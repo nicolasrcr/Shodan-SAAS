@@ -46,7 +46,7 @@ const RegrasSection = () => {
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-5">
         ⏱️ Tempos de Imobilização
       </h3>
-      <div className="grid grid-cols-3 gap-4 mb-10">
+      <div className="grid grid-cols-2 gap-4 mb-10">
         <div className="p-6 bg-green-500/10 border border-green-500/30 rounded-2xl text-center">
           <span className="text-3xl font-bold text-green-400">20s</span>
           <p className="text-sm text-foreground/70 mt-2">Ippon</p>
@@ -54,10 +54,6 @@ const RegrasSection = () => {
         <div className="p-6 bg-blue-500/10 border border-blue-500/30 rounded-2xl text-center">
           <span className="text-3xl font-bold text-blue-400">10-19s</span>
           <p className="text-sm text-foreground/70 mt-2">Waza-ari</p>
-        </div>
-        <div className="p-6 bg-yellow-500/10 border border-yellow-500/30 rounded-2xl text-center">
-          <span className="text-3xl font-bold text-yellow-400">5-9s</span>
-          <p className="text-sm text-foreground/70 mt-2">Yuko (2025)</p>
         </div>
       </div>
 
