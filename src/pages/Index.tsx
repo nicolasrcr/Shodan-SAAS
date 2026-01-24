@@ -7,6 +7,7 @@ import PrincipiosSection from "@/components/PrincipiosSection";
 import GokyoSection from "@/components/GokyoSection";
 import KatameWazaSection from "@/components/KatameWazaSection";
 import RegrasSection from "@/components/RegrasSection";
+import Regras2025Section from "@/components/Regras2025Section";
 import BeltSystemSection from "@/components/BeltSystemSection";
 import ComingSoonSection from "@/components/ComingSoonSection";
 import NomenclaturaSection from "@/components/NomenclaturaSection";
@@ -53,8 +54,9 @@ const Index = () => {
       case "treinos":
         return <TreinosSection />;
       case "regras":
-      case "regras2025":
         return <RegrasSection />;
+      case "regras2025":
+        return <Regras2025Section />;
       case "organizacao":
         return <OrganizacaoSection />;
       case "escolar":
