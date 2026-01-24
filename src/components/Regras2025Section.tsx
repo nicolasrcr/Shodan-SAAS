@@ -3,12 +3,17 @@ const Regras2025Section = () => {
     evento: 'Seminário Técnico Nacional de Judô 2025',
     local: 'Istambul, Turquia',
     data: '14-15 de dezembro de 2024',
-    delegacao: ['Edison Minakawa (Coordenador)', 'Thiara Bertholi', 'Marcelo Theotônio', 'Victor Penalber']
+    delegacao: [
+      'Edison Minakawa (Coordenador)',
+      'Thiara Bertholi',
+      'Marcelo Theotônio',
+      'Victor Penalber'
+    ]
   };
 
   const pontuacaoTachiwaza = [
-    { pontos: 'Ippon', criterio: 'Queda controlada de costas', cor: 'bg-green-500/20 border-green-500/30 text-green-400' },
-    { pontos: 'Waza-ari', criterio: 'Queda >90° mas não de costas', cor: 'bg-blue-500/20 border-blue-500/30 text-blue-400' },
+    { pontos: 'Ippon', criterio: 'Queda controlada de costas com força, velocidade e controle', cor: 'bg-green-500/20 border-green-500/30 text-green-400' },
+    { pontos: 'Waza-ari', criterio: 'Queda com rotação >90° mas não claramente de costas', cor: 'bg-blue-500/20 border-blue-500/30 text-blue-400' },
     { pontos: 'Yuko (NOVO)', criterio: 'Queda 90°, ombro com apoio de cotovelo, sentado ≥90°', cor: 'bg-yellow-500/20 border-yellow-500/30 text-yellow-400' },
   ];
 
@@ -19,23 +24,94 @@ const Regras2025Section = () => {
   ];
 
   const novasRegras = [
-    { titulo: 'Yuko Reintroduzido', desc: 'Contagem infinita de Yukos. Yukos nunca somam para Waza-ari.', icone: '📊' },
-    { titulo: 'Abraço de Urso', desc: 'Permitido, EXCETO com mãos/braços entrelaçados formando círculo (= Shido).', icone: '🐻' },
-    { titulo: 'Seoi-nage Invertido', desc: 'Permitido para Sênior/Júnior. Proibido para Cadetes (Shido).', icone: '🔄' },
-    { titulo: 'Uso da Cabeça (Tori)', desc: 'Sênior/Júnior podem usar cabeça para projetar. Cadetes não podem (Shido).', icone: '👤' },
-    { titulo: 'Defesa com Cabeça (Uke)', desc: 'Sênior/Júnior podem. Cadetes não podem (pontuação + Shido). Ponte = Ippon.', icone: '🛡️' },
-    { titulo: 'Mergulho (Diving)', desc: 'Mergulhar de cabeça no tatame = Hansoku-make direto.', icone: '⚠️' },
-    { titulo: 'Pegadas Abaixo da Faixa', desc: 'Permitido na parte externa da perna até altura da coxa. Pegadas internas = Shido.', icone: '👖' },
-    { titulo: 'Pegadas Internas', desc: 'Tachi-waza: permitido dentro da manga, proibido dentro da calça. Ne-waza: ambos permitidos.', icone: '✋' },
-    { titulo: 'Ataque Falso', desc: 'Ataques sem intenção real, sem kumikata, ou "volume fighting" = Shido.', icone: '🚫' },
-    { titulo: 'Kansetsu/Shime em Pé', desc: 'Sem queda ou queda leve = Shido. Queda perigosa = Hansoku-make.', icone: '⛔' },
+    { 
+      titulo: 'Yuko Reintroduzido', 
+      desc: 'O Yuko volta ao sistema de pontuação. Contagem infinita de Yukos. Yukos NUNCA somam para Waza-ari. No Golden Score, 5 segundos de osaekomi = Yuko + Soremadê.', 
+      icone: '📊' 
+    },
+    { 
+      titulo: 'Abraço de Urso (Bear Hug)', 
+      desc: 'Agora é permitido, EXCETO quando mãos/braços ficam entrelaçados formando um círculo completo (nesse caso = Shido).', 
+      icone: '🐻' 
+    },
+    { 
+      titulo: 'Seoi-nage Invertido (Drop Seoi)', 
+      desc: 'Permitido para Sênior e Júnior. PROIBIDO para Cadetes (Sub-18) - aplicação resulta em Shido.', 
+      icone: '🔄' 
+    },
+    { 
+      titulo: 'Uso da Cabeça (Tori)', 
+      desc: 'Sênior/Júnior podem usar a cabeça como apoio para projetar. Cadetes NÃO podem usar (resulta em Shido).', 
+      icone: '👤' 
+    },
+    { 
+      titulo: 'Defesa com Cabeça (Uke)', 
+      desc: 'Sênior/Júnior podem defender com a cabeça. Cadetes não podem (Tori pontua + Uke recebe Shido). Fazer ponte = Ippon direto para Tori.', 
+      icone: '🛡️' 
+    },
+    { 
+      titulo: 'Mergulho (Diving)', 
+      desc: 'Mergulhar de cabeça diretamente no tatame continua sendo Hansoku-make direto. Extremamente perigoso.', 
+      icone: '⚠️' 
+    },
+    { 
+      titulo: 'Pegadas Abaixo da Faixa', 
+      desc: 'Permitido na parte EXTERNA da perna até a altura da coxa. Pegadas na parte INTERNA da perna = Shido.', 
+      icone: '👖' 
+    },
+    { 
+      titulo: 'Pegadas Internas (Grip)', 
+      desc: 'Tachi-waza: permitido DENTRO da manga, PROIBIDO dentro da calça. Ne-waza: ambos permitidos.', 
+      icone: '✋' 
+    },
+    { 
+      titulo: 'Ataque Falso', 
+      desc: 'Ataques sem intenção real, sem kumikata adequado, ou "volume fighting" (fingir atacar) = Shido.', 
+      icone: '🚫' 
+    },
+    { 
+      titulo: 'Kansetsu/Shime em Pé', 
+      desc: 'Aplicar chave ou estrangulamento em pé: sem queda ou queda leve = Shido. Queda perigosa = Hansoku-make.', 
+      icone: '⛔' 
+    },
+    { 
+      titulo: 'Waki-Gatame em Pé', 
+      desc: 'Continua PROIBIDO. Aplicar Waki-gatame em pé = Hansoku-make direto.', 
+      icone: '❌' 
+    },
+    { 
+      titulo: 'Matte no Solo', 
+      desc: 'Árbitro pode dar Matte quando não houver progressão clara no ne-waza. Maior dinamismo nas lutas.', 
+      icone: '⏸️' 
+    },
   ];
 
   const regrasCadetes = [
     'Não podem usar cabeça para projetar (Shido)',
     'Não podem usar cabeça para defender (Tori pontua + Uke recebe Shido)',
-    'Não podem fazer Seoi-nage invertido (Shido)',
+    'Não podem fazer Seoi-nage invertido/Drop Seoi (Shido)',
+    'Se fizerem ponte na defesa = Ippon direto para Tori',
+    'Todas as regras de segurança são mais rigorosas',
   ];
+
+  const permitidoProibido = {
+    permitido: [
+      'Abraço de urso (sem entrelaçar braços)',
+      'Seoi-nage invertido (Sênior/Júnior)',
+      'Uso da cabeça para projetar (Sênior/Júnior)',
+      'Pegadas externas abaixo da faixa',
+      'Pegada dentro da manga em tachi-waza',
+      'Qualquer pegada em ne-waza',
+    ],
+    proibido: [
+      'Diving (mergulho de cabeça) = Hansoku-make',
+      'Abraço com braços entrelaçados = Shido',
+      'Pegadas internas na calça (tachi-waza) = Shido',
+      'Ataques falsos / volume fighting = Shido',
+      'Waki-gatame em pé = Hansoku-make',
+      'Leg grab direto = Hansoku-make',
+    ],
+  };
 
   return (
     <div className="animate-fade-in">
@@ -91,9 +167,10 @@ const Regras2025Section = () => {
 
       {/* Golden Score */}
       <div className="card-judo mb-8 border-primary/50">
-        <h4 className="font-semibold text-primary mb-2">⚡ Golden Score</h4>
+        <h4 className="font-semibold text-primary mb-2">⚡ Golden Score - Regra Especial</h4>
         <p className="text-sm text-foreground/80">
-          Osaekomi de <strong>5 segundos</strong> = Yuko + <strong>Soremadê</strong> (fim do combate)
+          Osaekomi de <strong>5 segundos</strong> = Yuko + <strong>Soremadê</strong> (fim do combate).
+          Ou seja, no Golden Score, qualquer osaekomi de 5s encerra a luta imediatamente.
         </p>
       </div>
 
@@ -119,7 +196,7 @@ const Regras2025Section = () => {
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4">
         <span>🧒</span> Regras Específicas para Cadetes (Sub-18)
       </h3>
-      <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6">
+      <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6 mb-8">
         <p className="text-sm text-orange-300 mb-4">
           ⚠️ Cadetes têm regras mais restritivas para proteção dos atletas jovens:
         </p>
@@ -133,7 +210,7 @@ const Regras2025Section = () => {
       </div>
 
       {/* Resumo Visual */}
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4 mt-10">
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4">
         <span>📊</span> Resumo: O que Mudou?
       </h3>
       <div className="card-judo">
@@ -143,10 +220,9 @@ const Regras2025Section = () => {
               ✅ Agora é Permitido
             </h4>
             <ul className="space-y-2 text-sm text-foreground/80">
-              <li>• Abraço de urso (sem entrelaçar)</li>
-              <li>• Seoi-nage invertido (Sênior/Júnior)</li>
-              <li>• Uso da cabeça para projetar (Sênior/Júnior)</li>
-              <li>• Pegadas externas abaixo da faixa</li>
+              {permitidoProibido.permitido.map((item, index) => (
+                <li key={index}>• {item}</li>
+              ))}
             </ul>
           </div>
           <div>
@@ -154,10 +230,9 @@ const Regras2025Section = () => {
               ❌ Continua Proibido / Novo Shido
             </h4>
             <ul className="space-y-2 text-sm text-foreground/80">
-              <li>• Diving (mergulho de cabeça) = Hansoku-make</li>
-              <li>• Abraço com braços entrelaçados = Shido</li>
-              <li>• Pegadas internas na calça (tachi-waza)</li>
-              <li>• Ataques falsos / volume fighting</li>
+              {permitidoProibido.proibido.map((item, index) => (
+                <li key={index}>• {item}</li>
+              ))}
             </ul>
           </div>
         </div>
