@@ -1,12 +1,22 @@
 import { useState } from "react";
 import { gokyoData } from "@/data/judoData";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+
+const kyoColors: Record<string, { bg: string; text: string; label: string }> = {
+  ikkyo: { bg: 'bg-green-600', text: 'text-green-400', label: 'Ikkyo (1º)' },
+  nikyo: { bg: 'bg-blue-600', text: 'text-blue-400', label: 'Nikyo (2º)' },
+  sankyo: { bg: 'bg-purple-600', text: 'text-purple-400', label: 'Sankyo (3º)' },
+  yonkyo: { bg: 'bg-orange-600', text: 'text-orange-400', label: 'Yonkyo (4º)' },
+  gokyo: { bg: 'bg-cyan-600', text: 'text-cyan-400', label: 'Gokyo (5º)' },
+};
 
 const GokyoSection = () => {
   const [activeGroup, setActiveGroup] = useState<keyof typeof gokyoData>("ikkyo");
 
   const groups = Object.entries(gokyoData);
   const currentGroup = gokyoData[activeGroup];
+  const currentColor = kyoColors[activeGroup];
 
   return (
     <div className="animate-fade-in">
@@ -22,30 +32,66 @@ const GokyoSection = () => {
         </p>
       </div>
 
+      {/* Color Legend */}
+      <div className="flex flex-wrap gap-2 mb-6">
+        {Object.entries(kyoColors).map(([key, color]) => (
+          <div 
+            key={key} 
+            className={cn(
+              "flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer",
+              activeGroup === key 
+                ? `${color.bg} border-transparent text-white` 
+                : "bg-card border-primary/20 hover:border-primary/40"
+            )}
+            onClick={() => setActiveGroup(key as keyof typeof gokyoData)}
+          >
+            <div className={cn("w-3 h-3 rounded-full", color.bg)} />
+            <span className={cn("text-xs font-medium", activeGroup === key ? "text-white" : color.text)}>
+              {color.label}
+            </span>
+          </div>
+        ))}
+      </div>
+
       {/* Tabs */}
       <div className="flex gap-2 mb-6 flex-wrap">
-        {groups.map(([key, group]) => (
-          <button
-            key={key}
-            onClick={() => setActiveGroup(key as keyof typeof gokyoData)}
-            className={cn(
-              "px-4 py-2.5 rounded-xl text-sm font-medium transition-all border",
-              activeGroup === key
-                ? "bg-gradient-to-br from-secondary/60 to-secondary/40 border-primary text-primary"
-                : "bg-card border-primary/20 text-muted-foreground hover:border-primary/40 hover:text-foreground"
-            )}
-          >
-            {group.name}
-          </button>
-        ))}
+        {groups.map(([key, group]) => {
+          const color = kyoColors[key];
+          return (
+            <button
+              key={key}
+              onClick={() => setActiveGroup(key as keyof typeof gokyoData)}
+              className={cn(
+                "px-4 py-2.5 rounded-xl text-sm font-medium transition-all border",
+                activeGroup === key
+                  ? `${color.bg} border-transparent text-white`
+                  : "bg-card border-primary/20 text-muted-foreground hover:border-primary/40 hover:text-foreground"
+              )}
+            >
+              {group.name}
+            </button>
+          );
+        })}
       </div>
 
       {/* Techniques Grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {currentGroup.techniques.map((technique) => (
-          <div key={technique.num} className="technique-card">
+          <div key={technique.num} className="technique-card relative">
+            <Badge 
+              className={cn(
+                "absolute top-2 right-2 text-[10px]",
+                currentColor.bg,
+                "hover:opacity-90"
+              )}
+            >
+              {currentColor.label}
+            </Badge>
             <div className="flex items-start justify-between mb-2">
-              <span className="w-7 h-7 rounded-full bg-primary/20 text-primary text-xs font-bold flex items-center justify-center">
+              <span className={cn(
+                "w-7 h-7 rounded-full text-xs font-bold flex items-center justify-center text-white",
+                currentColor.bg
+              )}>
                 {technique.num}
               </span>
               <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">
@@ -53,7 +99,7 @@ const GokyoSection = () => {
               </span>
             </div>
             <h4 className="font-semibold text-white text-sm mb-1">{technique.name}</h4>
-            <p className="text-2xl font-serif text-primary mb-2">{technique.kanji}</p>
+            <p className={cn("text-2xl font-serif mb-2", currentColor.text)}>{technique.kanji}</p>
             <p className="text-xs text-muted-foreground">{technique.translation}</p>
           </div>
         ))}
@@ -73,6 +119,22 @@ const GokyoSection = () => {
             <div key={index} className="p-3 bg-muted/50 rounded-lg">
               <p className="text-sm font-medium text-primary">{cat.name}</p>
               <p className="text-xs text-muted-foreground">{cat.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Color Legend Explanation */}
+      <div className="mt-6 p-4 bg-muted/30 rounded-xl">
+        <h4 className="text-sm font-semibold text-white mb-3">🎨 Sistema de Cores</h4>
+        <p className="text-xs text-muted-foreground mb-3">
+          As mesmas cores são usadas na seção de Vídeos para facilitar a identificação das técnicas:
+        </p>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+          {Object.entries(kyoColors).map(([key, color]) => (
+            <div key={key} className="flex items-center gap-2">
+              <div className={cn("w-4 h-4 rounded", color.bg)} />
+              <span className="text-xs text-foreground/70">{color.label}</span>
             </div>
           ))}
         </div>
