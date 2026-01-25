@@ -284,6 +284,14 @@ const saveProgress = (category: string, score: number, total: number) => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
 };
 
+interface AnswerHistory {
+  questionNumber: number;
+  question: string;
+  isCorrect: boolean;
+  selectedOption: string;
+  correctOption: string;
+}
+
 const QuizzesSection = () => {
   const [currentQuiz, setCurrentQuiz] = useState<string | null>(null);
   const [questionIndex, setQuestionIndex] = useState(0);
@@ -293,6 +301,7 @@ const QuizzesSection = () => {
   const [showResult, setShowResult] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [progress, setProgress] = useState<QuizProgress>(getProgress());
+  const [answerHistory, setAnswerHistory] = useState<AnswerHistory[]>([]);
 
   const startQuiz = (category: string) => {
     setCurrentQuiz(category);
@@ -302,6 +311,7 @@ const QuizzesSection = () => {
     setSelectedAnswer(null);
     setShowResult(false);
     setQuizCompleted(false);
+    setAnswerHistory([]);
   };
 
   const handleAnswer = (index: number) => {
@@ -312,8 +322,18 @@ const QuizzesSection = () => {
     setAnswered(prev => prev + 1);
     
     const quiz = quizData[currentQuiz!];
-    const isCorrect = index === quiz.questions[questionIndex].c;
+    const currentQuestion = quiz.questions[questionIndex];
+    const isCorrect = index === currentQuestion.c;
     const newScore = isCorrect ? score + 1 : score;
+    
+    // Add to history
+    setAnswerHistory(prev => [...prev, {
+      questionNumber: questionIndex + 1,
+      question: currentQuestion.q,
+      isCorrect,
+      selectedOption: currentQuestion.o[index],
+      correctOption: currentQuestion.o[currentQuestion.c],
+    }]);
     
     if (isCorrect) {
       setScore(newScore);
@@ -541,6 +561,41 @@ const QuizzesSection = () => {
           <span>Progresso</span>
           <span>{Math.round((questionIndex / quiz.questions.length) * 100)}%</span>
         </div>
+
+        {/* Answer History */}
+        {answerHistory.length > 0 && (
+          <div className="mt-4 pt-4 border-t border-muted/30">
+            <h5 className="text-xs font-semibold text-muted-foreground mb-2 flex items-center gap-1">
+              <span>📝</span> Histórico de Respostas
+            </h5>
+            <div className="max-h-32 overflow-y-auto space-y-1 scrollbar-thin">
+              {answerHistory.map((item, idx) => (
+                <div 
+                  key={idx}
+                  className={`flex items-center gap-2 p-2 rounded-lg text-xs ${
+                    item.isCorrect 
+                      ? 'bg-green-500/10 border border-green-500/20' 
+                      : 'bg-red-500/10 border border-red-500/20'
+                  }`}
+                >
+                  <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                    item.isCorrect ? 'bg-green-500/30 text-green-400' : 'bg-red-500/30 text-red-400'
+                  }`}>
+                    {item.isCorrect ? '✓' : '✗'}
+                  </span>
+                  <span className="flex-1 truncate text-foreground/80">
+                    <span className="text-muted-foreground">Q{item.questionNumber}:</span> {item.question}
+                  </span>
+                  {!item.isCorrect && (
+                    <span className="text-green-400/70 text-[10px] hidden sm:inline">
+                      R: {item.correctOption}
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="card-judo">
