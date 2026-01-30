@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Eye, EyeOff, Loader2, Check } from "lucide-react";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Eye, EyeOff, Loader2, Check, CreditCard, QrCode } from "lucide-react";
 import { z } from "zod";
 
 const cadastroSchema = z.object({
@@ -14,6 +15,7 @@ const cadastroSchema = z.object({
   email: z.string().trim().email("Email inválido").max(255, "Email muito longo"),
   phone: z.string().trim().min(10, "Telefone inválido").max(20, "Telefone inválido"),
   password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres").max(100, "Senha muito longa"),
+  paymentMethod: z.enum(["pix", "cartao"]),
 });
 
 const CadastroPage = () => {
@@ -25,6 +27,7 @@ const CadastroPage = () => {
     phone: "",
     password: "",
     confirmPassword: "",
+    paymentMethod: "pix" as "pix" | "cartao",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -63,6 +66,7 @@ const CadastroPage = () => {
       email: formData.email,
       phone: formData.phone.replace(/\D/g, ''),
       password: formData.password,
+      paymentMethod: formData.paymentMethod,
     });
 
     if (!validation.success) {
@@ -76,7 +80,8 @@ const CadastroPage = () => {
       formData.email,
       formData.password,
       formData.name,
-      formData.phone
+      formData.phone,
+      formData.paymentMethod
     );
 
     if (error) {
@@ -217,6 +222,46 @@ const CadastroPage = () => {
                   required
                   className="bg-secondary/50 border-primary/20 focus:border-primary"
                 />
+              </div>
+
+              <div className="space-y-3">
+                <Label className="text-white">Forma de Pagamento Preferida</Label>
+                <RadioGroup
+                  value={formData.paymentMethod}
+                  onValueChange={(value: "pix" | "cartao") => 
+                    setFormData(prev => ({ ...prev, paymentMethod: value }))
+                  }
+                  className="grid grid-cols-2 gap-3"
+                >
+                  <div className="relative">
+                    <RadioGroupItem
+                      value="pix"
+                      id="pix"
+                      className="peer sr-only"
+                    />
+                    <Label
+                      htmlFor="pix"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-primary/20 bg-secondary/50 p-4 hover:bg-secondary/70 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/20 cursor-pointer transition-all"
+                    >
+                      <QrCode className="h-6 w-6 mb-2 text-primary" />
+                      <span className="text-sm font-medium text-white">PIX</span>
+                    </Label>
+                  </div>
+                  <div className="relative">
+                    <RadioGroupItem
+                      value="cartao"
+                      id="cartao"
+                      className="peer sr-only"
+                    />
+                    <Label
+                      htmlFor="cartao"
+                      className="flex flex-col items-center justify-center rounded-lg border-2 border-primary/20 bg-secondary/50 p-4 hover:bg-secondary/70 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/20 cursor-pointer transition-all"
+                    >
+                      <CreditCard className="h-6 w-6 mb-2 text-primary" />
+                      <span className="text-sm font-medium text-white">Cartão</span>
+                    </Label>
+                  </div>
+                </RadioGroup>
               </div>
 
               <Button
