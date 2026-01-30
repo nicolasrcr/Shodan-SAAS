@@ -87,9 +87,9 @@ const AccessExpired = ({ expirationDate }: AccessExpiredProps) => {
               </ul>
 
               <div className="mb-8">
-                <div className="text-muted-foreground line-through text-lg mb-1">R$ 397</div>
+                <div className="text-muted-foreground line-through text-lg mb-1">R$ 197</div>
                 <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
-                  R$ 147
+                  R$ 99,90
                 </div>
                 <p className="text-sm text-muted-foreground">renovação anual</p>
               </div>
@@ -145,7 +145,7 @@ const AccessExpired = ({ expirationDate }: AccessExpiredProps) => {
               </div>
               <div className="bg-secondary/50 rounded-lg p-4 mb-4">
                 <p className="text-sm text-muted-foreground mb-2">Valor:</p>
-                <p className="text-2xl font-bold text-primary">R$ 147,00</p>
+                <p className="text-2xl font-bold text-primary">R$ 99,90</p>
               </div>
               <div className="bg-secondary/50 rounded-lg p-4 mb-4">
                 <p className="text-sm text-muted-foreground mb-2">Seu email cadastrado:</p>
