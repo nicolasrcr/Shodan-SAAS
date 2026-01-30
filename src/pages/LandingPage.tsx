@@ -228,9 +228,17 @@ const LandingPage = () => {
           <p className="text-sm text-muted-foreground mb-2">
             "Máxima eficiência com mínimo esforço. Prosperidade e benefícios mútuos."
           </p>
-          <p className="text-xs text-muted-foreground/60">
+          <p className="text-xs text-muted-foreground/60 mb-4">
             Guia de Preparação para Exame Shodan - Faixa Preta 1º Dan
           </p>
+          <a 
+            href="https://wa.me/5561996634944" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 text-primary hover:underline text-sm"
+          >
+            <span>📱</span> WhatsApp: (61) 99663-4944
+          </a>
         </div>
       </footer>
 
