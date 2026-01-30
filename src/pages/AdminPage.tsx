@@ -211,6 +211,7 @@ const AdminPage = () => {
                       <TableHead>Email</TableHead>
                       <TableHead>Telefone</TableHead>
                       <TableHead>Cadastro</TableHead>
+                      <TableHead>Expira em</TableHead>
                       <TableHead>Status</TableHead>
                       <TableHead className="text-right">Ações</TableHead>
                     </TableRow>
@@ -223,6 +224,19 @@ const AdminPage = () => {
                         <TableCell className="text-muted-foreground">{user.phone}</TableCell>
                         <TableCell className="text-muted-foreground text-sm">
                           {new Date(user.created_at).toLocaleDateString('pt-BR')}
+                        </TableCell>
+                        <TableCell className="text-sm">
+                          {(() => {
+                            const expirationDate = new Date(user.created_at);
+                            expirationDate.setFullYear(expirationDate.getFullYear() + 1);
+                            const isExpired = expirationDate < new Date();
+                            return (
+                              <span className={isExpired ? 'text-destructive font-medium' : 'text-muted-foreground'}>
+                                {expirationDate.toLocaleDateString('pt-BR')}
+                                {isExpired && ' (Expirado)'}
+                              </span>
+                            );
+                          })()}
                         </TableCell>
                         <TableCell>
                           {user.has_paid ? (
