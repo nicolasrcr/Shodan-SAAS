@@ -1,7 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import Header from "@/components/Header";
 import Navigation from "@/components/Navigation";
 import HomeSection from "@/components/HomeSection";
 import HistoriaSection from "@/components/HistoriaSection";
@@ -26,7 +25,7 @@ import QuizzesSection from "@/components/QuizzesSection";
 import FlashcardsSection from "@/components/FlashcardsSection";
 import PaymentRequired from "@/components/PaymentRequired";
 import AccessExpired from "@/components/AccessExpired";
-import { useState } from "react";
+import PageTransition from "@/components/PageTransition";
 import { Button } from "@/components/ui/button";
 import { LogOut, User } from "lucide-react";
 
@@ -172,7 +171,9 @@ const CursoPage = () => {
       <Navigation activeSection={activeSection} onNavigate={handleNavigate} />
       
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        {renderSection()}
+        <PageTransition activeKey={activeSection}>
+          {renderSection()}
+        </PageTransition>
       </main>
 
       {/* Footer */}
