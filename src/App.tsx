@@ -5,8 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import LandingPage from "./pages/LandingPage";
-import LoginPage from "./pages/LoginPage";
-import CadastroPage from "./pages/CadastroPage";
+import AuthPage from "./pages/AuthPage";
 import CursoPage from "./pages/CursoPage";
 import AdminPage from "./pages/AdminPage";
 import RecuperarSenhaPage from "./pages/RecuperarSenhaPage";
@@ -24,8 +23,8 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<LandingPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/cadastro" element={<CadastroPage />} />
+            <Route path="/login" element={<AuthPage />} />
+            <Route path="/cadastro" element={<AuthPage />} />
             <Route path="/recuperar-senha" element={<RecuperarSenhaPage />} />
             <Route path="/redefinir-senha" element={<RedefinirSenhaPage />} />
             <Route path="/curso" element={<CursoPage />} />
