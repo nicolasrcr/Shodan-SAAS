@@ -224,6 +224,22 @@ const VideosSection = () => {
         Vídeos - Demonstrações Técnicas
       </h2>
 
+      {/* Belt Color Legend */}
+      <div className="card-judo mb-6 p-4">
+        <h3 className="text-sm font-semibold text-primary mb-3">🎨 Sistema de Cores por Faixa (Gokyo)</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+          {Object.entries(gokyoInfo).slice(0, 5).map(([key, info]) => (
+            <div key={key} className="flex items-center gap-2">
+              <div className={`w-6 h-6 rounded-full ${info.color}`} />
+              <div>
+                <p className="text-xs font-medium text-white">{key}</p>
+                <p className="text-[10px] text-foreground/60">{info.kyu}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="card-red p-4 mb-8">
         <p className="text-sm text-foreground/80 flex items-center gap-2">
           <span>⚠️</span>
