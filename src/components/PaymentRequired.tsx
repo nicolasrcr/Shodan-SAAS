@@ -3,16 +3,52 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Lock, CreditCard, Smartphone, LogOut, Check } from "lucide-react";
+import { Lock, CreditCard, Smartphone, LogOut, Check, Loader2 } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 const PaymentRequired = () => {
   const navigate = useNavigate();
-  const { profile, signOut } = useAuth();
+  const { profile, user, signOut } = useAuth();
   const [showPixModal, setShowPixModal] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleSignOut = async () => {
     await signOut();
     navigate('/');
+  };
+
+  const handleCardPayment = async () => {
+    if (!user || !profile) {
+      toast.error("Erro ao identificar usuário. Faça login novamente.");
+      return;
+    }
+
+    setIsProcessing(true);
+    try {
+      const { data, error } = await supabase.functions.invoke('mercadopago-checkout', {
+        body: {
+          type: 'new',
+          userId: user.id,
+          userEmail: profile.email,
+          userName: profile.name,
+        },
+      });
+
+      if (error) throw error;
+
+      if (data?.initPoint) {
+        // Redirect to Mercado Pago checkout
+        window.location.href = data.initPoint;
+      } else {
+        throw new Error('Não foi possível gerar o link de pagamento');
+      }
+    } catch (error: any) {
+      console.error('Payment error:', error);
+      toast.error(error.message || "Erro ao processar pagamento. Tente novamente.");
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   return (
@@ -86,14 +122,16 @@ const PaymentRequired = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
-                  onClick={() => {
-                    // TODO: Integrate with Stripe for card payment
-                    alert('Integração com cartão será implementada com Stripe');
-                  }}
+                  onClick={handleCardPayment}
+                  disabled={isProcessing}
                   className="btn-gold text-lg py-6 px-8"
                 >
-                  <CreditCard className="w-5 h-5 mr-2" />
-                  Pagar com Cartão
+                  {isProcessing ? (
+                    <Loader2 className="w-5 h-5 mr-2 animate-spin" />
+                  ) : (
+                    <CreditCard className="w-5 h-5 mr-2" />
+                  )}
+                  {isProcessing ? 'Processando...' : 'Pagar com Cartão'}
                 </Button>
                 <Button 
                   onClick={() => setShowPixModal(true)}
