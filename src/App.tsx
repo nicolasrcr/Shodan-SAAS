@@ -10,6 +10,8 @@ import CursoPage from "./pages/CursoPage";
 import AdminPage from "./pages/AdminPage";
 import PasswordPage from "./pages/PasswordPage";
 import PlanosPage from "./pages/PlanosPage";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentFailure from "./pages/PaymentFailure";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -31,6 +33,8 @@ const App = () => (
             <Route path="/curso" element={<CursoPage />} />
             <Route path="/planos" element={<PlanosPage />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/payment-success" element={<PaymentSuccess />} />
+            <Route path="/payment-failure" element={<PaymentFailure />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

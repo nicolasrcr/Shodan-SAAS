@@ -48,6 +48,9 @@ serve(async (req) => {
     
     // Frontend URLs for redirects
     const siteUrl = req.headers.get('origin') || 'https://shodanexame.lovable.app';
+    const successUrl = `${siteUrl}/payment-success`;
+    const failureUrl = `${siteUrl}/payment-failure`;
+    const pendingUrl = `${siteUrl}/curso`;
 
     // Create Mercado Pago preference
     const preferenceData = {
@@ -67,9 +70,9 @@ serve(async (req) => {
       },
       external_reference: JSON.stringify({ userId, type }),
       back_urls: {
-        success: `${siteUrl}/curso?payment=success`,
-        failure: `${siteUrl}/curso?payment=failure`,
-        pending: `${siteUrl}/curso?payment=pending`,
+        success: successUrl,
+        failure: failureUrl,
+        pending: pendingUrl,
       },
       auto_return: 'approved',
       notification_url: webhookUrl,
