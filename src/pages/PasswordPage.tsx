@@ -1,17 +1,20 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Eye, EyeOff, Loader2, CheckCircle, ArrowLeft } from "lucide-react";
+import LanguageToggle from "@/components/LanguageToggle";
 
 type PageMode = "request" | "reset" | "request-success" | "reset-success";
 
 const PasswordPage = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [mode, setMode] = useState<PageMode>("request");
   
   // Request password reset state
@@ -61,7 +64,7 @@ const PasswordPage = () => {
     });
 
     if (error) {
-      setRequestError("Erro ao enviar email. Verifique se o email está correto.");
+      setRequestError(t("password.errorSending"));
       setRequestLoading(false);
       return;
     }
@@ -75,12 +78,12 @@ const PasswordPage = () => {
     setResetError("");
 
     if (password !== confirmPassword) {
-      setResetError("As senhas não coincidem.");
+      setResetError(t("auth.passwordsDontMatch"));
       return;
     }
 
     if (password.length < 6) {
-      setResetError("A senha deve ter pelo menos 6 caracteres.");
+      setResetError(t("password.minSixChars"));
       return;
     }
 
@@ -91,7 +94,7 @@ const PasswordPage = () => {
     });
 
     if (error) {
-      setResetError("Erro ao redefinir senha. Tente solicitar um novo link.");
+      setResetError(t("password.errorResetting"));
       setResetLoading(false);
       return;
     }
@@ -110,24 +113,27 @@ const PasswordPage = () => {
     return (
       <div className="min-h-screen bg-gradient-to-b from-background via-card to-background flex items-center justify-center p-4">
         <div className="w-full max-w-md">
+          <div className="flex justify-end mb-4">
+            <LanguageToggle />
+          </div>
           <div className="text-center mb-8">
             <Link to="/" className="inline-block">
               <span className="text-5xl font-serif text-primary">柔道</span>
-              <p className="text-sm text-muted-foreground mt-2">Exame Shodan</p>
+              <p className="text-sm text-muted-foreground mt-2">{t("header.title")}</p>
             </Link>
           </div>
 
           <Card className="bg-card/80 border-primary/20">
             <CardContent className="p-8 text-center">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h2 className="text-xl font-bold text-white mb-2">Email Enviado!</h2>
+              <h2 className="text-xl font-bold text-white mb-2">{t("password.emailSent")}</h2>
               <p className="text-muted-foreground mb-6">
-                Enviamos um link de recuperação para <strong className="text-white">{email}</strong>. 
-                Verifique sua caixa de entrada e spam.
+                {t("password.checkInbox")} <strong className="text-white">{email}</strong>. 
+                {t("password.checkSpam")}
               </p>
               <Link to="/login">
                 <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-secondary">
-                  Voltar para Login
+                  {t("password.backToLogin")}
                 </Button>
               </Link>
             </CardContent>
@@ -142,23 +148,26 @@ const PasswordPage = () => {
     return (
       <div className="min-h-screen bg-gradient-to-b from-background via-card to-background flex items-center justify-center p-4">
         <div className="w-full max-w-md">
+          <div className="flex justify-end mb-4">
+            <LanguageToggle />
+          </div>
           <div className="text-center mb-8">
             <Link to="/" className="inline-block">
               <span className="text-5xl font-serif text-primary">柔道</span>
-              <p className="text-sm text-muted-foreground mt-2">Exame Shodan</p>
+              <p className="text-sm text-muted-foreground mt-2">{t("header.title")}</p>
             </Link>
           </div>
 
           <Card className="bg-card/80 border-primary/20">
             <CardContent className="p-8 text-center">
               <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
-              <h2 className="text-xl font-bold text-white mb-2">Senha Redefinida!</h2>
+              <h2 className="text-xl font-bold text-white mb-2">{t("password.resetSuccess")}</h2>
               <p className="text-muted-foreground mb-6">
-                Sua senha foi alterada com sucesso. Você será redirecionado para o login...
+                {t("password.changedSuccess")}
               </p>
               <Link to="/login">
                 <Button className="btn-gold">
-                  Ir para Login
+                  {t("password.goToLogin")}
                 </Button>
               </Link>
             </CardContent>
@@ -173,17 +182,20 @@ const PasswordPage = () => {
     return (
       <div className="min-h-screen bg-gradient-to-b from-background via-card to-background flex items-center justify-center p-4">
         <div className="w-full max-w-md">
+          <div className="flex justify-end mb-4">
+            <LanguageToggle />
+          </div>
           <div className="text-center mb-8">
             <Link to="/" className="inline-block">
               <span className="text-5xl font-serif text-primary">柔道</span>
-              <p className="text-sm text-muted-foreground mt-2">Exame Shodan</p>
+              <p className="text-sm text-muted-foreground mt-2">{t("header.title")}</p>
             </Link>
           </div>
 
           <Card className="bg-card/80 border-primary/20">
             <CardHeader className="text-center">
-              <CardTitle className="text-2xl text-white">Redefinir Senha</CardTitle>
-              <CardDescription>Digite sua nova senha</CardDescription>
+              <CardTitle className="text-2xl text-white">{t("password.reset")}</CardTitle>
+              <CardDescription>{t("password.enterNewPassword")}</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleResetPassword} className="space-y-4">
@@ -194,12 +206,12 @@ const PasswordPage = () => {
                 )}
 
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-white">Nova Senha</Label>
+                  <Label htmlFor="password" className="text-white">{t("password.newPassword")}</Label>
                   <div className="relative">
                     <Input
                       id="password"
                       type={showPassword ? "text" : "password"}
-                      placeholder="Mínimo 6 caracteres"
+                      placeholder={t("auth.minChars")}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
@@ -216,11 +228,11 @@ const PasswordPage = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword" className="text-white">Confirmar Senha</Label>
+                  <Label htmlFor="confirmPassword" className="text-white">{t("auth.confirmPassword")}</Label>
                   <Input
                     id="confirmPassword"
                     type={showPassword ? "text" : "password"}
-                    placeholder="Repita a senha"
+                    placeholder={t("auth.repeatPassword")}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
@@ -236,10 +248,10 @@ const PasswordPage = () => {
                   {resetLoading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Salvando...
+                      {t("password.saving")}
                     </>
                   ) : (
-                    "Salvar Nova Senha"
+                    t("password.saveNewPassword")
                   )}
                 </Button>
               </form>
@@ -247,7 +259,7 @@ const PasswordPage = () => {
               <div className="mt-6 text-center">
                 <Link to="/login" className="text-sm text-muted-foreground hover:text-primary inline-flex items-center gap-1">
                   <ArrowLeft className="w-4 h-4" />
-                  Voltar para o login
+                  {t("password.backToLogin")}
                 </Link>
               </div>
             </CardContent>
@@ -261,17 +273,20 @@ const PasswordPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-card to-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
+        <div className="flex justify-end mb-4">
+          <LanguageToggle />
+        </div>
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <span className="text-5xl font-serif text-primary">柔道</span>
-            <p className="text-sm text-muted-foreground mt-2">Exame Shodan</p>
+            <p className="text-sm text-muted-foreground mt-2">{t("header.title")}</p>
           </Link>
         </div>
 
         <Card className="bg-card/80 border-primary/20">
           <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-white">Recuperar Senha</CardTitle>
-            <CardDescription>Digite seu email para receber um link de recuperação</CardDescription>
+            <CardTitle className="text-2xl text-white">{t("password.recover")}</CardTitle>
+            <CardDescription>{t("password.enterEmail")}</CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleRequestReset} className="space-y-4">
@@ -282,7 +297,7 @@ const PasswordPage = () => {
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="email" className="text-white">Email</Label>
+                <Label htmlFor="email" className="text-white">{t("auth.email")}</Label>
                 <Input
                   id="email"
                   type="email"
@@ -302,10 +317,10 @@ const PasswordPage = () => {
                 {requestLoading ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Enviando...
+                    {t("password.sending")}
                   </>
                 ) : (
-                  "Enviar Link de Recuperação"
+                  t("password.sendLink")
                 )}
               </Button>
             </form>
@@ -313,7 +328,7 @@ const PasswordPage = () => {
             <div className="mt-6 text-center">
               <Link to="/login" className="text-sm text-muted-foreground hover:text-primary inline-flex items-center gap-1">
                 <ArrowLeft className="w-4 h-4" />
-                Voltar para o login
+                {t("password.backToLogin")}
               </Link>
             </div>
           </CardContent>

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { useAdminCheck } from '@/hooks/useAdminCheck';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -11,6 +12,7 @@ import { Badge } from '@/components/ui/badge';
 import { toast } from '@/hooks/use-toast';
 import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp } from 'lucide-react';
 import StatCard from '@/components/admin/StatCard';
+import LanguageToggle from '@/components/LanguageToggle';
 
 type PaymentMethod = 'pix' | 'cartao' | 'outro' | null;
 
@@ -26,12 +28,17 @@ interface UserProfile {
 }
 
 const AdminPage = () => {
-  const { user, signOut } = useAuth();
+  const { signOut } = useAuth();
   const { isAdmin, loading: adminLoading } = useAdminCheck();
+  const { t, language } = useLanguage();
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [updating, setUpdating] = useState<string | null>(null);
+
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString(language === 'pt' ? 'pt-BR' : 'en-US');
+  };
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -43,8 +50,8 @@ const AdminPage = () => {
     if (error) {
       console.error('Error fetching users:', error);
       toast({
-        title: 'Erro',
-        description: 'Não foi possível carregar os usuários.',
+        title: t('common.error'),
+        description: t('admin.errorLoadingUsers'),
         variant: 'destructive',
       });
     } else {
@@ -70,14 +77,15 @@ const AdminPage = () => {
     if (error) {
       console.error('Error updating payment status:', error);
       toast({
-        title: 'Erro',
-        description: 'Não foi possível atualizar o status do pagamento.',
+        title: t('common.error'),
+        description: t('admin.errorUpdatingStatus'),
         variant: 'destructive',
       });
     } else {
+      const status = !currentStatus ? t('admin.accessReleased') : t('admin.accessRevoked');
       toast({
-        title: 'Sucesso',
-        description: `Acesso ${!currentStatus ? 'liberado' : 'revogado'} com sucesso!`,
+        title: t('common.success'),
+        description: t('admin.accessSuccessMessage').replace('{status}', status),
       });
       fetchUsers();
     }
@@ -99,14 +107,14 @@ const AdminPage = () => {
     if (error) {
       console.error('Error renewing access:', error);
       toast({
-        title: 'Erro',
-        description: 'Não foi possível renovar o acesso.',
+        title: t('common.error'),
+        description: t('admin.errorRenewing'),
         variant: 'destructive',
       });
     } else {
       toast({
-        title: 'Sucesso',
-        description: 'Acesso renovado por mais 1 ano!',
+        title: t('common.success'),
+        description: t('admin.renewedSuccess'),
       });
       fetchUsers();
     }
@@ -137,7 +145,7 @@ const AdminPage = () => {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background via-card to-background">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Verificando permissões...</p>
+          <p className="text-muted-foreground">{t('admin.verifyingPermissions')}</p>
         </div>
       </div>
     );
@@ -156,14 +164,17 @@ const AdminPage = () => {
           <div className="flex items-center gap-3">
             <Shield className="h-8 w-8 text-primary" />
             <div>
-              <h1 className="text-xl font-bold text-primary">Painel Administrativo</h1>
-              <p className="text-xs text-muted-foreground">Gerenciamento de Usuários</p>
+              <h1 className="text-xl font-bold text-primary">{t('admin.title')}</h1>
+              <p className="text-xs text-muted-foreground">{t('admin.userManagement')}</p>
             </div>
           </div>
-          <Button variant="outline" onClick={signOut} className="gap-2">
-            <LogOut className="h-4 w-4" />
-            Sair
-          </Button>
+          <div className="flex items-center gap-3">
+            <LanguageToggle />
+            <Button variant="outline" onClick={signOut} className="gap-2">
+              <LogOut className="h-4 w-4" />
+              {t('common.logout')}
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -172,37 +183,37 @@ const AdminPage = () => {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
           <StatCard
             icon={<Users className="h-5 w-5" />}
-            title="Total de Usuários"
+            title={t('admin.totalUsers')}
             value={stats.total}
             variant="gold"
           />
           <StatCard
             icon={<CheckCircle className="h-5 w-5" />}
-            title="Acessos Liberados"
+            title={t('admin.accessGranted')}
             value={stats.paid}
             variant="green"
           />
           <StatCard
             icon={<XCircle className="h-5 w-5" />}
-            title="Aguardando Pagamento"
+            title={t('admin.awaitingPayment')}
             value={stats.unpaid}
             variant="orange"
           />
           <StatCard
             icon={<QrCode className="h-5 w-5" />}
-            title="Pagamento PIX"
+            title={t('admin.pixPayment')}
             value={stats.pix}
             variant="gold"
           />
           <StatCard
             icon={<CreditCard className="h-5 w-5" />}
-            title="Pagamento Cartão"
+            title={t('admin.cardPayment')}
             value={stats.cartao}
             variant="blue"
           />
           <StatCard
             icon={<TrendingUp className="h-5 w-5" />}
-            title="Taxa de Conversão"
+            title={t('admin.conversionRate')}
             value={`${stats.conversionRate}%`}
             variant="green"
           />
@@ -214,13 +225,13 @@ const AdminPage = () => {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Users className="h-5 w-5 text-primary" />
-                Usuários Cadastrados
+                {t('admin.registeredUsers')}
               </CardTitle>
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <div className="relative flex-1 sm:w-64">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
-                    placeholder="Buscar por nome, email ou telefone..."
+                    placeholder={t('admin.searchPlaceholder')}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-9"
@@ -236,25 +247,25 @@ const AdminPage = () => {
             {loading ? (
               <div className="text-center py-8">
                 <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary mx-auto mb-2"></div>
-                <p className="text-muted-foreground text-sm">Carregando usuários...</p>
+                <p className="text-muted-foreground text-sm">{t('admin.loadingUsers')}</p>
               </div>
             ) : filteredUsers.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
-                {searchTerm ? 'Nenhum usuário encontrado com essa busca.' : 'Nenhum usuário cadastrado.'}
+                {searchTerm ? t('admin.noUsersFound') : t('admin.noUsersRegistered')}
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Nome</TableHead>
-                      <TableHead>Email</TableHead>
-                      <TableHead>Telefone</TableHead>
-                      <TableHead>Cadastro</TableHead>
-                      <TableHead>Expira em</TableHead>
-                      <TableHead>Pagamento</TableHead>
-                      <TableHead>Status</TableHead>
-                      <TableHead className="text-right">Ações</TableHead>
+                      <TableHead>{t('admin.name')}</TableHead>
+                      <TableHead>{t('admin.email')}</TableHead>
+                      <TableHead>{t('admin.phone')}</TableHead>
+                      <TableHead>{t('admin.registration')}</TableHead>
+                      <TableHead>{t('admin.expiresOn')}</TableHead>
+                      <TableHead>{t('admin.payment')}</TableHead>
+                      <TableHead>{t('admin.status')}</TableHead>
+                      <TableHead className="text-right">{t('admin.actions')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -264,7 +275,7 @@ const AdminPage = () => {
                         <TableCell className="text-muted-foreground">{user.email}</TableCell>
                         <TableCell className="text-muted-foreground">{user.phone}</TableCell>
                         <TableCell className="text-muted-foreground text-sm">
-                          {new Date(user.created_at).toLocaleDateString('pt-BR')}
+                          {formatDate(user.created_at)}
                         </TableCell>
                         <TableCell className="text-sm">
                           {(() => {
@@ -278,8 +289,8 @@ const AdminPage = () => {
                             const isExpired = expirationDate < new Date();
                             return (
                               <span className={isExpired ? 'text-destructive font-medium' : 'text-muted-foreground'}>
-                                {expirationDate.toLocaleDateString('pt-BR')}
-                                {isExpired && ' (Expirado)'}
+                                {formatDate(expirationDate.toISOString())}
+                                {isExpired && ` (${t('admin.expired')})`}
                               </span>
                             );
                           })()}
@@ -294,12 +305,12 @@ const AdminPage = () => {
                           {user.payment_method === 'cartao' && (
                             <Badge variant="outline" className="border-blue-500/50 text-blue-400">
                               <CreditCard className="h-3 w-3 mr-1" />
-                              Cartão
+                              {language === 'pt' ? 'Cartão' : 'Card'}
                             </Badge>
                           )}
                           {user.payment_method === 'outro' && (
                             <Badge variant="outline" className="border-muted-foreground/50 text-muted-foreground">
-                              Outro
+                              {language === 'pt' ? 'Outro' : 'Other'}
                             </Badge>
                           )}
                           {!user.payment_method && (
@@ -310,12 +321,12 @@ const AdminPage = () => {
                           {user.has_paid ? (
                             <Badge className="bg-green-500/20 text-green-500 hover:bg-green-500/30">
                               <CheckCircle className="h-3 w-3 mr-1" />
-                              Liberado
+                              {t('admin.released')}
                             </Badge>
                           ) : (
                             <Badge variant="secondary" className="bg-orange-500/20 text-orange-500">
                               <XCircle className="h-3 w-3 mr-1" />
-                              Pendente
+                              {t('admin.pending')}
                             </Badge>
                           )}
                         </TableCell>
@@ -345,7 +356,7 @@ const AdminPage = () => {
                                     ) : (
                                       <>
                                         <RotateCcw className="h-4 w-4 mr-1" />
-                                        Renovar
+                                        {t('admin.renew')}
                                       </>
                                     )}
                                   </Button>
@@ -362,9 +373,9 @@ const AdminPage = () => {
                               {updating === user.id ? (
                                 <RefreshCw className="h-4 w-4 animate-spin" />
                               ) : user.has_paid ? (
-                                'Revogar'
+                                t('admin.revoke')
                               ) : (
-                                'Liberar'
+                                t('admin.release')
                               )}
                             </Button>
                           </div>
@@ -383,15 +394,15 @@ const AdminPage = () => {
           <CardHeader>
             <CardTitle className="text-sm flex items-center gap-2">
               <Shield className="h-4 w-4 text-primary" />
-              Instruções de Uso
+              {t('admin.instructions')}
             </CardTitle>
           </CardHeader>
           <CardContent className="text-sm text-muted-foreground space-y-2">
-            <p>• <strong>Liberar Acesso:</strong> Clique em "Liberar" para dar acesso ao curso após confirmar pagamento.</p>
-            <p>• <strong>Revogar Acesso:</strong> Clique em "Revogar" para remover acesso de um usuário.</p>
-            <p>• <strong>Renovar Acesso:</strong> Para usuários com acesso expirado, clique em "Renovar" para estender por mais 1 ano.</p>
-            <p>• <strong>Busca:</strong> Use a barra de busca para filtrar por nome, email ou telefone.</p>
-            <p>• <strong>Atualizar:</strong> Clique no botão de refresh para recarregar a lista de usuários.</p>
+            <p>• <strong>{t('admin.release')}:</strong> {t('admin.instructionRelease')}</p>
+            <p>• <strong>{t('admin.revoke')}:</strong> {t('admin.instructionRevoke')}</p>
+            <p>• <strong>{t('admin.renew')}:</strong> {t('admin.instructionRenew')}</p>
+            <p>• <strong>{language === 'pt' ? 'Busca' : 'Search'}:</strong> {t('admin.instructionSearch')}</p>
+            <p>• <strong>{language === 'pt' ? 'Atualizar' : 'Refresh'}:</strong> {t('admin.instructionRefresh')}</p>
           </CardContent>
         </Card>
       </main>

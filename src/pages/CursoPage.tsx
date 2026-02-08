@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import Navigation from "@/components/Navigation";
 import HomeSection from "@/components/HomeSection";
 import HistoriaSection from "@/components/HistoriaSection";
@@ -27,12 +28,14 @@ import FlashcardsSection from "@/components/FlashcardsSection";
 import PaymentRequired from "@/components/PaymentRequired";
 import AccessExpired from "@/components/AccessExpired";
 import PageTransition from "@/components/PageTransition";
+import LanguageToggle from "@/components/LanguageToggle";
 import { Button } from "@/components/ui/button";
 import { LogOut, User } from "lucide-react";
 
 const CursoPage = () => {
   const navigate = useNavigate();
   const { user, profile, loading, signOut } = useAuth();
+  const { t } = useLanguage();
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
@@ -56,7 +59,7 @@ const CursoPage = () => {
       <div className="min-h-screen bg-gradient-to-b from-background via-card to-background flex items-center justify-center">
         <div className="text-center">
           <span className="text-5xl font-serif text-primary animate-pulse">柔道</span>
-          <p className="text-muted-foreground mt-4">Carregando...</p>
+          <p className="text-muted-foreground mt-4">{t("common.loading")}</p>
         </div>
       </div>
     );
@@ -147,12 +150,13 @@ const CursoPage = () => {
                 柔道
               </span>
               <div>
-                <h1 className="text-lg md:text-xl font-bold text-white">Exame Shodan</h1>
-                <p className="text-xs text-foreground/70">Preparação para Faixa Preta</p>
+                <h1 className="text-lg md:text-xl font-bold text-white">{t("header.title")}</h1>
+                <p className="text-xs text-foreground/70">{t("header.subtitle")}</p>
               </div>
             </div>
             
             <div className="flex items-center gap-4">
+              <LanguageToggle />
               <div className="hidden sm:flex items-center gap-2 text-sm text-muted-foreground">
                 <User className="w-4 h-4" />
                 <span>{profile?.name?.split(' ')[0]}</span>
@@ -164,7 +168,7 @@ const CursoPage = () => {
                 className="border-primary/50 text-primary hover:bg-primary hover:text-secondary"
               >
                 <LogOut className="w-4 h-4 mr-2" />
-                <span className="hidden sm:inline">Sair</span>
+                <span className="hidden sm:inline">{t("common.logout")}</span>
               </Button>
             </div>
           </div>
@@ -184,10 +188,10 @@ const CursoPage = () => {
         <div className="max-w-7xl mx-auto px-4 text-center">
           <p className="text-3xl font-serif text-primary mb-3">柔道</p>
           <p className="text-sm text-muted-foreground mb-2">
-            "Máxima eficiência com mínimo esforço. Prosperidade e benefícios mútuos."
+            "{t("footer.quote")}"
           </p>
           <p className="text-xs text-muted-foreground/60">
-            Guia de Preparação para Exame Shodan - Faixa Preta 1º Dan
+            {t("footer.courseDescription")}
           </p>
         </div>
       </footer>

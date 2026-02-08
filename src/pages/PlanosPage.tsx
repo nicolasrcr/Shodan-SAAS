@@ -1,50 +1,53 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Check, Star, Crown, ArrowLeft, Smartphone, CreditCard } from "lucide-react";
+import LanguageToggle from "@/components/LanguageToggle";
 
 const PlanosPage = () => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [showPixModal, setShowPixModal] = useState(false);
 
   const plans = [
     {
-      name: "Renovação",
-      price: "99,90",
+      name: t("plans.renewal"),
+      price: t("plans.renewalPrice"),
       originalPrice: null,
-      period: "por ano",
-      description: "Para quem já é aluno e quer continuar estudando",
+      period: t("plans.renewalPeriod"),
+      description: t("plans.renewalDescription"),
       icon: Star,
       features: [
-        "Renovação por mais 1 ano",
-        "Acesso a todo conteúdo atualizado",
-        "Novas regras 2025 inclusas",
-        "Quizzes e Flashcards",
-        "Suporte via WhatsApp"
+        t("plans.renewalFeature1"),
+        t("plans.renewalFeature2"),
+        t("plans.renewalFeature3"),
+        t("plans.renewalFeature4"),
+        t("plans.renewalFeature5")
       ],
       highlight: false,
-      cta: "Renovar Acesso"
+      cta: t("plans.renewCta")
     },
     {
-      name: "Acesso Completo",
-      price: "197",
-      originalPrice: "397",
-      period: "pagamento único",
-      description: "Ideal para quem vai fazer o exame de Shodan",
+      name: t("plans.fullAccess"),
+      price: t("plans.fullAccessPrice"),
+      originalPrice: t("plans.fullAccessOriginal"),
+      period: t("plans.fullAccessPeriod"),
+      description: t("plans.fullAccessDescription"),
       icon: Crown,
       features: [
-        "Acesso por 1 ano completo",
-        "17 módulos de conteúdo",
-        "Flashcards interativos",
-        "Quizzes com 175+ perguntas",
-        "Vídeos demonstrativos",
-        "Sistema de Placar e Regras 2025",
-        "Suporte prioritário via WhatsApp",
-        "Atualizações durante o período"
+        t("plans.fullAccessFeature1"),
+        t("plans.fullAccessFeature2"),
+        t("plans.fullAccessFeature3"),
+        t("plans.fullAccessFeature4"),
+        t("plans.fullAccessFeature5"),
+        t("plans.fullAccessFeature6"),
+        t("plans.fullAccessFeature7"),
+        t("plans.fullAccessFeature8")
       ],
       highlight: true,
-      cta: "Começar Agora"
+      cta: t("plans.startNow")
     }
   ];
 
@@ -62,10 +65,11 @@ const PlanosPage = () => {
             </button>
             <span className="text-4xl font-serif text-primary">柔道</span>
             <div>
-              <h1 className="text-lg font-bold text-white">Planos e Preços</h1>
-              <p className="text-xs text-foreground/70">Escolha o melhor para você</p>
+              <h1 className="text-lg font-bold text-white">{t("plans.title")}</h1>
+              <p className="text-xs text-foreground/70">{t("plans.subtitle")}</p>
             </div>
           </div>
+          <LanguageToggle />
         </div>
       </header>
 
@@ -73,11 +77,10 @@ const PlanosPage = () => {
         {/* Title Section */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Invista no seu <span className="text-primary">futuro no Judô</span>
+            {t("plans.investTitle")} <span className="text-primary">{t("plans.investHighlight")}</span>
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Escolha o plano ideal para sua jornada rumo à faixa preta. 
-            Todo o conhecimento que você precisa para o exame de Shodan.
+            {t("plans.description")}
           </p>
         </div>
 
@@ -94,7 +97,7 @@ const PlanosPage = () => {
             >
               {plan.highlight && (
                 <div className="absolute top-0 right-0 bg-primary text-secondary px-4 py-1 text-sm font-bold rounded-bl-lg">
-                  MAIS POPULAR
+                  {t("plans.mostPopular")}
                 </div>
               )}
               <CardHeader className="text-center pb-4">
@@ -145,7 +148,7 @@ const PlanosPage = () => {
                     className="border-primary/50 text-primary hover:bg-primary hover:text-secondary"
                   >
                     <Smartphone className="w-4 h-4 mr-2" />
-                    Pagar com PIX
+                    {t("payment.payWithPix")}
                   </Button>
                 </div>
               </CardContent>
@@ -155,30 +158,30 @@ const PlanosPage = () => {
 
         {/* FAQ Section */}
         <div className="bg-card/30 rounded-2xl p-8 border border-border/50">
-          <h2 className="text-2xl font-bold text-white mb-6 text-center">Perguntas Frequentes</h2>
+          <h2 className="text-2xl font-bold text-white mb-6 text-center">{t("plans.faq")}</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
-              <h4 className="font-semibold text-white mb-2">Como funciona o acesso?</h4>
+              <h4 className="font-semibold text-white mb-2">{t("plans.faqAccess")}</h4>
               <p className="text-sm text-muted-foreground">
-                Após o pagamento confirmado, você terá acesso imediato a todo o conteúdo por 1 ano completo.
+                {t("plans.faqAccessAnswer")}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-white mb-2">Posso acessar pelo celular?</h4>
+              <h4 className="font-semibold text-white mb-2">{t("plans.faqMobile")}</h4>
               <p className="text-sm text-muted-foreground">
-                Sim! O curso é 100% responsivo e funciona em qualquer dispositivo com internet.
+                {t("plans.faqMobileAnswer")}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-white mb-2">E se meu acesso expirar?</h4>
+              <h4 className="font-semibold text-white mb-2">{t("plans.faqExpire")}</h4>
               <p className="text-sm text-muted-foreground">
-                Você pode renovar por apenas R$ 99,90/ano e continuar estudando com as atualizações.
+                {t("plans.faqExpireAnswer")}
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-white mb-2">Tem suporte?</h4>
+              <h4 className="font-semibold text-white mb-2">{t("plans.faqSupport")}</h4>
               <p className="text-sm text-muted-foreground">
-                Sim! Suporte via WhatsApp (61) 99663-4944 para dúvidas sobre conteúdo ou acesso.
+                {t("plans.faqSupportAnswer")}
               </p>
             </div>
           </div>
@@ -187,7 +190,7 @@ const PlanosPage = () => {
         {/* Help Text */}
         <div className="text-center text-sm text-muted-foreground mt-8">
           <p>
-            Dúvidas? Fale conosco pelo{' '}
+            {t("plans.questions")}{' '}
             <a 
               href="https://wa.me/5561996634944" 
               target="_blank" 
@@ -205,18 +208,18 @@ const PlanosPage = () => {
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <Card className="max-w-md w-full bg-card border-primary/30">
             <CardContent className="p-6">
-              <h3 className="text-xl font-bold text-white mb-4 text-center">Pagamento via PIX</h3>
+              <h3 className="text-xl font-bold text-white mb-4 text-center">{t("plans.pixTitle")}</h3>
               <div className="bg-secondary/50 rounded-lg p-4 mb-4">
-                <p className="text-sm text-muted-foreground mb-2">Chave PIX (CNPJ):</p>
+                <p className="text-sm text-muted-foreground mb-2">{t("pix.key")}</p>
                 <p className="text-primary font-mono break-all">62.333.509/0001-03</p>
               </div>
               <div className="bg-secondary/50 rounded-lg p-4 mb-4">
-                <p className="text-sm text-muted-foreground mb-2">Valores:</p>
-                <p className="text-lg text-white">Acesso Completo: <span className="text-primary font-bold">R$ 197,00</span></p>
-                <p className="text-lg text-white">Renovação: <span className="text-primary font-bold">R$ 99,90</span></p>
+                <p className="text-sm text-muted-foreground mb-2">{t("plans.pixValues")}</p>
+                <p className="text-lg text-white">{t("plans.pixFullAccess")} <span className="text-primary font-bold">R$ 197,00</span></p>
+                <p className="text-lg text-white">{t("plans.pixRenewal")} <span className="text-primary font-bold">R$ 99,90</span></p>
               </div>
               <div className="bg-primary/20 border border-primary/50 rounded-lg p-4 mb-4">
-                <p className="text-sm text-muted-foreground mb-2">Após o pagamento, envie o comprovante:</p>
+                <p className="text-sm text-muted-foreground mb-2">{t("plans.pixAfterPayment")}</p>
                 <a 
                   href="https://wa.me/5561996634944" 
                   target="_blank" 
@@ -227,13 +230,13 @@ const PlanosPage = () => {
                 </a>
               </div>
               <p className="text-sm text-muted-foreground mb-4 text-center">
-                Informe seu nome e email cadastrado. A liberação será feita em até 24 horas.
+                {t("plans.pixInstructions")}
               </p>
               <Button 
                 onClick={() => setShowPixModal(false)}
                 className="w-full btn-gold"
               >
-                Entendido
+                {t("common.understood")}
               </Button>
             </CardContent>
           </Card>

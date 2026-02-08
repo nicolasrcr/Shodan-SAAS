@@ -1,4 +1,5 @@
 import { sections } from "@/data/judoData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ComingSoonSectionProps {
   section: string;
@@ -6,6 +7,7 @@ interface ComingSoonSectionProps {
 }
 
 const ComingSoonSection = ({ section, onNavigate }: ComingSoonSectionProps) => {
+  const { t } = useLanguage();
   const sectionInfo = sections.find(s => s.id === section);
   
   return (
@@ -18,23 +20,23 @@ const ComingSoonSection = ({ section, onNavigate }: ComingSoonSectionProps) => {
       <div className="card-judo text-center py-16">
         <span className="text-6xl mb-6 block">{sectionInfo?.icon || '🥋'}</span>
         <h3 className="text-2xl font-semibold text-white mb-4">
-          Conteúdo em Desenvolvimento
+          {t("comingSoon.title")}
         </h3>
         <p className="text-muted-foreground mb-8 max-w-md mx-auto">
-          Esta seção está sendo preparada com todo o conteúdo sobre {sectionInfo?.label?.toLowerCase()}.
-          Volte em breve para acessar todo o material de estudo.
+          {t("comingSoon.description")} {sectionInfo?.label?.toLowerCase()}.
+          {t("comingSoon.backSoon")}
         </p>
         <button 
           onClick={() => onNavigate('home')}
           className="btn-gold"
         >
-          ← Voltar ao Início
+          {t("comingSoon.backToHome")}
         </button>
       </div>
 
       {/* Quick Navigation */}
       <div className="mt-10">
-        <h3 className="text-lg font-semibold text-primary mb-5">Seções Disponíveis</h3>
+        <h3 className="text-lg font-semibold text-primary mb-5">{t("comingSoon.availableSections")}</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {['historia', 'principios', 'etiqueta', 'gokyo', 'katameWaza', 'regras'].map((id) => {
             const s = sections.find(sec => sec.id === id);

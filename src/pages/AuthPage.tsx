@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,19 +12,13 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye, EyeOff, Loader2, Check, CreditCard, QrCode } from "lucide-react";
 import { z } from "zod";
-
-const cadastroSchema = z.object({
-  name: z.string().trim().min(3, "Nome deve ter pelo menos 3 caracteres").max(100, "Nome muito longo"),
-  email: z.string().trim().email("Email inválido").max(255, "Email muito longo"),
-  phone: z.string().trim().min(10, "Telefone inválido").max(20, "Telefone inválido"),
-  password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres").max(100, "Senha muito longa"),
-  paymentMethod: z.enum(["pix", "cartao"]),
-});
+import LanguageToggle from "@/components/LanguageToggle";
 
 const AuthPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const { signIn, signUp } = useAuth();
+  const { t } = useLanguage();
   
   // Tab state - check URL param for initial tab
   const initialTab = searchParams.get('tab') === 'cadastro' ? 'cadastro' : 'login';
@@ -63,6 +58,15 @@ const AuthPage = () => {
     }
   }, [searchParams]);
 
+  // Validation schema
+  const cadastroSchema = z.object({
+    name: z.string().trim().min(3, t("auth.fullName")).max(100),
+    email: z.string().trim().email(t("auth.email")).max(255),
+    phone: z.string().trim().min(10).max(20),
+    password: z.string().min(6, t("auth.minChars")).max(100),
+    paymentMethod: z.enum(["pix", "cartao"]),
+  });
+
   // Login handlers
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -82,12 +86,10 @@ const AuthPage = () => {
 
       if (isEmailNotConfirmed) {
         setNeedsEmailConfirm(true);
-        setLoginError(
-          "Seu email ainda não foi confirmado. Verifique sua caixa de entrada e o spam (lixo eletrônico)."
-        );
+        setLoginError(t("auth.emailNotConfirmed"));
       } else {
         setNeedsEmailConfirm(false);
-        setLoginError("Email ou senha incorretos. Tente novamente.");
+        setLoginError(t("auth.wrongCredentials"));
       }
       setLoginLoading(false);
       return;
@@ -111,9 +113,7 @@ const AuthPage = () => {
     });
 
     if (error) {
-      setLoginError(
-        "Não foi possível reenviar o email agora. Aguarde alguns minutos e tente novamente."
-      );
+      setLoginError(t("auth.cannotResend"));
       setResendLoading(false);
       return;
     }
@@ -144,7 +144,7 @@ const AuthPage = () => {
     setCadastroError("");
 
     if (formData.password !== formData.confirmPassword) {
-      setCadastroError("As senhas não coincidem");
+      setCadastroError(t("auth.passwordsDontMatch"));
       return;
     }
 
@@ -173,11 +173,11 @@ const AuthPage = () => {
 
     if (error) {
       if (error.message.includes('already registered')) {
-        setCadastroError("Este email já está cadastrado. Tente fazer login.");
+        setCadastroError(t("auth.emailAlreadyRegistered"));
       } else if (error.message.includes('rate limit') || error.message.includes('over_email_send_rate_limit')) {
-        setCadastroError("Limite de envio de emails atingido. Aguarde alguns minutos e tente novamente.");
+        setCadastroError(t("auth.rateLimitReached"));
       } else {
-        setCadastroError("Erro ao criar conta. Tente novamente.");
+        setCadastroError(t("auth.createAccountError"));
       }
       setCadastroLoading(false);
       return;
@@ -196,16 +196,16 @@ const AuthPage = () => {
             <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/20 flex items-center justify-center">
               <Check className="w-8 h-8 text-primary" />
             </div>
-            <h2 className="text-2xl font-bold text-white mb-4">Cadastro Realizado!</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">{t("auth.registrationComplete")}</h2>
             <p className="text-muted-foreground mb-6">
-              Sua conta foi criada com sucesso. Verifique seu email para confirmar o cadastro.
+              {t("auth.accountCreated")}
             </p>
             <div className="space-y-3">
               <Button onClick={() => { setCadastroSuccess(false); setActiveTab('login'); }} className="w-full btn-gold">
-                Fazer Login
+                {t("auth.doLogin")}
               </Button>
               <Button onClick={() => navigate('/')} variant="outline" className="w-full border-primary/50 text-primary">
-                Voltar ao Início
+                {t("auth.backToHome")}
               </Button>
             </div>
           </CardContent>
@@ -217,23 +217,28 @@ const AuthPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-background via-card to-background flex items-center justify-center p-4">
       <div className="w-full max-w-md">
+        {/* Language Toggle */}
+        <div className="flex justify-end mb-4">
+          <LanguageToggle />
+        </div>
+
         {/* Logo */}
         <div className="text-center mb-8">
           <Link to="/" className="inline-block">
             <span className="text-5xl font-serif text-primary">柔道</span>
-            <p className="text-sm text-muted-foreground mt-2">Exame Shodan</p>
+            <p className="text-sm text-muted-foreground mt-2">{t("header.title")}</p>
           </Link>
         </div>
 
         <Card className="bg-card/80 border-primary/20">
           <CardHeader className="text-center pb-2">
             <CardTitle className="text-2xl text-white">
-              {activeTab === 'login' ? 'Entrar' : 'Criar Conta'}
+              {activeTab === 'login' ? t("auth.login") : t("auth.createAccount")}
             </CardTitle>
             <CardDescription>
               {activeTab === 'login' 
-                ? 'Acesse sua conta para continuar estudando' 
-                : 'Cadastre-se para acessar o curso'}
+                ? t("auth.accessAccount") 
+                : t("auth.registerAccess")}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -243,13 +248,13 @@ const AuthPage = () => {
                   value="login" 
                   className="data-[state=active]:bg-primary data-[state=active]:text-secondary"
                 >
-                  Login
+                  {t("common.login")}
                 </TabsTrigger>
                 <TabsTrigger 
                   value="cadastro"
                   className="data-[state=active]:bg-primary data-[state=active]:text-secondary"
                 >
-                  Cadastro
+                  {t("common.register")}
                 </TabsTrigger>
               </TabsList>
 
@@ -263,7 +268,7 @@ const AuthPage = () => {
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="login-email" className="text-white">Email</Label>
+                    <Label htmlFor="login-email" className="text-white">{t("auth.email")}</Label>
                     <Input
                       id="login-email"
                       type="email"
@@ -277,19 +282,19 @@ const AuthPage = () => {
 
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <Label htmlFor="login-password" className="text-white">Senha</Label>
+                      <Label htmlFor="login-password" className="text-white">{t("auth.password")}</Label>
                       <Link 
                         to="/recuperar-senha" 
                         className="text-xs text-primary hover:underline"
                       >
-                        Esqueci a senha
+                        {t("auth.forgotPassword")}
                       </Link>
                     </div>
                     <div className="relative">
                       <Input
                         id="login-password"
                         type={showLoginPassword ? "text" : "password"}
-                        placeholder="Sua senha"
+                        placeholder={t("auth.password")}
                         value={loginPassword}
                         onChange={(e) => setLoginPassword(e.target.value)}
                         required
@@ -313,10 +318,10 @@ const AuthPage = () => {
                     {loginLoading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Entrando...
+                        {t("auth.entering")}
                       </>
                     ) : (
-                      "Entrar"
+                      t("auth.login")
                     )}
                   </Button>
 
@@ -332,15 +337,15 @@ const AuthPage = () => {
                         {resendLoading ? (
                           <>
                             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                            Reenviando...
+                            {t("auth.resending")}
                           </>
                         ) : (
-                          "Reenviar email de confirmação"
+                          t("auth.resendEmail")
                         )}
                       </Button>
                       {resendSent && (
                         <p className="text-xs text-muted-foreground text-center">
-                          Email reenviado! Confira sua caixa de entrada e o spam.
+                          {t("auth.emailResent")}
                         </p>
                       )}
                     </div>
@@ -358,11 +363,11 @@ const AuthPage = () => {
                   )}
 
                   <div className="space-y-2">
-                    <Label htmlFor="name" className="text-white">Nome Completo</Label>
+                    <Label htmlFor="name" className="text-white">{t("auth.fullName")}</Label>
                     <Input
                       id="name"
                       type="text"
-                      placeholder="Seu nome completo"
+                      placeholder={t("auth.fullName")}
                       value={formData.name}
                       onChange={handleChange('name')}
                       required
@@ -371,7 +376,7 @@ const AuthPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-white">Email</Label>
+                    <Label htmlFor="email" className="text-white">{t("auth.email")}</Label>
                     <Input
                       id="email"
                       type="email"
@@ -384,7 +389,7 @@ const AuthPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-white">Telefone (WhatsApp)</Label>
+                    <Label htmlFor="phone" className="text-white">{t("auth.phone")}</Label>
                     <Input
                       id="phone"
                       type="tel"
@@ -397,12 +402,12 @@ const AuthPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="password" className="text-white">Senha</Label>
+                    <Label htmlFor="password" className="text-white">{t("auth.password")}</Label>
                     <div className="relative">
                       <Input
                         id="password"
                         type={showCadastroPassword ? "text" : "password"}
-                        placeholder="Mínimo 6 caracteres"
+                        placeholder={t("auth.minChars")}
                         value={formData.password}
                         onChange={handleChange('password')}
                         required
@@ -419,11 +424,11 @@ const AuthPage = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="confirmPassword" className="text-white">Confirmar Senha</Label>
+                    <Label htmlFor="confirmPassword" className="text-white">{t("auth.confirmPassword")}</Label>
                     <Input
                       id="confirmPassword"
                       type={showCadastroPassword ? "text" : "password"}
-                      placeholder="Repita a senha"
+                      placeholder={t("auth.repeatPassword")}
                       value={formData.confirmPassword}
                       onChange={handleChange('confirmPassword')}
                       required
@@ -432,7 +437,7 @@ const AuthPage = () => {
                   </div>
 
                   <div className="space-y-3">
-                    <Label className="text-white">Forma de Pagamento Preferida</Label>
+                    <Label className="text-white">{t("auth.preferredPayment")}</Label>
                     <RadioGroup
                       value={formData.paymentMethod}
                       onValueChange={(value: "pix" | "cartao") => 
@@ -448,10 +453,11 @@ const AuthPage = () => {
                         />
                         <Label
                           htmlFor="pix"
-                          className="flex flex-col items-center justify-center rounded-lg border-2 border-primary/20 bg-secondary/50 p-4 hover:bg-secondary/70 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/20 cursor-pointer transition-all"
+                          className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                         >
-                          <QrCode className="h-6 w-6 mb-2 text-primary" />
-                          <span className="text-sm font-medium text-white">PIX</span>
+                          <QrCode className="mb-2 h-6 w-6 text-primary" />
+                          <span className="text-sm font-medium">{t("auth.pix")}</span>
+                          <span className="text-xs text-muted-foreground">{t("auth.pixDesc")}</span>
                         </Label>
                       </div>
                       <div className="relative">
@@ -462,10 +468,11 @@ const AuthPage = () => {
                         />
                         <Label
                           htmlFor="cartao"
-                          className="flex flex-col items-center justify-center rounded-lg border-2 border-primary/20 bg-secondary/50 p-4 hover:bg-secondary/70 peer-data-[state=checked]:border-primary peer-data-[state=checked]:bg-primary/20 cursor-pointer transition-all"
+                          className="flex flex-col items-center justify-center rounded-lg border-2 border-muted bg-popover p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary cursor-pointer"
                         >
-                          <CreditCard className="h-6 w-6 mb-2 text-primary" />
-                          <span className="text-sm font-medium text-white">Cartão</span>
+                          <CreditCard className="mb-2 h-6 w-6 text-blue-400" />
+                          <span className="text-sm font-medium">{t("auth.card")}</span>
+                          <span className="text-xs text-muted-foreground">{t("auth.cardDesc")}</span>
                         </Label>
                       </div>
                     </RadioGroup>
@@ -479,28 +486,15 @@ const AuthPage = () => {
                     {cadastroLoading ? (
                       <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                        Criando conta...
+                        {t("auth.creating")}
                       </>
                     ) : (
-                      "Criar Conta"
+                      t("auth.createAccountBtn")
                     )}
                   </Button>
                 </form>
-
-                {/* Price reminder */}
-                <div className="mt-4 text-center">
-                  <p className="text-sm text-muted-foreground">
-                    Valor do curso: <span className="text-primary font-bold">R$ 197</span> (pagamento único)
-                  </p>
-                </div>
               </TabsContent>
             </Tabs>
-
-            <div className="mt-6 text-center">
-              <Link to="/" className="text-sm text-muted-foreground hover:text-primary">
-                ← Voltar para a página inicial
-              </Link>
-            </div>
           </CardContent>
         </Card>
       </div>
