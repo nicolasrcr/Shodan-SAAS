@@ -58,6 +58,34 @@ const RegrasSection = () => {
               </div>
             ))}
           </div>
+          
+          {/* Ippon Criteria */}
+          <div className="mt-6 p-5 bg-green-500/10 border border-green-500/30 rounded-2xl">
+            <h4 className="font-semibold text-green-400 mb-4 text-center">
+              🥇 Critérios para Ippon
+            </h4>
+            <p className="text-sm text-foreground/80 mb-4 text-center">
+              Para ser considerado Ippon, o arremesso deve demonstrar:
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="text-center p-3 bg-muted/30 rounded-xl">
+                <span className="text-2xl block mb-1">💪</span>
+                <span className="text-sm font-semibold text-green-400">Força</span>
+              </div>
+              <div className="text-center p-3 bg-muted/30 rounded-xl">
+                <span className="text-2xl block mb-1">⚡</span>
+                <span className="text-sm font-semibold text-green-400">Velocidade</span>
+              </div>
+              <div className="text-center p-3 bg-muted/30 rounded-xl">
+                <span className="text-2xl block mb-1">🎯</span>
+                <span className="text-sm font-semibold text-green-400">Controle</span>
+              </div>
+              <div className="text-center p-3 bg-muted/30 rounded-xl">
+                <span className="text-2xl block mb-1">✨</span>
+                <span className="text-sm font-semibold text-green-400">Impacto Perfeito</span>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Commands */}
