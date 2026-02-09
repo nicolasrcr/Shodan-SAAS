@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Search } from "lucide-react";
 import { searchIndex, sections } from "@/data/judoData";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SearchBarProps {
   onNavigate: (section: string) => void;
@@ -12,6 +13,7 @@ const SearchBar = ({ onNavigate }: SearchBarProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [results, setResults] = useState<typeof searchIndex>([]);
   const inputRef = useRef<HTMLInputElement>(null);
+  const { language } = useLanguage();
 
   useEffect(() => {
     if (query.length < 2) {
@@ -36,8 +38,17 @@ const SearchBar = ({ onNavigate }: SearchBarProps) => {
   };
 
   const getSectionLabel = (id: string) => {
+    // This is simplified, for full i18n we'd need to translate sections list too
     return sections.find((s) => s.id === id)?.label || id;
   };
+
+  const placeholder = language === 'en' 
+    ? "Search techniques, terms, history..." 
+    : "Pesquisar técnicas, termos, história...";
+
+  const noResults = language === 'en'
+    ? "No results found"
+    : "Nenhum resultado encontrado";
 
   return (
     <div className="relative max-w-xl mx-auto mb-10">
@@ -48,7 +59,7 @@ const SearchBar = ({ onNavigate }: SearchBarProps) => {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onBlur={() => setTimeout(() => setIsOpen(false), 200)}
-          placeholder="Pesquisar técnicas, termos, história..."
+          placeholder={placeholder}
           className="search-input pr-12"
         />
         <Search className="absolute right-5 top-1/2 -translate-y-1/2 text-primary w-5 h-5" />
@@ -78,7 +89,7 @@ const SearchBar = ({ onNavigate }: SearchBarProps) => {
 
       {isOpen && query.length >= 2 && results.length === 0 && (
         <div className="absolute top-full left-0 right-0 mt-2 bg-card/98 border border-primary rounded-xl p-5 text-center text-muted-foreground z-50">
-          Nenhum resultado encontrado
+          {noResults}
         </div>
       )}
     </div>

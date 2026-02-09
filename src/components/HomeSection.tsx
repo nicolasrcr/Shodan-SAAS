@@ -1,11 +1,40 @@
 import { homeCards } from "@/data/judoData";
 import SearchBar from "./SearchBar";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface HomeSectionProps {
   onNavigate: (section: string) => void;
 }
 
 const HomeSection = ({ onNavigate }: HomeSectionProps) => {
+  const { t, language } = useLanguage();
+
+  const translatedCards = {
+    pt: homeCards,
+    en: [
+      { title: 'History', desc: 'Jigoro Kano, Kodokan and origins', icon: '史', section: 'historia' },
+      { title: 'Principles', desc: 'Philosophy and moral code', icon: '心', section: 'principios' },
+      { title: 'Etiquette', desc: 'Conduct, bowing and dojo', icon: '礼', section: 'etiqueta' },
+      { title: 'Nomenclature', desc: 'Japanese terms', icon: '言', section: 'nomenclatura' },
+      { title: 'Gokyo', desc: '40 throwing techniques', icon: '投', section: 'gokyo' },
+      { title: 'Katame-Waza', desc: 'Ground techniques', icon: '固', section: 'katameWaza' },
+      { title: 'Katas', desc: 'Nage-no-Kata and Katame-no-Kata', icon: '形', section: 'katas' },
+      { title: 'Nage no Kata', desc: '15 techniques in 5 groups', icon: '投形', section: 'nageNoKata' },
+      { title: 'Katame no Kata', desc: '15 techniques in 3 groups', icon: '固形', section: 'katameNoKata' },
+      { title: 'Training', desc: 'Uchi-komi, Randori and methods', icon: '練', section: 'treinos' },
+      { title: 'Scoreboard', desc: 'Scoring and penalties', icon: '🏆', section: 'placar' },
+      { title: 'Rules', desc: 'Refereeing and scoring', icon: '則', section: 'regras' },
+      { title: '2025 Rules', desc: 'New IJF rules', icon: '新', section: 'regras2025' },
+      { title: 'Organization', desc: 'Federations and categories', icon: '🏟️', section: 'organizacao' },
+      { title: 'School Judo', desc: 'Pedagogy and kids belts', icon: '🎓', section: 'escolar' },
+      { title: 'First Aid', desc: 'Emergencies on tatami', icon: '🚑', section: 'socorros' },
+      { title: 'Inclusive', desc: 'ASD, ADHD and adaptations', icon: '♿', section: 'inclusivo' },
+      { title: 'Videos', desc: 'Demo playlist', icon: '映', section: 'videos' },
+    ]
+  };
+
+  const cards = language === 'en' ? translatedCards.en : translatedCards.pt;
+
   return (
     <div className="animate-fade-in">
       {/* Hero */}
@@ -14,12 +43,12 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
           <span className="text-5xl font-serif text-secondary">柔道</span>
         </div>
         <h1 className="text-3xl md:text-4xl font-light text-white mb-3">
-          Guia Completo <span className="text-primary font-bold">Exame Shodan</span>
+          {t("hero.title1")} <span className="text-primary font-bold">{t("hero.title2")}</span>
         </h1>
-        <p className="text-muted-foreground mb-3">Preparação para o Exame de Faixa Preta - 1º Dan</p>
+        <p className="text-muted-foreground mb-3">{t("hero.description")}</p>
         <p className="text-primary italic text-sm max-w-xl mx-auto">
-          "O objetivo final do Judô não é a vitória sobre os outros, mas o aperfeiçoamento de si mesmo."
-          <span className="block mt-1 text-muted-foreground not-italic">— Jigoro Kano</span>
+          {t("quote.text")}
+          <span className="block mt-1 text-muted-foreground not-italic">{t("quote.author")}</span>
         </p>
       </div>
 
@@ -28,7 +57,7 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
 
       {/* Cards Grid - 5 columns on xl to match reference design */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-12">
-        {homeCards.map((card) => (
+        {cards.map((card) => (
           <div
             key={card.section}
             onClick={() => onNavigate(card.section)}
@@ -53,10 +82,10 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
       {/* CTA Section */}
       <div className="card-red rounded-3xl p-8 md:p-10 text-center">
         <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">
-          Pronto para testar seus conhecimentos?
+          {language === 'en' ? "Ready to test your knowledge?" : "Pronto para testar seus conhecimentos?"}
         </h3>
         <p className="text-muted-foreground mb-6 max-w-lg mx-auto">
-          Pratique com flashcards e quizzes para consolidar seu aprendizado
+          {language === 'en' ? "Practice with flashcards and quizzes to consolidate your learning" : "Pratique com flashcards e quizzes para consolidar seu aprendizado"}
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <button onClick={() => onNavigate('flashcardsMenu')} className="btn-gold">

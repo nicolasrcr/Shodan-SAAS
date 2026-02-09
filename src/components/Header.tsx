@@ -1,8 +1,12 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 interface HeaderProps {
   onNavigate: (section: string) => void;
 }
 
 const Header = ({ onNavigate }: HeaderProps) => {
+  const { t } = useLanguage();
+
   return (
     <header className="sticky top-0 z-50 bg-gradient-to-r from-secondary via-judo-red-dark to-secondary border-b-[3px] border-primary">
       <div className="max-w-7xl mx-auto px-6 py-3">
@@ -15,8 +19,8 @@ const Header = ({ onNavigate }: HeaderProps) => {
               柔道
             </span>
             <div>
-              <h1 className="text-lg md:text-xl font-bold text-white">Exame Shodan</h1>
-              <p className="text-xs text-foreground/70">Preparação para Faixa Preta</p>
+              <h1 className="text-lg md:text-xl font-bold text-white">{t("header.title")}</h1>
+              <p className="text-xs text-foreground/70">{t("header.subtitle")}</p>
             </div>
           </div>
           
@@ -24,7 +28,7 @@ const Header = ({ onNavigate }: HeaderProps) => {
             <span className="text-2xl text-primary animate-pulse-gold">●</span>
             <div>
               <div className="text-2xl md:text-3xl font-serif text-primary">初段</div>
-              <p className="text-[10px] text-foreground/60 hidden sm:block">Primeiro Dan</p>
+              <p className="text-[10px] text-foreground/60 hidden sm:block">{t("header.firstDan")}</p>
             </div>
           </div>
         </div>
