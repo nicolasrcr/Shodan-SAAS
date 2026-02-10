@@ -2,21 +2,39 @@ import { useState } from "react";
 import { gokyoData } from "@/data/judoData";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-
-const kyoColors: Record<string, { bg: string; text: string; label: string; kyu: string }> = {
-  ikkyo: { bg: 'bg-yellow-500', text: 'text-yellow-400', label: 'Ikkyo (1º)', kyu: '5º Kyu' },
-  nikyo: { bg: 'bg-orange-500', text: 'text-orange-400', label: 'Nikyo (2º)', kyu: '4º Kyu' },
-  sankyo: { bg: 'bg-green-600', text: 'text-green-400', label: 'Sankyo (3º)', kyu: '3º Kyu' },
-  yonkyo: { bg: 'bg-blue-600', text: 'text-blue-400', label: 'Yonkyo (4º)', kyu: '2º Kyu' },
-  gokyo: { bg: 'bg-amber-800', text: 'text-amber-600', label: 'Gokyo (5º)', kyu: '1º Kyu' },
-};
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const GokyoSection = () => {
   const [activeGroup, setActiveGroup] = useState<keyof typeof gokyoData>("ikkyo");
+  const { language } = useLanguage();
+
+  const kyoColors: Record<string, { bg: string; text: string; label: string; kyu: string }> = {
+    ikkyo: { bg: 'bg-yellow-500', text: 'text-yellow-400', label: 'Ikkyo (1º)', kyu: language === 'pt' ? '5º Kyu' : '5th Kyu' },
+    nikyo: { bg: 'bg-orange-500', text: 'text-orange-400', label: 'Nikyo (2º)', kyu: language === 'pt' ? '4º Kyu' : '4th Kyu' },
+    sankyo: { bg: 'bg-green-600', text: 'text-green-400', label: 'Sankyo (3º)', kyu: language === 'pt' ? '3º Kyu' : '3rd Kyu' },
+    yonkyo: { bg: 'bg-blue-600', text: 'text-blue-400', label: 'Yonkyo (4º)', kyu: language === 'pt' ? '2º Kyu' : '2nd Kyu' },
+    gokyo: { bg: 'bg-amber-800', text: 'text-amber-600', label: 'Gokyo (5º)', kyu: language === 'pt' ? '1º Kyu' : '1st Kyu' },
+  };
 
   const groups = Object.entries(gokyoData);
   const currentGroup = gokyoData[activeGroup];
   const currentColor = kyoColors[activeGroup];
+
+  const categories = language === 'pt'
+    ? [
+        { name: "Te-waza", desc: "Técnicas de mão/braço" },
+        { name: "Koshi-waza", desc: "Técnicas de quadril" },
+        { name: "Ashi-waza", desc: "Técnicas de perna/pé" },
+        { name: "Ma-sutemi", desc: "Sacrifício para trás" },
+        { name: "Yoko-sutemi", desc: "Sacrifício lateral" },
+      ]
+    : [
+        { name: "Te-waza", desc: "Hand/arm techniques" },
+        { name: "Koshi-waza", desc: "Hip techniques" },
+        { name: "Ashi-waza", desc: "Leg/foot techniques" },
+        { name: "Ma-sutemi", desc: "Rear sacrifice" },
+        { name: "Yoko-sutemi", desc: "Side sacrifice" },
+      ];
 
   return (
     <div className="animate-fade-in">
@@ -27,8 +45,9 @@ const GokyoSection = () => {
 
       <div className="card-judo mb-8">
         <p className="text-sm text-foreground/70">
-          O Go-Kyo (Cinco Ensinos) foi estabelecido por Jigoro Kano em 1895 e revisado em 1920 (Shin-Go-Kyo). 
-          Contém 40 técnicas fundamentais de projeção em 5 grupos de 8 técnicas cada.
+          {language === 'pt'
+            ? 'O Go-Kyo (Cinco Ensinos) foi estabelecido por Jigoro Kano em 1895 e revisado em 1920 (Shin-Go-Kyo). Contém 40 técnicas fundamentais de projeção em 5 grupos de 8 técnicas cada.'
+            : 'The Go-Kyo (Five Teachings) was established by Jigoro Kano in 1895 and revised in 1920 (Shin-Go-Kyo). It contains 40 fundamental throwing techniques in 5 groups of 8 techniques each.'}
         </p>
       </div>
 
@@ -103,7 +122,7 @@ const GokyoSection = () => {
             <p className={cn("text-2xl font-serif mb-2", currentColor.text)}>{technique.kanji}</p>
             <p className="text-xs text-muted-foreground mb-2">{technique.translation}</p>
             <p className="text-[10px] text-primary/70 flex items-center gap-1">
-              <span>🎬</span> Vídeo disponível na página Vídeos
+              <span>🎬</span> {language === 'pt' ? 'Vídeo disponível na página Vídeos' : 'Video available on Videos page'}
             </p>
           </div>
         ))}
@@ -111,15 +130,11 @@ const GokyoSection = () => {
 
       {/* Group Legend */}
       <div className="mt-8 p-5 bg-card rounded-xl border border-primary/20">
-        <h4 className="text-sm font-semibold text-primary mb-4">Categorias de Técnicas</h4>
+        <h4 className="text-sm font-semibold text-primary mb-4">
+          {language === 'pt' ? 'Categorias de Técnicas' : 'Technique Categories'}
+        </h4>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-          {[
-            { name: "Te-waza", desc: "Técnicas de mão/braço" },
-            { name: "Koshi-waza", desc: "Técnicas de quadril" },
-            { name: "Ashi-waza", desc: "Técnicas de perna/pé" },
-            { name: "Ma-sutemi", desc: "Sacrifício para trás" },
-            { name: "Yoko-sutemi", desc: "Sacrifício lateral" },
-          ].map((cat, index) => (
+          {categories.map((cat, index) => (
             <div key={index} className="p-3 bg-muted/50 rounded-lg">
               <p className="text-sm font-medium text-primary">{cat.name}</p>
               <p className="text-xs text-muted-foreground">{cat.desc}</p>
@@ -130,9 +145,13 @@ const GokyoSection = () => {
 
       {/* Color Legend Explanation */}
       <div className="mt-6 p-4 bg-muted/30 rounded-xl">
-        <h4 className="text-sm font-semibold text-white mb-3">🎨 Sistema de Cores</h4>
+        <h4 className="text-sm font-semibold text-white mb-3">
+          {language === 'pt' ? '🎨 Sistema de Cores' : '🎨 Color System'}
+        </h4>
         <p className="text-xs text-muted-foreground mb-3">
-          As mesmas cores são usadas na seção de Vídeos para facilitar a identificação das técnicas:
+          {language === 'pt'
+            ? 'As mesmas cores são usadas na seção de Vídeos para facilitar a identificação das técnicas:'
+            : 'The same colors are used in the Videos section to facilitate technique identification:'}
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
           {Object.entries(kyoColors).map(([key, color]) => (
