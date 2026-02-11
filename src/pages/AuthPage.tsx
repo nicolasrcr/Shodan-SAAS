@@ -172,12 +172,16 @@ const AuthPage = () => {
     );
 
     if (error) {
-      if (error.message.includes('already registered')) {
+      console.error('Signup error:', error.message, error);
+      const msg = (error.message || '').toLowerCase();
+      if (msg.includes('already registered') || msg.includes('already been registered') || msg.includes('user already registered')) {
         setCadastroError(t("auth.emailAlreadyRegistered"));
-      } else if (error.message.includes('rate limit') || error.message.includes('over_email_send_rate_limit')) {
+      } else if (msg.includes('rate limit') || msg.includes('over_email_send_rate_limit') || msg.includes('email rate limit')) {
         setCadastroError(t("auth.rateLimitReached"));
+      } else if (msg.includes('password') && msg.includes('6')) {
+        setCadastroError(t("auth.minChars"));
       } else {
-        setCadastroError(t("auth.createAccountError"));
+        setCadastroError(`${t("auth.createAccountError")} (${error.message})`);
       }
       setCadastroLoading(false);
       return;
