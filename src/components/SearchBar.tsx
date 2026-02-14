@@ -22,10 +22,13 @@ const SearchBar = ({ onNavigate }: SearchBarProps) => {
       return;
     }
 
+    const q = query.toLowerCase();
     const filtered = searchIndex.filter(
-      (item) =>
-        item.title.toLowerCase().includes(query.toLowerCase()) ||
-        item.keywords.toLowerCase().includes(query.toLowerCase())
+      (item) => {
+        const title = language === 'en' && item.titleEn ? item.titleEn : item.title;
+        const keywords = language === 'en' && item.keywordsEn ? item.keywordsEn : item.keywords;
+        return title.toLowerCase().includes(q) || keywords.toLowerCase().includes(q);
+      }
     );
     setResults(filtered.slice(0, 8));
     setIsOpen(true);
@@ -81,7 +84,7 @@ const SearchBar = ({ onNavigate }: SearchBarProps) => {
                 {getSectionLabel(result.section)}
               </div>
               <div className="text-foreground text-sm font-medium">
-                {result.title}
+                {language === 'en' && result.titleEn ? result.titleEn : result.title}
               </div>
             </div>
           ))}
