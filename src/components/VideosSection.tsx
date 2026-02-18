@@ -5,7 +5,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 interface VideoItem {
   name: string;
   id: string;
-  gokyo?: string;
+  category?: string;
 }
 
 const VideoThumbnail = ({ videoId, videoName }: { videoId: string; videoName: string }) => {
@@ -39,129 +39,207 @@ const VideosSection = () => {
   const content = {
     pt: {
       title: 'Vídeos - Demonstrações Técnicas',
-      beltColorSystem: 'Sistema de Cores por Faixa (Gokyo)',
       warning: 'É necessário ter acesso à internet para visualizar os vídeos. Ao clicar, você será redirecionado para o YouTube.',
       attention: 'ATENÇÃO:',
-      intro: 'Playlist completa de vídeos demonstrativos de todas as técnicas oficiais do Judô. Vídeos do Kodokan oficial e canais de referência mundial.',
+      intro: 'Playlist completa de vídeos demonstrativos das 100 técnicas oficiais do Kodokan Judô, organizadas por categoria de técnica. Vídeos do Kodokan oficial e canais de referência mundial.',
       studyTips: 'Dicas para Estudo por Vídeo',
       howToStudy: 'Como Estudar',
       whatToObserve: 'O que Observar',
       studyItems: ['Assista em velocidade reduzida (0.5x ou 0.25x)', 'Pause para analisar posições-chave', 'Compare com suas próprias gravações', 'Foque em uma técnica por sessão de estudo'],
       observeItems: ['Posição das mãos (kumi-kata)', 'Direção do desequilíbrio (kuzushi)', 'Momento da entrada (tsukuri)', 'Finalização da técnica (kake)'],
-      categories: [
-        'Ikkyo - 1º Grupo (5º Kyu - Faixa Amarela)', 'Nikyo - 2º Grupo (4º Kyu - Faixa Laranja)',
-        'Sankyo - 3º Grupo (3º Kyu - Faixa Verde)', 'Yonkyo - 4º Grupo (2º Kyu - Faixa Azul)',
-        'Gokyo - 5º Grupo (1º Kyu - Faixa Marrom)', 'Shinmeisho-no-Waza (Técnicas Adicionais)',
-        'Kinshi-Waza (Técnicas Proibidas)', 'Ukemi (Técnicas de Queda)',
-      ],
-      additionalTechniques: 'Técnicas Adicionais',
-      prohibitedTechniques: 'Proibidas',
+      categories: {
+        teWaza: 'Te-waza — Técnicas de Braço',
+        koshiWaza: 'Koshi-waza — Técnicas de Quadril',
+        ashiWaza: 'Ashi-waza — Técnicas de Perna',
+        sutemiWaza: 'Sutemi-waza — Técnicas de Sacrifício',
+        osaekomiWaza: 'Osaekomi-waza — Imobilizações',
+        shimeWaza: 'Shime-waza — Estrangulamentos',
+        kansetsuWaza: 'Kansetsu-waza — Chaves de Articulação',
+        ukemi: 'Ukemi — Técnicas de Queda',
+      },
     },
     en: {
       title: 'Videos - Technical Demonstrations',
-      beltColorSystem: 'Belt Color System (Gokyo)',
       warning: 'Internet access is required to view the videos. Clicking will redirect you to YouTube.',
       attention: 'ATTENTION:',
-      intro: 'Complete playlist of demonstration videos of all official Judo techniques. Videos from the official Kodokan and world reference channels.',
+      intro: 'Complete playlist of demonstration videos of all 100 official Kodokan Judo techniques, organized by technique category. Videos from the official Kodokan and world reference channels.',
       studyTips: 'Video Study Tips',
       howToStudy: 'How to Study',
       whatToObserve: 'What to Observe',
       studyItems: ['Watch at reduced speed (0.5x or 0.25x)', 'Pause to analyze key positions', 'Compare with your own recordings', 'Focus on one technique per study session'],
       observeItems: ['Hand position (kumi-kata)', 'Direction of off-balance (kuzushi)', 'Entry moment (tsukuri)', 'Technique completion (kake)'],
-      categories: [
-        'Ikkyo - 1st Group (5th Kyu - Yellow Belt)', 'Nikyo - 2nd Group (4th Kyu - Orange Belt)',
-        'Sankyo - 3rd Group (3rd Kyu - Green Belt)', 'Yonkyo - 4th Group (2nd Kyu - Blue Belt)',
-        'Gokyo - 5th Group (1st Kyu - Brown Belt)', 'Shinmeisho-no-Waza (Additional Techniques)',
-        'Kinshi-Waza (Prohibited Techniques)', 'Ukemi (Falling Techniques)',
-      ],
-      additionalTechniques: 'Additional Techniques',
-      prohibitedTechniques: 'Prohibited',
+      categories: {
+        teWaza: 'Te-waza — Hand Techniques',
+        koshiWaza: 'Koshi-waza — Hip Techniques',
+        ashiWaza: 'Ashi-waza — Foot/Leg Techniques',
+        sutemiWaza: 'Sutemi-waza — Sacrifice Techniques',
+        osaekomiWaza: 'Osaekomi-waza — Pins',
+        shimeWaza: 'Shime-waza — Chokes',
+        kansetsuWaza: 'Kansetsu-waza — Joint Locks',
+        ukemi: 'Ukemi — Falling Techniques',
+      },
     }
   };
 
   const t = content[language === 'en' ? 'en' : 'pt'];
 
-  const gokyoInfo = {
-    Ikkyo: { color: 'bg-yellow-500', textColor: 'text-black', kyu: language === 'en' ? '5th Kyu' : '5º Kyu', emoji: '🟡' },
-    Nikyo: { color: 'bg-orange-500', textColor: 'text-white', kyu: language === 'en' ? '4th Kyu' : '4º Kyu', emoji: '🟠' },
-    Sankyo: { color: 'bg-green-600', textColor: 'text-white', kyu: language === 'en' ? '3rd Kyu' : '3º Kyu', emoji: '🟢' },
-    Yonkyo: { color: 'bg-blue-600', textColor: 'text-white', kyu: language === 'en' ? '2nd Kyu' : '2º Kyu', emoji: '🔵' },
-    Gokyo: { color: 'bg-amber-800', textColor: 'text-white', kyu: language === 'en' ? '1st Kyu' : '1º Kyu', emoji: '🟤' },
-    Shinmeisho: { color: 'bg-gray-600', textColor: 'text-white', kyu: t.additionalTechniques, emoji: '⚪' },
-    Kinshi: { color: 'bg-red-700', textColor: 'text-white', kyu: t.prohibitedTechniques, emoji: '🔴' },
+  const categoryInfo: Record<string, { color: string; textColor: string; emoji: string; icon: string; badge: string }> = {
+    teWaza: { color: 'bg-blue-600', textColor: 'text-white', emoji: '🤲', icon: '手', badge: 'Te' },
+    koshiWaza: { color: 'bg-purple-600', textColor: 'text-white', emoji: '🔄', icon: '腰', badge: 'Koshi' },
+    ashiWaza: { color: 'bg-green-600', textColor: 'text-white', emoji: '🦶', icon: '足', badge: 'Ashi' },
+    sutemiWaza: { color: 'bg-orange-500', textColor: 'text-white', emoji: '⚡', icon: '捨', badge: 'Sutemi' },
+    osaekomiWaza: { color: 'bg-red-600', textColor: 'text-white', emoji: '🔒', icon: '固', badge: 'Osae' },
+    shimeWaza: { color: 'bg-rose-700', textColor: 'text-white', emoji: '🔗', icon: '絞', badge: 'Shime' },
+    kansetsuWaza: { color: 'bg-amber-700', textColor: 'text-white', emoji: '🔧', icon: '関', badge: 'Kansetsu' },
+    ukemi: { color: 'bg-gray-600', textColor: 'text-white', emoji: '🎬', icon: '受', badge: 'Ukemi' },
   };
 
-  // Video IDs mapping
-  const videoIds: Record<string, string> = {
-    'De-Ashi-Harai': '4BUUvqxi_Kk', 'Hiza-Guruma': 'TlODJyQE57g', 'Sasae-Tsurikomi-Ashi': 'z3bP4l4Ofhg',
-    'Uki-Goshi': 'bPKwtB4lyOQ', 'O-Soto-Gari': 'c-A_nP7mKAc', 'O-Goshi': 'yhu1mfy2vJ4',
-    'O-Uchi-Gari': '0itJFhV9pDQ', 'Seoi-Nage': 'zIq0xI0ogxk',
-    'Ko-Soto-Gari': 'jeQ541ScLB4', 'Ko-Uchi-Gari': '3Jb3tZvr9Ng', 'Koshi-Guruma': 'SU7Id6uVJ44',
-    'Tsurikomi-Goshi': 'McfzA0yRVt4', 'Okuri-Ashi-Harai': 'kNhJKQE5aLY', 'Tai-Otoshi': '4x6S3Q-Ktv8',
-    'Harai-Goshi': 'qTo8HlAAkOo', 'Uchi-Mata': 'iUpSu5J-bgw',
-    'Ko-Soto-Gake': 'ORaD7hUVR80', 'Tsuri-Goshi': 'IKRsNEnHJKg', 'Yoko-Otoshi': 'MnNG67pF_a0',
-    'Ashi-Guruma': 'N3aNe7Ufpfs', 'Hane-Goshi': 'M9_7De6A1kk', 'Harai-Tsurikomi-Ashi': 'pjbUb1lpmxc',
-    'Tomoe-Nage': '880WbHvHv6A', 'Kata-Guruma': 'cnHRhSy8yi4',
-    'Sumi-Gaeshi': '5VhduA5xkbA', 'Tani-Otoshi': '3b9Me3Fohpk', 'Hane-Makikomi': '6CRBGLGz9j8',
-    'Sukui-Nage': 'vU6aJ2kFxoI', 'Utsuri-Goshi': 'GKl0pUKGWMg', 'O-Guruma': 'k3l_v7rPSVg',
-    'Soto-Makikomi': 'bWG9O1BVKtQ', 'Uki-Otoshi': '6H5tmncOY4Q',
-    'O-Soto-Guruma': 'Dt5LfUyPqVA', 'Uki-Waza': 'weVOpJ63gII', 'Yoko-Wakare': 'bp1tscHlePI',
-    'Yoko-Guruma': 'MehP6I5cY2c', 'Ushiro-Goshi': 'C7OXB3wQ9Ds', 'Ura-Nage': 'Fgi9b8DJ5sQ',
-    'Sumi-Otoshi': 'lLU9wv52ni0', 'Yoko-Gake': 'tP1Sj1uDfSo',
-  };
+  // === NAGE-WAZA: Te-waza (16 Técnicas de Braço) ===
+  const teWazaVideos: VideoItem[] = [
+    { name: 'Seoi-nage', id: 'zIq0xI0ogxk', category: 'teWaza' },
+    { name: 'Ippon-seoi-nage', id: 'FQnOlCxo4oI', category: 'teWaza' },
+    { name: 'Seoi-otoshi', id: 'vu1TMVNnq34', category: 'teWaza' },
+    { name: 'Tai-otoshi', id: '4x6S3Q-Ktv8', category: 'teWaza' },
+    { name: 'Kata-guruma', id: 'cnHRhSy8yi4', category: 'teWaza' },
+    { name: 'Sukui-nage', id: 'vU6aJ2kFxoI', category: 'teWaza' },
+    { name: 'Obi-otoshi', id: 'ff8U2TVZIYI', category: 'teWaza' },
+    { name: 'Uki-otoshi', id: '6H5tmncOY4Q', category: 'teWaza' },
+    { name: 'Sumi-otoshi', id: 'lLU9wv52ni0', category: 'teWaza' },
+    { name: 'Yama-arashi', id: 'MGlyKmSuzdc', category: 'teWaza' },
+    { name: 'Obi-tori-gaeshi', id: 'bpc82SrunUU', category: 'teWaza' },
+    { name: 'Morote-gari', id: 'BHLQS4K85bs', category: 'teWaza' },
+    { name: 'Kuchiki-taoshi', id: 'ZNL47q1aJNY', category: 'teWaza' },
+    { name: 'Kibisu-gaeshi', id: 'tJylJYfBliA', category: 'teWaza' },
+    { name: 'Uchi-mata-sukashi', id: 'V-RS3uhtVWM', category: 'teWaza' },
+    { name: 'Ko-uchi-gaeshi', id: '_MWAdYi_LC4', category: 'teWaza' },
+  ];
+
+  // === NAGE-WAZA: Koshi-waza (10 Técnicas de Quadril) ===
+  const koshiWazaVideos: VideoItem[] = [
+    { name: 'Uki-goshi', id: 'bPKwtB4lyOQ', category: 'koshiWaza' },
+    { name: 'O-goshi', id: 'yhu1mfy2vJ4', category: 'koshiWaza' },
+    { name: 'Koshi-guruma', id: 'SU7Id6uVJ44', category: 'koshiWaza' },
+    { name: 'Tsurikomi-goshi', id: 'McfzA0yRVt4', category: 'koshiWaza' },
+    { name: 'Sode-tsurikomi-goshi', id: 'QsmAxpmYLOI', category: 'koshiWaza' },
+    { name: 'Harai-goshi', id: 'qTo8HlAAkOo', category: 'koshiWaza' },
+    { name: 'Tsuri-goshi', id: '51Htlp7xEvE', category: 'koshiWaza' },
+    { name: 'Hane-goshi', id: 'M9_7De6A1kk', category: 'koshiWaza' },
+    { name: 'Utsuri-goshi', id: '4pQd_bEnlf0', category: 'koshiWaza' },
+    { name: 'Ushiro-goshi', id: 'ORIYstuxYT8', category: 'koshiWaza' },
+  ];
+
+  // === NAGE-WAZA: Ashi-waza (21 Técnicas de Perna) ===
+  const ashiWazaVideos: VideoItem[] = [
+    { name: 'De-ashi-harai', id: '4BUUvqxi_Kk', category: 'ashiWaza' },
+    { name: 'Hiza-guruma', id: 'JPJx9-oAVns', category: 'ashiWaza' },
+    { name: 'Sasae-tsurikomi-ashi', id: 'z3bP4l4Ofhg', category: 'ashiWaza' },
+    { name: 'O-soto-gari', id: 'c-A_nP7mKAc', category: 'ashiWaza' },
+    { name: 'O-uchi-gari', id: '0itJFhV9pDQ', category: 'ashiWaza' },
+    { name: 'Ko-soto-gari', id: 'jeQ541ScLB4', category: 'ashiWaza' },
+    { name: 'Ko-uchi-gari', id: '3Jb3tZvr9Ng', category: 'ashiWaza' },
+    { name: 'Okuri-ashi-harai', id: 'nw1ZdRjrdRI', category: 'ashiWaza' },
+    { name: 'Uchi-mata', id: 'iUpSu5J-bgw', category: 'ashiWaza' },
+    { name: 'Ko-soto-gake', id: '8b6kY4s4zH4', category: 'ashiWaza' },
+    { name: 'Ashi-guruma', id: 'ROeayhvom9U', category: 'ashiWaza' },
+    { name: 'Harai-tsurikomi-ashi', id: 'gGPXvWL8VbE', category: 'ashiWaza' },
+    { name: 'O-guruma', id: 'SnZciTAY9vc', category: 'ashiWaza' },
+    { name: 'O-soto-guruma', id: '92KbCm6pQeI', category: 'ashiWaza' },
+    { name: 'O-soto-otoshi', id: '2DsVvDw7b8g', category: 'ashiWaza' },
+    { name: 'Tsubame-gaeshi', id: 'GwweWqqFB5g', category: 'ashiWaza' },
+    { name: 'O-soto-gaeshi', id: '8ZjM3X_EANo', category: 'ashiWaza' },
+    { name: 'O-uchi-gaeshi', id: 'dCyZTXyjIXE', category: 'ashiWaza' },
+    { name: 'Hane-goshi-gaeshi', id: '9bZAZSBtnGs', category: 'ashiWaza' },
+    { name: 'Harai-goshi-gaeshi', id: '4U3It-7PPsc', category: 'ashiWaza' },
+    { name: 'Uchi-mata-gaeshi', id: 'Sy6sLWxkWYw', category: 'ashiWaza' },
+  ];
+
+  // === NAGE-WAZA: Sutemi-waza (21 Técnicas de Sacrifício) ===
+  // Ma-sutemi-waza (5) + Yoko-sutemi-waza (16)
+  const sutemiWazaVideos: VideoItem[] = [
+    { name: 'Tomoe-nage', id: '880WbHvHv6A', category: 'sutemiWaza' },
+    { name: 'Sumi-gaeshi', id: '5VhduA5xkbA', category: 'sutemiWaza' },
+    { name: 'Hikikomi-gaeshi', id: '92zUYWBp5N8', category: 'sutemiWaza' },
+    { name: 'Tawara-gaeshi', id: 'TmTWgrmViZc', category: 'sutemiWaza' },
+    { name: 'Ura-nage', id: 'Fgi9b8DJ5sQ', category: 'sutemiWaza' },
+    { name: 'Yoko-otoshi', id: 'MnNG67pF_a0', category: 'sutemiWaza' },
+    { name: 'Tani-otoshi', id: '3b9Me3Fohpk', category: 'sutemiWaza' },
+    { name: 'Hane-makikomi', id: '6CRBGLGz9j8', category: 'sutemiWaza' },
+    { name: 'Soto-makikomi', id: 'bWG9O1BVKtQ', category: 'sutemiWaza' },
+    { name: 'Uki-waza', id: 'weVOpJ63gII', category: 'sutemiWaza' },
+    { name: 'Yoko-wakare', id: 'bp1tscHlePI', category: 'sutemiWaza' },
+    { name: 'Yoko-guruma', id: 'MehP6I5cY2c', category: 'sutemiWaza' },
+    { name: 'Yoko-gake', id: 'tP1Sj1uDfSo', category: 'sutemiWaza' },
+    { name: 'Daki-wakare', id: 'Hr0cOMGBDYo', category: 'sutemiWaza' },
+    { name: 'O-soto-makikomi', id: 'DGDv2oMwmas', category: 'sutemiWaza' },
+    { name: 'Uchi-mata-makikomi', id: 'jZXENTLpJCI', category: 'sutemiWaza' },
+    { name: 'Harai-makikomi', id: 'VBaHzKaCXss', category: 'sutemiWaza' },
+    { name: 'Ko-uchi-makikomi', id: '_1eygIXLD_w', category: 'sutemiWaza' },
+    { name: 'Kani-basami', id: 'OR-HGHnarYc', category: 'sutemiWaza' },
+    { name: 'Kawazu-gake', id: 'w6G57bWACi0', category: 'sutemiWaza' },
+  ];
+
+  // === KATAME-WAZA: Osaekomi-waza (10 Imobilizações) ===
+  const osaekomiWazaVideos: VideoItem[] = [
+    { name: 'Kesa-gatame', id: 'KbjpU3bBrzw', category: 'osaekomiWaza' },
+    { name: 'Kuzure-kesa-gatame', id: 'XEJL1VvREfY', category: 'osaekomiWaza' },
+    { name: 'Ushiro-kesa-gatame', id: '3FRW5DBR3WE', category: 'osaekomiWaza' },
+    { name: 'Kata-gatame', id: 'hqb4f5PJRZ4', category: 'osaekomiWaza' },
+    { name: 'Kami-shiho-gatame', id: 'jQu8x4dosJk', category: 'osaekomiWaza' },
+    { name: 'Kuzure-kami-shiho-gatame', id: 'DkYN1BYEyIE', category: 'osaekomiWaza' },
+    { name: 'Yoko-shiho-gatame', id: '4UqGhU1MjnI', category: 'osaekomiWaza' },
+    { name: 'Tate-shiho-gatame', id: 'ixMlMbyeBKU', category: 'osaekomiWaza' },
+    { name: 'Uki-gatame', id: 'PGZ2e2gsDgA', category: 'osaekomiWaza' },
+    { name: 'Ura-gatame', id: '4HiK1laG28A', category: 'osaekomiWaza' },
+  ];
+
+  // === KATAME-WAZA: Shime-waza (12 Estrangulamentos) ===
+  const shimeWazaVideos: VideoItem[] = [
+    { name: 'Nami-juji-jime', id: 'q6a6v9GMnWg', category: 'shimeWaza' },
+    { name: 'Gyaku-juji-jime', id: 'GwFKxPBi5f4', category: 'shimeWaza' },
+    { name: 'Kata-juji-jime', id: 'IpVtCN-8NYc', category: 'shimeWaza' },
+    { name: 'Hadaka-jime', id: 'wAZKLeHJjZ8', category: 'shimeWaza' },
+    { name: 'Okuri-eri-jime', id: 'T1UGna5MWIM', category: 'shimeWaza' },
+    { name: 'Kata-ha-jime', id: 'kH5s_S8k3GI', category: 'shimeWaza' },
+    { name: 'Katate-jime', id: 'PNE-FMMVfuw', category: 'shimeWaza' },
+    { name: 'Ryote-jime', id: 'g2mMI2Vz2yE', category: 'shimeWaza' },
+    { name: 'Sode-guruma-jime', id: 'S4I-dKJif_U', category: 'shimeWaza' },
+    { name: 'Tsukkomi-jime', id: 'Yn_P1YYSGWA', category: 'shimeWaza' },
+    { name: 'Sankaku-jime', id: 'hPbkW85PnB0', category: 'shimeWaza' },
+    { name: 'Do-jime', id: 'Cd8G7GiRBiw', category: 'shimeWaza' },
+  ];
+
+  // === KATAME-WAZA: Kansetsu-waza (10 Chaves de Articulação) ===
+  const kansetsuWazaVideos: VideoItem[] = [
+    { name: 'Ude-garami', id: 'itvCm51BGPY', category: 'kansetsuWaza' },
+    { name: 'Ude-hishigi-juji-gatame', id: 'POXoGorkfN4', category: 'kansetsuWaza' },
+    { name: 'Ude-hishigi-ude-gatame', id: '2i7VMKak5mQ', category: 'kansetsuWaza' },
+    { name: 'Ude-hishigi-hiza-gatame', id: 'kF3ERbawmB4', category: 'kansetsuWaza' },
+    { name: 'Ude-hishigi-waki-gatame', id: 'ZLc2G1bLSVk', category: 'kansetsuWaza' },
+    { name: 'Ude-hishigi-hara-gatame', id: 'xGqm3mfqSxg', category: 'kansetsuWaza' },
+    { name: 'Ude-hishigi-ashi-gatame', id: 'MvfWOmm-FxA', category: 'kansetsuWaza' },
+    { name: 'Ude-hishigi-te-gatame', id: 'QxbhCiht5x0', category: 'kansetsuWaza' },
+    { name: 'Ude-hishigi-sankaku-gatame', id: 'QS6ifr05Fkk', category: 'kansetsuWaza' },
+    { name: 'Ashi-garami', id: 'yXs5YV8pF6A', category: 'kansetsuWaza' },
+  ];
+
+  // === Ukemi (Técnicas de Queda) ===
+  const ukemiVideos: VideoItem[] = [
+    { name: 'Ushiro-ukemi', id: 'u4oHFVznIVY', category: 'ukemi' },
+    { name: 'Yoko-ukemi', id: 'KJFr5FINMIM', category: 'ukemi' },
+    { name: 'Mae-ukemi', id: 'ukSj8JM8cvI', category: 'ukemi' },
+    { name: 'Zenpo-kaiten-ukemi', id: 'BvFpMr1Insw', category: 'ukemi' },
+    { name: 'Ukemi Completo', id: 'VoktcQAxEPg', category: 'ukemi' },
+  ];
 
   const videoCategories = [
-    { title: t.categories[0], gokyo: 'Ikkyo', videos: [
-      { name: 'De-Ashi-Harai', id: videoIds['De-Ashi-Harai'], gokyo: 'Ikkyo' }, { name: 'Hiza-Guruma', id: videoIds['Hiza-Guruma'], gokyo: 'Ikkyo' },
-      { name: 'Sasae-Tsurikomi-Ashi', id: videoIds['Sasae-Tsurikomi-Ashi'], gokyo: 'Ikkyo' }, { name: 'Uki-Goshi', id: videoIds['Uki-Goshi'], gokyo: 'Ikkyo' },
-      { name: 'O-Soto-Gari', id: videoIds['O-Soto-Gari'], gokyo: 'Ikkyo' }, { name: 'O-Goshi', id: videoIds['O-Goshi'], gokyo: 'Ikkyo' },
-      { name: 'O-Uchi-Gari', id: videoIds['O-Uchi-Gari'], gokyo: 'Ikkyo' }, { name: 'Seoi-Nage', id: videoIds['Seoi-Nage'], gokyo: 'Ikkyo' },
-    ] as VideoItem[] },
-    { title: t.categories[1], gokyo: 'Nikyo', videos: [
-      { name: 'Ko-Soto-Gari', id: videoIds['Ko-Soto-Gari'], gokyo: 'Nikyo' }, { name: 'Ko-Uchi-Gari', id: videoIds['Ko-Uchi-Gari'], gokyo: 'Nikyo' },
-      { name: 'Koshi-Guruma', id: videoIds['Koshi-Guruma'], gokyo: 'Nikyo' }, { name: 'Tsurikomi-Goshi', id: videoIds['Tsurikomi-Goshi'], gokyo: 'Nikyo' },
-      { name: 'Okuri-Ashi-Harai', id: videoIds['Okuri-Ashi-Harai'], gokyo: 'Nikyo' }, { name: 'Tai-Otoshi', id: videoIds['Tai-Otoshi'], gokyo: 'Nikyo' },
-      { name: 'Harai-Goshi', id: videoIds['Harai-Goshi'], gokyo: 'Nikyo' }, { name: 'Uchi-Mata', id: videoIds['Uchi-Mata'], gokyo: 'Nikyo' },
-    ] as VideoItem[] },
-    { title: t.categories[2], gokyo: 'Sankyo', videos: [
-      { name: 'Ko-Soto-Gake', id: videoIds['Ko-Soto-Gake'], gokyo: 'Sankyo' }, { name: 'Tsuri-Goshi', id: videoIds['Tsuri-Goshi'], gokyo: 'Sankyo' },
-      { name: 'Yoko-Otoshi', id: videoIds['Yoko-Otoshi'], gokyo: 'Sankyo' }, { name: 'Ashi-Guruma', id: videoIds['Ashi-Guruma'], gokyo: 'Sankyo' },
-      { name: 'Hane-Goshi', id: videoIds['Hane-Goshi'], gokyo: 'Sankyo' }, { name: 'Harai-Tsurikomi-Ashi', id: videoIds['Harai-Tsurikomi-Ashi'], gokyo: 'Sankyo' },
-      { name: 'Tomoe-Nage', id: videoIds['Tomoe-Nage'], gokyo: 'Sankyo' }, { name: 'Kata-Guruma', id: videoIds['Kata-Guruma'], gokyo: 'Sankyo' },
-    ] as VideoItem[] },
-    { title: t.categories[3], gokyo: 'Yonkyo', videos: [
-      { name: 'Sumi-Gaeshi', id: videoIds['Sumi-Gaeshi'], gokyo: 'Yonkyo' }, { name: 'Tani-Otoshi', id: videoIds['Tani-Otoshi'], gokyo: 'Yonkyo' },
-      { name: 'Hane-Makikomi', id: videoIds['Hane-Makikomi'], gokyo: 'Yonkyo' }, { name: 'Sukui-Nage', id: videoIds['Sukui-Nage'], gokyo: 'Yonkyo' },
-      { name: 'Utsuri-Goshi', id: videoIds['Utsuri-Goshi'], gokyo: 'Yonkyo' }, { name: 'O-Guruma', id: videoIds['O-Guruma'], gokyo: 'Yonkyo' },
-      { name: 'Soto-Makikomi', id: videoIds['Soto-Makikomi'], gokyo: 'Yonkyo' }, { name: 'Uki-Otoshi', id: videoIds['Uki-Otoshi'], gokyo: 'Yonkyo' },
-    ] as VideoItem[] },
-    { title: t.categories[4], gokyo: 'Gokyo', videos: [
-      { name: 'O-Soto-Guruma', id: videoIds['O-Soto-Guruma'], gokyo: 'Gokyo' }, { name: 'Uki-Waza', id: videoIds['Uki-Waza'], gokyo: 'Gokyo' },
-      { name: 'Yoko-Wakare', id: videoIds['Yoko-Wakare'], gokyo: 'Gokyo' }, { name: 'Yoko-Guruma', id: videoIds['Yoko-Guruma'], gokyo: 'Gokyo' },
-      { name: 'Ushiro-Goshi', id: videoIds['Ushiro-Goshi'], gokyo: 'Gokyo' }, { name: 'Ura-Nage', id: videoIds['Ura-Nage'], gokyo: 'Gokyo' },
-      { name: 'Sumi-Otoshi', id: videoIds['Sumi-Otoshi'], gokyo: 'Gokyo' }, { name: 'Yoko-Gake', id: videoIds['Yoko-Gake'], gokyo: 'Gokyo' },
-    ] as VideoItem[] },
-    { title: t.categories[5], gokyo: 'Shinmeisho', videos: [
-      { name: 'Obi-otoshi', id: 'ff8U2TVZIYI', gokyo: 'Shinmeisho' }, { name: 'Obi-tori-gaeshi', id: 'bpc82SrunUU', gokyo: 'Shinmeisho' },
-      { name: 'Morote-gari', id: 'BHLQS4K85bs', gokyo: 'Shinmeisho' }, { name: 'Kuchiki-taoshi', id: 'ZNL47q1aJNY', gokyo: 'Shinmeisho' },
-      { name: 'Kibisu-gaeshi', id: 'SqI12aHF1P8', gokyo: 'Shinmeisho' }, { name: 'Uchi-mata-sukashi', id: 'y5v1kU6E01I', gokyo: 'Shinmeisho' },
-      { name: 'Ko-uchi-gaeshi', id: '8v7S_76IHBE', gokyo: 'Shinmeisho' }, { name: 'Sode-tsurikomi-goshi', id: 'WhQg2YMoW9o', gokyo: 'Shinmeisho' },
-      { name: 'O-soto-gaeshi', id: '8ZjM3X_EANo', gokyo: 'Shinmeisho' }, { name: 'O-uchi-gaeshi', id: 'dCyZTXyjIXE', gokyo: 'Shinmeisho' },
-      { name: 'Hane-goshi-gaeshi', id: '9bZAZSBtnGs', gokyo: 'Shinmeisho' }, { name: 'Harai-goshi-gaeshi', id: '4U3It-7PPsc', gokyo: 'Shinmeisho' },
-      { name: 'Uchi-mata-gaeshi', id: 'Sy6sLWxkWYw', gokyo: 'Shinmeisho' }, { name: 'Tsubame-gaeshi', id: 'GwweWqqFB5g', gokyo: 'Shinmeisho' },
-      { name: 'Hikikomi-gaeshi', id: '92zUYWBp5N8', gokyo: 'Shinmeisho' }, { name: 'Tawara-gaeshi', id: 'TmTWgrmViZc', gokyo: 'Shinmeisho' },
-      { name: 'Daki-wakare', id: 'Hr0cOMGBDYo', gokyo: 'Shinmeisho' }, { name: 'O-soto-makikomi', id: 'DGDv2oMwmas', gokyo: 'Shinmeisho' },
-      { name: 'Uchi-mata-makikomi', id: 'jZXENTLpJCI', gokyo: 'Shinmeisho' }, { name: 'Harai-makikomi', id: 'VBaHzKaCXss', gokyo: 'Shinmeisho' },
-      { name: 'Ko-uchi-makikomi', id: '_1eygIXLD_w', gokyo: 'Shinmeisho' },
-    ] as VideoItem[] },
-    { title: t.categories[6], gokyo: 'Kinshi', videos: [
-      { name: 'Kani-basami', id: 'OR-HGHnarYc', gokyo: 'Kinshi' }, { name: 'Kawazu-gake', id: 'w6G57bWACi0', gokyo: 'Kinshi' },
-    ] as VideoItem[] },
-    { title: t.categories[7], gokyo: undefined, videos: [
-      { name: 'Ushiro-Ukemi', id: 'u4oHFVznIVY' }, { name: 'Yoko-Ukemi', id: 'KJFr5FINMIM' },
-      { name: 'Mae-Ukemi', id: 'ukSj8JM8cvI' }, { name: 'Zenpo-Kaiten-Ukemi', id: 'BvFpMr1Insw' },
-      { name: 'Ukemi Completo', id: 'VoktcQAxEPg' },
-    ] as VideoItem[] },
+    { key: 'teWaza', title: t.categories.teWaza, videos: teWazaVideos },
+    { key: 'koshiWaza', title: t.categories.koshiWaza, videos: koshiWazaVideos },
+    { key: 'ashiWaza', title: t.categories.ashiWaza, videos: ashiWazaVideos },
+    { key: 'sutemiWaza', title: t.categories.sutemiWaza, videos: sutemiWazaVideos },
+    { key: 'osaekomiWaza', title: t.categories.osaekomiWaza, videos: osaekomiWazaVideos },
+    { key: 'shimeWaza', title: t.categories.shimeWaza, videos: shimeWazaVideos },
+    { key: 'kansetsuWaza', title: t.categories.kansetsuWaza, videos: kansetsuWazaVideos },
+    { key: 'ukemi', title: t.categories.ukemi, videos: ukemiVideos },
   ];
 
   return (
@@ -169,10 +247,16 @@ const VideosSection = () => {
       <h2 className="section-title"><span className="section-title-icon">映</span>{t.title}</h2>
 
       <div className="card-judo mb-6 p-4">
-        <h3 className="text-sm font-semibold text-primary mb-3">🎨 {t.beltColorSystem}</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
-          {Object.entries(gokyoInfo).slice(0, 5).map(([key, info]) => (
-            <div key={key} className="flex items-center gap-2"><div className={`w-6 h-6 rounded-full ${info.color}`} /><div><p className="text-xs font-medium text-white">{key}</p><p className="text-[10px] text-foreground/60">{info.kyu}</p></div></div>
+        <h3 className="text-sm font-semibold text-primary mb-3">🎯 {language === 'en' ? 'Categories by Technique Type' : 'Categorias por Tipo de Técnica'}</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          {Object.entries(categoryInfo).filter(([key]) => key !== 'ukemi').map(([key, info]) => (
+            <div key={key} className="flex items-center gap-2">
+              <div className={`w-6 h-6 rounded-full ${info.color} flex items-center justify-center text-[10px] text-white font-bold`}>{info.icon}</div>
+              <div>
+                <p className="text-xs font-medium text-white">{info.badge}-waza</p>
+                <p className="text-[10px] text-foreground/60">{videoCategories.find(c => c.key === key)?.videos.length} {language === 'en' ? 'techniques' : 'técnicas'}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -183,12 +267,14 @@ const VideosSection = () => {
 
       <div className="card-judo mb-8"><p className="text-sm text-foreground/70">{t.intro}</p></div>
 
-      {videoCategories.map((category, catIndex) => {
-        const info = category.gokyo ? gokyoInfo[category.gokyo as keyof typeof gokyoInfo] : null;
+      {videoCategories.map((category) => {
+        const info = categoryInfo[category.key];
         return (
-          <div key={catIndex} className="mb-10">
+          <div key={category.key} className="mb-10">
             <h3 className="text-lg font-semibold flex items-center gap-3 mb-4">
-              {info ? (<><span className={`w-6 h-6 rounded ${info.color}`} /><span className="text-primary">{category.title}</span></>) : (<><span>🎬</span><span className="text-primary">{category.title}</span></>)}
+              <span className={`w-7 h-7 rounded flex items-center justify-center text-xs text-white font-bold ${info.color}`}>{info.icon}</span>
+              <span className="text-primary">{category.title}</span>
+              <Badge variant="secondary" className="text-[10px] ml-1">{category.videos.length}</Badge>
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {category.videos.map((video, index) => (
@@ -196,13 +282,9 @@ const VideosSection = () => {
                   <div className="relative aspect-video bg-background/50">
                     <VideoThumbnail videoId={video.id} videoName={video.name} />
                     <div className="absolute inset-0 flex items-center justify-center"><div className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center group-hover:scale-110 transition-transform"><span className="text-white text-sm ml-0.5">▶</span></div></div>
-                    {video.gokyo && (
-                      <Badge variant={video.gokyo === 'Kinshi' ? 'destructive' : 'secondary'} className={`absolute top-1 right-1 text-[10px] px-1.5 py-0.5 ${
-                        video.gokyo === 'Ikkyo' ? 'bg-yellow-500 hover:bg-yellow-600 text-black' : video.gokyo === 'Nikyo' ? 'bg-orange-500 hover:bg-orange-600' :
-                        video.gokyo === 'Sankyo' ? 'bg-green-600 hover:bg-green-700' : video.gokyo === 'Yonkyo' ? 'bg-blue-600 hover:bg-blue-700' :
-                        video.gokyo === 'Gokyo' ? 'bg-amber-800 hover:bg-amber-900' : video.gokyo === 'Shinmeisho' ? 'bg-gray-600 hover:bg-gray-700' :
-                        video.gokyo === 'Kinshi' ? 'bg-red-700 hover:bg-red-800' : ''}`}>{video.gokyo}</Badge>
-                    )}
+                    <Badge variant="secondary" className={`absolute top-1 right-1 text-[10px] px-1.5 py-0.5 ${info.color} ${info.textColor}`}>
+                      {info.badge}
+                    </Badge>
                   </div>
                   <div className="p-2 text-center"><p className="text-xs font-medium text-white group-hover:text-primary transition-colors truncate">{video.name}</p></div>
                 </a>
