@@ -10,6 +10,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
 import { toast } from '@/hooks/use-toast';
 import { ShieldAlert, Eye, Lock, Unlock, Monitor, Clock, RefreshCw, Search } from 'lucide-react';
+import AdminSessionsPanel from './AdminSessionsPanel';
 
 interface SuspiciousEntry {
   user_id: string;
@@ -226,6 +227,7 @@ export default function AdminSecurityTab({ language, users }: { language: string
 
       {/* User Detail Panel */}
       {detailUserId && (
+        <>
         <Card className="border-primary/20 bg-card/50 mt-4">
           <CardHeader>
             <div className="flex justify-between items-center">
@@ -288,6 +290,9 @@ export default function AdminSecurityTab({ language, users }: { language: string
             )}
           </CardContent>
         </Card>
+
+        <AdminSessionsPanel userId={detailUserId} language={language} />
+        </>
       )}
 
       {/* Block Dialog */}
