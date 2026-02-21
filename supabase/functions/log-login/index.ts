@@ -20,7 +20,6 @@ function getIp(req: Request) {
 async function getGeoFromIp(ip: string | null): Promise<{ city: string | null; country: string | null }> {
   if (!ip) return { city: null, country: null };
   try {
-    // ip-api.com: free, no key needed, 45 req/min limit (plenty for logins)
     const res = await fetch(`http://ip-api.com/json/${ip}?fields=status,city,country`);
     const data = await res.json();
     if (data.status === "success") {
@@ -52,7 +51,6 @@ serve(async (req) => {
       });
     }
 
-    // Client scoped to the logged-in user (RLS applies)
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
       global: { headers: { Authorization: authHeader } },
     });
@@ -77,7 +75,7 @@ serve(async (req) => {
     const ip = getIp(req);
     const user_agent = req.headers.get("user-agent");
 
-    // (A) Register login event with geo-IP (only on login, not heartbeat)
+    // Register login event with geo-IP (only on login, not heartbeat)
     if (kind === "login") {
       const geo = await getGeoFromIp(ip);
       await supabase.from("auth_login_events").insert({
@@ -90,7 +88,7 @@ serve(async (req) => {
       });
     }
 
-    // (B) Upsert active session
+    // Upsert active session (for admin visibility only, no auto-revocation)
     if (session_id) {
       await supabase.from("user_sessions").upsert(
         {
@@ -107,103 +105,8 @@ serve(async (req) => {
       );
     }
 
-    // (C) Limit simultaneous active sessions
-    const MAX_ACTIVE = 1;
-
-    const { data: sessions } = await supabase
-      .from("user_sessions")
-      .select("session_id,last_seen_at,revoked_at")
-      .eq("user_id", userId)
-      .is("revoked_at", null)
-      .order("last_seen_at", { ascending: false });
-
-    const active = sessions ?? [];
-    const toRevoke = active.slice(MAX_ACTIVE);
-
-    if (toRevoke.length) {
-      const revokeIds = toRevoke.map((s: any) => s.session_id);
-      await supabase
-        .from("user_sessions")
-        .update({
-          revoked_at: new Date().toISOString(),
-          revoke_reason:
-            "Sessão extra detectada (possível compartilhamento)",
-        })
-        .in("session_id", revokeIds);
-    }
-
-    // Check if current session was revoked
-    let force_logout = !!(
-      session_id && toRevoke.some((s: any) => s.session_id === session_id)
-    );
-
-    // (D) Auto-block detection based on 24h metrics
-    const THRESHOLD_IPS_24H = 3;
-    const THRESHOLD_DEVICES_24H = 3;
-    const THRESHOLD_LOGINS_24H = 10;
-
-    // Use service role client for metrics view (no RLS on views)
-    const SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
-    if (SERVICE_ROLE_KEY) {
-      const adminClient = createClient(SUPABASE_URL, SERVICE_ROLE_KEY);
-
-      const { data: metrics } = await adminClient
-        .from("user_login_metrics_24h")
-        .select("logins_24h, ips_24h, devices_24h")
-        .eq("user_id", userId)
-        .maybeSingle();
-
-      if (metrics) {
-        const shouldBlock =
-          (metrics.ips_24h ?? 0) >= THRESHOLD_IPS_24H ||
-          (metrics.devices_24h ?? 0) >= THRESHOLD_DEVICES_24H ||
-          (metrics.logins_24h ?? 0) >= THRESHOLD_LOGINS_24H;
-
-        if (shouldBlock) {
-          const reason = `Auto-block: ips_24h=${metrics.ips_24h}, devices_24h=${metrics.devices_24h}, logins_24h=${metrics.logins_24h}`;
-
-          await adminClient.from("user_security").upsert(
-            {
-              user_id: userId,
-              is_blocked: true,
-              blocked_reason: reason,
-              blocked_at: new Date().toISOString(),
-              updated_at: new Date().toISOString(),
-            },
-            { onConflict: "user_id" }
-          );
-
-          // Revoke all active sessions
-          await adminClient
-            .from("user_sessions")
-            .update({
-              revoked_at: new Date().toISOString(),
-              revoke_reason:
-                "Bloqueio automático por suspeita de compartilhamento",
-            })
-            .eq("user_id", userId)
-            .is("revoked_at", null);
-
-          return new Response(
-            JSON.stringify({
-              ok: true,
-              force_logout: true,
-              blocked: true,
-              block_reason: reason,
-            }),
-            {
-              headers: {
-                ...corsHeaders,
-                "Content-Type": "application/json",
-              },
-            }
-          );
-        }
-      }
-    }
-
     return new Response(
-      JSON.stringify({ ok: true, force_logout, max_active: MAX_ACTIVE }),
+      JSON.stringify({ ok: true, force_logout: false }),
       {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       }
