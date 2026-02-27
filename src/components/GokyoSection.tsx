@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { gokyoData, extraGokyoData } from "@/data/judoData";
 import { extraGokyoDataEn } from "@/data/judoDataEn";
 import { cn } from "@/lib/utils";
@@ -9,6 +9,7 @@ import { Ban, Sparkles } from "lucide-react";
 const GokyoSection = () => {
   const [activeGroup, setActiveGroup] = useState<string>("ikkyo");
   const { language } = useLanguage();
+  const extra = language === 'en' ? extraGokyoDataEn : extraGokyoData;
 
   const kyoColors: Record<string, { bg: string; text: string; label: string; kyu: string }> = {
     ikkyo: { bg: 'bg-yellow-500', text: 'text-yellow-400', label: 'Ikkyo (1º)', kyu: language === 'pt' ? '5º Kyu' : '5th Kyu' },
