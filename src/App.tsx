@@ -35,6 +35,7 @@ const App = () => {
           <AuthProvider>
             <Toaster />
             <Sonner />
+            <OfflineBanner />
             {showSplash && <SplashScreen onFinish={handleSplashFinish} />}
             <BrowserRouter>
               <Routes>
