@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { gokyoData, extraGokyoData } from "@/data/judoData";
+import { extraGokyoDataEn } from "@/data/judoDataEn";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -8,6 +9,7 @@ import { Ban, Sparkles } from "lucide-react";
 const GokyoSection = () => {
   const [activeGroup, setActiveGroup] = useState<string>("ikkyo");
   const { language } = useLanguage();
+  const extra = language === 'en' ? extraGokyoDataEn : extraGokyoData;
 
   const kyoColors: Record<string, { bg: string; text: string; label: string; kyu: string }> = {
     ikkyo: { bg: 'bg-yellow-500', text: 'text-yellow-400', label: 'Ikkyo (1º)', kyu: language === 'pt' ? '5º Kyu' : '5th Kyu' },
@@ -179,17 +181,17 @@ const GokyoSection = () => {
               <div>
                 <h3 className="text-lg font-bold text-red-400">Habukareta-Waza</h3>
                 <p className="text-xs text-muted-foreground">
-                  {language === 'pt' ? extraGokyoData.habukaretaWaza.description : extraGokyoData.habukaretaWaza.descriptionEn}
+                  {extra.habukaretaWaza.description}
                 </p>
               </div>
             </div>
             <div className="card-judo mb-4">
               <p className="text-sm text-foreground/70">
-                {language === 'pt' ? extraGokyoData.habukaretaWaza.info : extraGokyoData.habukaretaWaza.infoEn}
+                {extra.habukaretaWaza.info}
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {extraGokyoData.habukaretaWaza.techniques.map((technique) => (
+              {extra.habukaretaWaza.techniques.map((technique) => (
                 <div key={technique.num} className="technique-card relative">
                   <Badge className="absolute top-2 right-2 text-[10px] bg-red-700 text-white hover:opacity-90">
                     {language === 'pt' ? 'Excluída' : 'Excluded'}
@@ -205,7 +207,7 @@ const GokyoSection = () => {
                   <h4 className="font-semibold text-white text-sm mb-1">{technique.name}</h4>
                   <p className="text-2xl font-serif mb-2 text-red-400">{technique.kanji}</p>
                   <p className="text-xs text-muted-foreground mb-1">
-                    {language === 'pt' ? technique.translation : technique.translationEn}
+                    {technique.translation}
                   </p>
                   <p className="text-[10px] text-red-400/70">
                     {language === 'pt' ? `Pertencia ao ${technique.originalGroup}` : `Belonged to ${technique.originalGroup}`}
@@ -224,17 +226,17 @@ const GokyoSection = () => {
               <div>
                 <h3 className="text-lg font-bold text-sky-400">Shinmeisho-no-Waza</h3>
                 <p className="text-xs text-muted-foreground">
-                  {language === 'pt' ? extraGokyoData.shinmeishoNoWaza.description : extraGokyoData.shinmeishoNoWaza.descriptionEn}
+                  {extra.shinmeishoNoWaza.description}
                 </p>
               </div>
             </div>
             <div className="card-judo mb-4">
               <p className="text-sm text-foreground/70">
-                {language === 'pt' ? extraGokyoData.shinmeishoNoWaza.info : extraGokyoData.shinmeishoNoWaza.infoEn}
+                {extra.shinmeishoNoWaza.info}
               </p>
             </div>
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {extraGokyoData.shinmeishoNoWaza.techniques.map((technique) => (
+              {extra.shinmeishoNoWaza.techniques.map((technique) => (
                 <div key={technique.num} className="technique-card relative">
                   <Badge className="absolute top-2 right-2 text-[10px] bg-sky-600 text-white hover:opacity-90">
                     Shinmeisho
@@ -250,7 +252,7 @@ const GokyoSection = () => {
                   <h4 className="font-semibold text-white text-sm mb-1">{technique.name}</h4>
                   <p className="text-2xl font-serif mb-2 text-sky-400">{technique.kanji}</p>
                   <p className="text-xs text-muted-foreground">
-                    {language === 'pt' ? technique.translation : technique.translationEn}
+                    {technique.translation}
                   </p>
                 </div>
               ))}
