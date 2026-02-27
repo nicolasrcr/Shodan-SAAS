@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       try {
         await registerLogin("heartbeat");
       } catch (e) {
-        console.error("heartbeat error", e);
+        if (import.meta.env.DEV) console.error("heartbeat error", e);
       }
     }, 60_000);
 
