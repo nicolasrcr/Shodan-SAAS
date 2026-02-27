@@ -151,7 +151,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       await registerLogin("login");
     } catch (e) {
-      console.error("registerLogin failed", e);
+      if (import.meta.env.DEV) console.error("registerLogin failed", e);
     }
 
     return { error: null };
