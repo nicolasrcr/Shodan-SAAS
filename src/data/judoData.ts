@@ -305,6 +305,57 @@ export const gokyoData = {
   },
 };
 
+export const extraGokyoData = {
+  habukaretaWaza: {
+    name: "Habukareta-Waza",
+    description: "Técnicas Excluídas",
+    descriptionEn: "Excluded Techniques",
+    info: "Conjunto de técnicas que, originalmente, estavam incluídas na primeira versão do Go-Kyo (Kyu-Gokyō), porém foram retiradas em 1920 após uma revisão do Go-Kyo.",
+    infoEn: "Set of techniques that were originally included in the first version of the Go-Kyo (Kyu-Gokyō), but were removed in 1920 after a revision of the Go-Kyo.",
+    techniques: [
+      { num: 1, name: "Obi-Otoshi", kanji: "帯落", translation: "Queda pela faixa", translationEn: "Belt drop", group: "Te-waza", originalGroup: "3º Grupo" },
+      { num: 2, name: "Hikikomi-Gaeshi", kanji: "引込返", translation: "Virada puxando", translationEn: "Pulling reversal", group: "Ma-sutemi", originalGroup: "4º Grupo" },
+      { num: 3, name: "O-Soto-Otoshi", kanji: "大外落", translation: "Grande queda externa", translationEn: "Large outer drop", group: "Ashi-waza", originalGroup: "4º Grupo" },
+      { num: 4, name: "Daki-Wakare", kanji: "抱分", translation: "Separação abraçando", translationEn: "Hugging separation", group: "Yoko-sutemi", originalGroup: "4º Grupo" },
+      { num: 5, name: "Tawara-Gaeshi", kanji: "俵返", translation: "Virada do saco de arroz", translationEn: "Rice bag reversal", group: "Ma-sutemi", originalGroup: "4º Grupo" },
+      { num: 6, name: "Seoi-Otoshi", kanji: "背負落", translation: "Queda pelas costas", translationEn: "Back drop", group: "Te-waza", originalGroup: "5º Grupo" },
+      { num: 7, name: "Uchi-Makikomi", kanji: "内巻込", translation: "Enrolamento interno", translationEn: "Inner winding", group: "Yoko-sutemi", originalGroup: "5º Grupo" },
+      { num: 8, name: "Yama-Arashi", kanji: "山嵐", translation: "Tempestade na montanha", translationEn: "Mountain storm", group: "Te-waza", originalGroup: "5º Grupo" },
+    ]
+  },
+  shinmeishoNoWaza: {
+    name: "Shinmeisho-no-Waza",
+    description: "Técnicas com Novos Nomes",
+    descriptionEn: "Newly Named Techniques",
+    info: "Técnicas que foram adicionadas ao catálogo oficial do Kodokan após a revisão de 1920, com nomes novos ou reclassificações.",
+    infoEn: "Techniques that were added to the official Kodokan catalog after the 1920 revision, with new names or reclassifications.",
+    techniques: [
+      { num: 1, name: "Morote-Gari", kanji: "双手刈", translation: "Ceifada com duas mãos", translationEn: "Two-hand reap", group: "Te-waza" },
+      { num: 2, name: "Kuchiki-Taoshi", kanji: "朽木倒", translation: "Derrubar árvore seca", translationEn: "Dead tree drop", group: "Te-waza" },
+      { num: 3, name: "Kibisu-Gaeshi", kanji: "踵返", translation: "Virada pelo calcanhar", translationEn: "Heel reversal", group: "Te-waza" },
+      { num: 4, name: "Uchi-Mata-Sukashi", kanji: "内股透", translation: "Esquiva do Uchi-mata", translationEn: "Uchi-mata slip", group: "Ashi-waza" },
+      { num: 5, name: "Ko-Uchi-Gaeshi", kanji: "小内返", translation: "Contra do Ko-uchi", translationEn: "Ko-uchi counter", group: "Ashi-waza" },
+      { num: 6, name: "Obi-Tori-Gaeshi", kanji: "帯取返", translation: "Virada agarrando a faixa", translationEn: "Belt grab reversal", group: "Te-waza" },
+      { num: 7, name: "Sode-Tsurikomi-Goshi", kanji: "袖釣込腰", translation: "Quadril puxando pela manga", translationEn: "Sleeve lifting hip", group: "Koshi-waza" },
+      { num: 8, name: "Ippon-Seoi-Nage", kanji: "一本背負投", translation: "Projeção por um braço", translationEn: "One-arm shoulder throw", group: "Te-waza" },
+      { num: 9, name: "Tsubame-Gaeshi", kanji: "燕返", translation: "Contra da andorinha", translationEn: "Swallow counter", group: "Ashi-waza" },
+      { num: 10, name: "O-Soto-Gaeshi", kanji: "大外返", translation: "Contra do O-soto", translationEn: "O-soto counter", group: "Ashi-waza" },
+      { num: 11, name: "O-Uchi-Gaeshi", kanji: "大内返", translation: "Contra do O-uchi", translationEn: "O-uchi counter", group: "Ashi-waza" },
+      { num: 12, name: "Hane-Goshi-Gaeshi", kanji: "跳腰返", translation: "Contra do Hane-goshi", translationEn: "Hane-goshi counter", group: "Ashi-waza" },
+      { num: 13, name: "Harai-Goshi-Gaeshi", kanji: "払腰返", translation: "Contra do Harai-goshi", translationEn: "Harai-goshi counter", group: "Ashi-waza" },
+      { num: 14, name: "Uchi-Mata-Gaeshi", kanji: "内股返", translation: "Contra do Uchi-mata", translationEn: "Uchi-mata counter", group: "Ashi-waza" },
+      { num: 15, name: "Kani-Basami", kanji: "蟹挟", translation: "Tesoura de caranguejo", translationEn: "Crab scissors", group: "Yoko-sutemi" },
+      { num: 16, name: "Kawazu-Gake", kanji: "河津掛", translation: "Gancho Kawazu", translationEn: "Kawazu hook", group: "Yoko-sutemi" },
+      { num: 17, name: "O-Soto-Makikomi", kanji: "大外巻込", translation: "Enrolamento externo grande", translationEn: "Large outer winding", group: "Yoko-sutemi" },
+      { num: 18, name: "Uchi-Mata-Makikomi", kanji: "内股巻込", translation: "Enrolamento do Uchi-mata", translationEn: "Uchi-mata winding", group: "Yoko-sutemi" },
+      { num: 19, name: "Harai-Makikomi", kanji: "払巻込", translation: "Enrolamento varrendo", translationEn: "Sweeping winding", group: "Yoko-sutemi" },
+      { num: 20, name: "Ko-Uchi-Makikomi", kanji: "小内巻込", translation: "Enrolamento interno pequeno", translationEn: "Small inner winding", group: "Yoko-sutemi" },
+      { num: 21, name: "Uki-Gatame", kanji: "浮固", translation: "Imobilização flutuante", translationEn: "Floating hold", group: "Osaekomi-waza" },
+      { num: 22, name: "Ura-Gatame", kanji: "裏固", translation: "Imobilização por trás", translationEn: "Rear hold", group: "Osaekomi-waza" },
+    ]
+  }
+};
+
 export const katameData = {
   osaekomi: {
     title: "固 Osaekomi-Waza (Imobilizações)",
