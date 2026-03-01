@@ -131,6 +131,7 @@ export const translations = {
     "auth.emailAlreadyRegistered": "Este email já está cadastrado. Tente fazer login.",
     "auth.rateLimitReached": "Limite de envio de emails atingido. Aguarde alguns minutos e tente novamente.",
     "auth.weakPassword": "A senha é muito fraca ou comum. Escolha uma senha mais segura.",
+    "auth.passwordRequirements": "A senha deve conter pelo menos uma letra minúscula, uma letra maiúscula e um número. Além disso, não pode ser uma senha comum.",
     "auth.createAccountError": "Erro ao criar conta. Tente novamente.",
     
     // Password Page
