@@ -116,8 +116,8 @@ const EtiquetaSection = () => {
         { name: 'Otagai-Ni-Rei', desc: 'Mutual bow between students', steps: ['Done standing or kneeling'] },
       ],
       conducts: [
-        { icon: '🚿', text: 'Have taken a shower, hands and feet clean. Hygiene is essential.' },
-        { icon: '✂️', text: 'Fingernails and toenails always trimmed to avoid hurting partner.' },
+        { icon: '🥋', text: 'Have taken a shower, hands and feet clean. Hygiene is essential.' },
+        { icon: '🥋', text: 'Fingernails and toenails always trimmed to avoid hurting partner.' },
         { icon: '👕', text: 'Women must wear a white t-shirt with closed collar under the judogi.' },
         { icon: '💇', text: 'Long hair must be tied back well so it doesn\'t come loose.' },
         { icon: '🧺', text: 'Judogi always dry and clean. Keep in airy place to avoid odor.' },

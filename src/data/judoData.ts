@@ -34,13 +34,13 @@ export const homeCards = [
   { title: 'Nage no Kata', desc: '15 técnicas em 5 grupos', descEn: '15 techniques in 5 groups', icon: '投形', section: 'nageNoKata' },
   { title: 'Katame no Kata', desc: '15 técnicas em 3 grupos', descEn: '15 techniques in 3 groups', icon: '固形', section: 'katameNoKata' },
   { title: 'Treinamentos', desc: 'Uchi-komi, Randori e métodos', descEn: 'Uchi-komi, Randori and methods', icon: '練', section: 'treinos' },
-  { title: 'Sistema de Placar', desc: 'Pontuação e penalidades', descEn: 'Scoring and penalties', icon: '🏆', section: 'placar' },
+  { title: 'Sistema de Placar', desc: 'Pontuação e penalidades', descEn: 'Scoring and penalties', icon: '🥇', section: 'placar' },
   { title: 'Regras', desc: 'Arbitragem e pontuação', descEn: 'Refereeing and scoring', icon: '則', section: 'regras' },
   { title: 'Regras 2025', desc: 'Novas regras IJF', descEn: 'New IJF rules', icon: '新', section: 'regras2025' },
-  { title: 'Organização Desportiva', desc: 'Federações e categorias', descEn: 'Federations and categories', icon: '🏟️', section: 'organizacao' },
-  { title: 'Judô Escolar', desc: 'Pedagogia e faixas infantis', descEn: 'Pedagogy and kids belts', icon: '🎓', section: 'escolar' },
-  { title: 'Primeiros Socorros', desc: 'Emergências no tatame', descEn: 'Emergencies on tatami', icon: '🚑', section: 'socorros' },
-  { title: 'Inclusivo', desc: 'TEA, TDAH e adaptações', descEn: 'ASD, ADHD and adaptations', icon: '♿', section: 'inclusivo' },
+  { title: 'Organização Desportiva', desc: 'Federações e categorias', descEn: 'Federations and categories', icon: '🏯', section: 'organizacao' },
+  { title: 'Judô Escolar', desc: 'Pedagogia e faixas infantis', descEn: 'Pedagogy and kids belts', icon: '🔰', section: 'escolar' },
+  { title: 'Primeiros Socorros', desc: 'Emergências no tatame', descEn: 'Emergencies on tatami', icon: '⛑️', section: 'socorros' },
+  { title: 'Inclusivo', desc: 'TEA, TDAH e adaptações', descEn: 'ASD, ADHD and adaptations', icon: '🤝', section: 'inclusivo' },
   { title: 'Vídeos', desc: 'Playlist de demonstrações', descEn: 'Demo playlist', icon: '映', section: 'videos' },
 ];
 

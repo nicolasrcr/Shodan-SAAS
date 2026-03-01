@@ -58,8 +58,8 @@ const InclusivoSection = () => {
       objetivos: [
         { titulo: 'Social', desc: 'Integration, belonging and mutual respect', icone: '🤝', cor: 'bg-green-500/20 border-green-500/30' },
         { titulo: 'Cognitive', desc: 'Concentration, strategy and decision-making', icone: '🧠', cor: 'bg-blue-500/20 border-blue-500/30' },
-        { titulo: 'Motor', desc: 'Coordination, balance and body awareness', icone: '🏃', cor: 'bg-orange-500/20 border-orange-500/30' },
-        { titulo: 'Emotional', desc: 'Self-esteem, self-control and resilience', icone: '💚', cor: 'bg-purple-500/20 border-purple-500/30' },
+        { titulo: 'Motor', desc: 'Coordination, balance and body awareness', icone: '🥋', cor: 'bg-orange-500/20 border-orange-500/30' },
+        { titulo: 'Emotional', desc: 'Self-esteem, self-control and resilience', icone: '🥋', cor: 'bg-purple-500/20 border-purple-500/30' },
       ],
       abordagens: [
         { tipo: 'ASD', nome: 'Autism Spectrum Disorder', cor: 'bg-blue-500', estrategias: ['Structured and predictable environment', 'Clear and consistent routines', 'Use of pictograms and visual communication', 'Reduction of excessive sensory stimuli', 'Short and objective instructions', 'Individual adaptation time'] },

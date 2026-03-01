@@ -265,7 +265,7 @@ const NomenclaturaSection = () => {
 
       {/* Nomenclatura Ne-Waza */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4 mt-8">
-        <span>🤼</span> {t.titles.ne}
+        <span>🥋</span> {t.titles.ne}
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
         {t.neNomenclatura.map((item, i) => (

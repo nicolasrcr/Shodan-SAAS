@@ -204,7 +204,7 @@ const RegrasSection = () => {
 
       {/* Competition Area */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-5">
-        🥋 {language === 'pt' ? 'Área de Competição' : 'Competition Area'}
+        🥇 {language === 'pt' ? 'Área de Competição' : 'Competition Area'}
       </h3>
       <div className="card-judo mb-8">
         <div className="grid sm:grid-cols-2 gap-6">

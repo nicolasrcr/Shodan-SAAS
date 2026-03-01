@@ -46,9 +46,9 @@ const HistoriaSection = () => {
         dates: "1860 - 1938",
         kanji: "嘉納 治五郎 (Kano Jigoro)",
         birth: "📍 Born: October 28, 1860, Mikage (now Kobe)",
-        education: "🏛️ Education: Tokyo Imperial University",
-        physique: "💪 Physique: 1.57m / 50kg - frail, was bullied",
-        studies: "📚 Studied: Tenjin Shin'yō-ryū and Kitō-ryū (Jujutsu)"
+        education: "⛩️ Education: Tokyo Imperial University",
+        physique: "🥋 Physique: 1.57m / 50kg - frail, was bullied",
+        studies: "📜 Studied: Tenjin Shin'yō-ryū and Kitō-ryū (Jujutsu)"
       },
       curiosities: {
         title: "Curiosities about Kano",

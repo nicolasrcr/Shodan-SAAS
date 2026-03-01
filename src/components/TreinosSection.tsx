@@ -56,10 +56,10 @@ const TreinosSection = () => {
         { icon: '🔄', title: 'Warm-up', desc: 'Always start with general and specific warm-up' },
         { icon: '🎯', title: 'Focus', desc: 'Focus on few techniques per session' },
         { icon: '🤝', title: 'Partner', desc: 'Respect your partner - they are essential' },
-        { icon: '📊', title: 'Progression', desc: 'Progress gradually: basic → advanced' },
-        { icon: '🧘', title: 'Ukemi', desc: 'Practice falls regularly' },
-        { icon: '💪', title: 'Recovery', desc: 'Rest adequately between training sessions' },
-        { icon: '📝', title: 'Notes', desc: 'Keep a training journal' },
+        { icon: '📜', title: 'Progression', desc: 'Progress gradually: basic → advanced' },
+        { icon: '🥋', title: 'Ukemi', desc: 'Practice falls regularly' },
+        { icon: '🥋', title: 'Recovery', desc: 'Rest adequately between training sessions' },
+        { icon: '📜', title: 'Notes', desc: 'Keep a training journal' },
         { icon: '🎥', title: 'Videos', desc: 'Record your training for analysis' },
       ];
 
