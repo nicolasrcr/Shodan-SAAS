@@ -35,7 +35,7 @@ const SocorrosSection = () => {
         { titulo: 'Suspeita de Fratura', icone: '🦴', passos: ['Imobilizar o membro sem movimentar', 'Não tentar endireitar ou alinhar', 'Aplicar gelo envolto em pano', 'Manter o atleta calmo e imóvel', 'Chamar SAMU (192) imediatamente', 'Se fratura exposta, cobrir com gaze estéril sem pressionar'] },
       ],
       prevencao: [
-        { icon: '🧘', titulo: 'Ukemi Regular', desc: 'Quedas bem treinadas previnem 90% das lesões' },
+        { icon: '🥋', titulo: 'Ukemi Regular', desc: 'Quedas bem treinadas previnem 90% das lesões' },
         { icon: '🔥', titulo: 'Aquecimento', desc: 'Nunca iniciar treino sem aquecimento adequado' },
         { icon: '💧', titulo: 'Hidratação', desc: 'Manter hidratação durante todo o treino' },
         { icon: '😴', titulo: 'Descanso', desc: 'Respeitar tempo de recuperação entre treinos' },
