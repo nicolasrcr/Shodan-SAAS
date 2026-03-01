@@ -43,24 +43,24 @@ const TreinosSection = () => {
 
   const trainingTips = language === 'pt'
     ? [
-        { icon: '🔄', title: 'Aquecimento', desc: 'Sempre inicie com aquecimento geral e específico' },
-        { icon: '🎯', title: 'Foco', desc: 'Concentre-se em poucas técnicas por treino' },
-        { icon: '🤝', title: 'Parceiro', desc: 'Respeite seu parceiro - ele é essencial' },
-        { icon: '📜', title: 'Progressão', desc: 'Evolua gradualmente: básico → avançado' },
-        { icon: '🥋', title: 'Ukemi', desc: 'Pratique quedas regularmente' },
-        { icon: '🥋', title: 'Recuperação', desc: 'Descanse adequadamente entre treinos' },
-        { icon: '📜', title: 'Anotações', desc: 'Mantenha um diário de treinos' },
-        { icon: '🎥', title: 'Vídeos', desc: 'Grave seus treinos para análise' },
+        { icon: '準', title: 'Aquecimento', desc: 'Sempre inicie com aquecimento geral e específico' },
+        { icon: '集', title: 'Foco', desc: 'Concentre-se em poucas técnicas por treino' },
+        { icon: '仲', title: 'Parceiro', desc: 'Respeite seu parceiro - ele é essencial' },
+        { icon: '進', title: 'Progressão', desc: 'Evolua gradualmente: básico → avançado' },
+        { icon: '受', title: 'Ukemi', desc: 'Pratique quedas regularmente' },
+        { icon: '休', title: 'Recuperação', desc: 'Descanse adequadamente entre treinos' },
+        { icon: '記', title: 'Anotações', desc: 'Mantenha um diário de treinos' },
+        { icon: '映', title: 'Vídeos', desc: 'Grave seus treinos para análise' },
       ]
     : [
-        { icon: '🔄', title: 'Warm-up', desc: 'Always start with general and specific warm-up' },
-        { icon: '🎯', title: 'Focus', desc: 'Focus on few techniques per session' },
-        { icon: '🤝', title: 'Partner', desc: 'Respect your partner - they are essential' },
-        { icon: '📜', title: 'Progression', desc: 'Progress gradually: basic → advanced' },
-        { icon: '🥋', title: 'Ukemi', desc: 'Practice falls regularly' },
-        { icon: '🥋', title: 'Recovery', desc: 'Rest adequately between training sessions' },
-        { icon: '📜', title: 'Notes', desc: 'Keep a training journal' },
-        { icon: '🎥', title: 'Videos', desc: 'Record your training for analysis' },
+        { icon: '準', title: 'Warm-up', desc: 'Always start with general and specific warm-up' },
+        { icon: '集', title: 'Focus', desc: 'Focus on few techniques per session' },
+        { icon: '仲', title: 'Partner', desc: 'Respect your partner - they are essential' },
+        { icon: '進', title: 'Progression', desc: 'Progress gradually: basic → advanced' },
+        { icon: '受', title: 'Ukemi', desc: 'Practice falls regularly' },
+        { icon: '休', title: 'Recovery', desc: 'Rest adequately between training sessions' },
+        { icon: '記', title: 'Notes', desc: 'Keep a training journal' },
+        { icon: '映', title: 'Videos', desc: 'Record your training for analysis' },
       ];
 
   const classStructure = language === 'pt'
@@ -79,20 +79,20 @@ const TreinosSection = () => {
 
   const physicalPreparation = language === 'pt'
     ? [
-        { icon: '🏃', title: 'Resistência', desc: 'Corrida, corda, circuitos aeróbicos' },
-        { icon: '💪', title: 'Força', desc: 'Musculação funcional, peso corporal' },
-        { icon: '🤸', title: 'Flexibilidade', desc: 'Alongamentos dinâmicos e estáticos' },
-        { icon: '⚡', title: 'Explosão', desc: 'Pliometria, sprints, movimentos rápidos' },
-        { icon: '🧠', title: 'Coordenação', desc: 'Exercícios de agilidade, timing' },
-        { icon: '🎯', title: 'Grip', desc: 'Fortalecimento de pegada com gi' },
+        { icon: '走', title: 'Resistência', desc: 'Corrida, corda, circuitos aeróbicos' },
+        { icon: '力', title: 'Força', desc: 'Musculação funcional, peso corporal' },
+        { icon: '柔', title: 'Flexibilidade', desc: 'Alongamentos dinâmicos e estáticos' },
+        { icon: '速', title: 'Explosão', desc: 'Pliometria, sprints, movimentos rápidos' },
+        { icon: '技', title: 'Coordenação', desc: 'Exercícios de agilidade, timing' },
+        { icon: '握', title: 'Grip', desc: 'Fortalecimento de pegada com gi' },
       ]
     : [
-        { icon: '🏃', title: 'Endurance', desc: 'Running, rope, aerobic circuits' },
-        { icon: '💪', title: 'Strength', desc: 'Functional weight training, bodyweight' },
-        { icon: '🤸', title: 'Flexibility', desc: 'Dynamic and static stretching' },
-        { icon: '⚡', title: 'Explosiveness', desc: 'Plyometrics, sprints, fast movements' },
-        { icon: '🧠', title: 'Coordination', desc: 'Agility exercises, timing' },
-        { icon: '🎯', title: 'Grip', desc: 'Grip strengthening with gi' },
+        { icon: '走', title: 'Endurance', desc: 'Running, rope, aerobic circuits' },
+        { icon: '力', title: 'Strength', desc: 'Functional weight training, bodyweight' },
+        { icon: '柔', title: 'Flexibility', desc: 'Dynamic and static stretching' },
+        { icon: '速', title: 'Explosiveness', desc: 'Plyometrics, sprints, fast movements' },
+        { icon: '技', title: 'Coordination', desc: 'Agility exercises, timing' },
+        { icon: '握', title: 'Grip', desc: 'Grip strengthening with gi' },
       ];
 
   const progressionLevels = language === 'pt'

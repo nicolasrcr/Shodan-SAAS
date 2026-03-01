@@ -108,10 +108,10 @@ const RegrasSection = () => {
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { emoji: '🥋', label: language === 'pt' ? 'Força' : 'Force' },
-                { emoji: '⚡', label: language === 'pt' ? 'Velocidade' : 'Speed' },
-                { emoji: '🎯', label: language === 'pt' ? 'Controle' : 'Control' },
-                { emoji: '🥇', label: language === 'pt' ? 'Impacto Perfeito' : 'Perfect Impact' },
+                { emoji: '力', label: language === 'pt' ? 'Força' : 'Force' },
+                { emoji: '速', label: language === 'pt' ? 'Velocidade' : 'Speed' },
+                { emoji: '制', label: language === 'pt' ? 'Controle' : 'Control' },
+                { emoji: '極', label: language === 'pt' ? 'Impacto Perfeito' : 'Perfect Impact' },
               ].map((item, i) => (
                 <div key={i} className="text-center p-3 bg-muted/30 rounded-xl">
                   <span className="text-2xl block mb-1">{item.emoji}</span>
