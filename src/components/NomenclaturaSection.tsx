@@ -171,7 +171,7 @@ const NomenclaturaSection = () => {
 
       {/* Posições e Posturas */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4">
-        <span>🧘</span> {t.titles.posicoes}
+        <span>🥋</span> {t.titles.posicoes}
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-10">
         {t.positions.map((item, i) => (
