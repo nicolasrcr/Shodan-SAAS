@@ -134,7 +134,7 @@ const EscolarSection = () => {
         ))}
       </div>
 
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>📊</span> {t.methodology}</h3>
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🥋</span> {t.methodology}</h3>
       <div className="card-judo mb-8">
         <div className="grid sm:grid-cols-2 gap-4 mb-6">
           {t.fases.map((item, index) => (<div key={index} className="bg-muted/20 rounded-lg p-4"><h4 className="font-semibold text-primary text-sm mb-2">{item.fase}</h4><p className="text-xs text-foreground/70">{item.desc}</p></div>))}
