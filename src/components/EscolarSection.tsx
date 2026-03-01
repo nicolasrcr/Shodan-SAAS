@@ -114,7 +114,7 @@ const EscolarSection = () => {
 
   return (
     <div className="animate-fade-in">
-      <h2 className="section-title"><span className="section-title-icon">🎓</span>{t.title}</h2>
+      <h2 className="section-title"><span className="section-title-icon">🔰</span>{t.title}</h2>
       <div className="card-judo mb-8"><p className="text-sm text-foreground/70">{t.intro}</p></div>
 
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🥋</span> {t.beltSystem}</h3>
