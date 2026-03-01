@@ -104,7 +104,7 @@ const SocorrosSection = () => {
 
   return (
     <div className="animate-fade-in">
-      <h2 className="section-title"><span className="section-title-icon">🚑</span>{t.title}</h2>
+      <h2 className="section-title"><span className="section-title-icon">⛑️</span>{t.title}</h2>
 
       <div className="bg-red-500/20 border-2 border-red-500/50 rounded-xl p-6 mb-8">
         <h3 className="text-lg font-semibold text-red-400 flex items-center gap-2 mb-3"><span>🚨</span> {t.emergencyAlert}</h3>
