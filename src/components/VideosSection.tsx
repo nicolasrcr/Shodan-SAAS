@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
@@ -42,10 +42,29 @@ const VideoThumbnail = ({ videoId, videoName }: { videoId: string; videoName: st
   );
 };
 
-const VideosSection = () => {
+interface VideosSectionProps {
+  highlightTechnique?: string | null;
+}
+
+const VideosSection = ({ highlightTechnique }: VideosSectionProps) => {
   const { language } = useLanguage();
   const [activeGokyoFilter, setActiveGokyoFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const highlightedRef = useRef<HTMLAnchorElement>(null);
+  const [highlightActive, setHighlightActive] = useState(false);
+
+  useEffect(() => {
+    if (highlightTechnique) {
+      setHighlightActive(true);
+      // Small delay for DOM to render, then scroll
+      const timer = setTimeout(() => {
+        highlightedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+      // Remove highlight after 5 seconds
+      const fadeTimer = setTimeout(() => setHighlightActive(false), 5000);
+      return () => { clearTimeout(timer); clearTimeout(fadeTimer); };
+    }
+  }, [highlightTechnique]);
 
   const content = {
     pt: {
@@ -462,10 +481,16 @@ const VideosSection = () => {
                 return (
                   <a
                     key={index}
+                    ref={highlightTechnique && video.name.toLowerCase() === highlightTechnique.toLowerCase() ? highlightedRef : undefined}
+                    id={`tech-${video.name.replace(/\s+/g, '-')}`}
                     href={`https://www.youtube.com/watch?v=${video.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="card-judo group overflow-hidden p-0 hover:border-primary transition-colors"
+                    className={cn(
+                      "card-judo group overflow-hidden p-0 hover:border-primary transition-all relative",
+                      highlightActive && highlightTechnique && video.name.toLowerCase() === highlightTechnique.toLowerCase()
+                        && "ring-2 ring-yellow-400 border-yellow-400 shadow-lg shadow-yellow-400/20"
+                    )}
                   >
                     <div className="relative aspect-video bg-background/50">
                       <VideoThumbnail videoId={video.id} videoName={video.name} />
@@ -492,6 +517,11 @@ const VideosSection = () => {
                       <p className="text-xs font-medium text-white group-hover:text-primary transition-colors truncate">
                         {video.name}
                       </p>
+                      {highlightActive && highlightTechnique && video.name.toLowerCase() === highlightTechnique.toLowerCase() && (
+                        <Badge className="mt-1 text-[9px] bg-yellow-500 text-black border-0">
+                          {language === 'pt' ? '📍 Via Gokyo' : '📍 From Gokyo'}
+                        </Badge>
+                      )}
                     </div>
                   </a>
                 );

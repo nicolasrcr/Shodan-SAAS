@@ -40,6 +40,7 @@ const CursoPage = () => {
   const { user, profile, loading, signOut } = useAuth();
   const { t, language } = useLanguage();
   const [activeSection, setActiveSection] = useState("home");
+  const [highlightTechnique, setHighlightTechnique] = useState<string | null>(null);
   const { markSeen, toggleCompleted, getLastSeenSection, progressStats, isSectionCompleted } = useCourseProgress();
   const { isBlocked, loading: secLoading } = useUserSecurity();
 
@@ -57,7 +58,15 @@ const CursoPage = () => {
 
   const handleNavigate = (section: string) => {
     setActiveSection(section);
+    if (section !== 'videos') setHighlightTechnique(null);
     markSeen(section);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigateToVideo = (techniqueName: string) => {
+    setHighlightTechnique(techniqueName);
+    setActiveSection('videos');
+    markSeen('videos');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -99,7 +108,7 @@ const CursoPage = () => {
       case "principios": return <PrincipiosSection />;
       case "etiqueta": return <EtiquetaSection />;
       case "nomenclatura": return <NomenclaturaSection />;
-      case "gokyo": return <GokyoSection />;
+      case "gokyo": return <GokyoSection onNavigateToVideo={handleNavigateToVideo} />;
       case "katameWaza": return <KatameWazaSection />;
       case "katas": return <KatasSection />;
       case "nageNoKata": return <NageNoKataSection />;
@@ -112,7 +121,7 @@ const CursoPage = () => {
       case "escolar": return <EscolarSection />;
       case "socorros": return <SocorrosSection />;
       case "inclusivo": return <InclusivoSection />;
-      case "videos": return <VideosSection />;
+      case "videos": return <VideosSection highlightTechnique={highlightTechnique} />;
       case "quizzes": return <QuizzesSection />;
       case "flashcardsMenu": return <FlashcardsSection />;
       default: return <ComingSoonSection section={activeSection} onNavigate={handleNavigate} />;
