@@ -121,7 +121,7 @@ const CursoPage = () => {
       case "escolar": return <EscolarSection />;
       case "socorros": return <SocorrosSection />;
       case "inclusivo": return <InclusivoSection />;
-      case "videos": return <VideosSection />;
+      case "videos": return <VideosSection highlightTechnique={highlightTechnique} />;
       case "quizzes": return <QuizzesSection />;
       case "flashcardsMenu": return <FlashcardsSection />;
       default: return <ComingSoonSection section={activeSection} onNavigate={handleNavigate} />;
