@@ -155,7 +155,7 @@ const EscolarSection = () => {
         {t.beneficios.map((item, index) => (<div key={index} className="card-judo text-center p-4"><span className="text-2xl block mb-2">{item.icon}</span><p className="text-sm text-white">{item.text}</p></div>))}
       </div>
 
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>👨‍🏫</span> {t.teacherRole}</h3>
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🥋</span> {t.teacherRole}</h3>
       <div className="card-red p-6">
         <div className="grid sm:grid-cols-2 gap-4">
           <div><h4 className="font-semibold text-white mb-3">{t.responsibilities}</h4><ul className="space-y-2 text-sm text-foreground/70">{t.responsabilidades.map((r, i) => <li key={i}>• {r}</li>)}</ul></div>
