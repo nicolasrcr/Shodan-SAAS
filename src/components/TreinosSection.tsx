@@ -53,14 +53,14 @@ const TreinosSection = () => {
         { icon: '映', title: 'Vídeos', desc: 'Grave seus treinos para análise' },
       ]
     : [
-        { icon: '🔄', title: 'Warm-up', desc: 'Always start with general and specific warm-up' },
-        { icon: '🎯', title: 'Focus', desc: 'Focus on few techniques per session' },
-        { icon: '🤝', title: 'Partner', desc: 'Respect your partner - they are essential' },
-        { icon: '📜', title: 'Progression', desc: 'Progress gradually: basic → advanced' },
-        { icon: '🥋', title: 'Ukemi', desc: 'Practice falls regularly' },
-        { icon: '🥋', title: 'Recovery', desc: 'Rest adequately between training sessions' },
-        { icon: '📜', title: 'Notes', desc: 'Keep a training journal' },
-        { icon: '🎥', title: 'Videos', desc: 'Record your training for analysis' },
+        { icon: '準', title: 'Warm-up', desc: 'Always start with general and specific warm-up' },
+        { icon: '集', title: 'Focus', desc: 'Focus on few techniques per session' },
+        { icon: '仲', title: 'Partner', desc: 'Respect your partner - they are essential' },
+        { icon: '進', title: 'Progression', desc: 'Progress gradually: basic → advanced' },
+        { icon: '受', title: 'Ukemi', desc: 'Practice falls regularly' },
+        { icon: '休', title: 'Recovery', desc: 'Rest adequately between training sessions' },
+        { icon: '記', title: 'Notes', desc: 'Keep a training journal' },
+        { icon: '映', title: 'Videos', desc: 'Record your training for analysis' },
       ];
 
   const classStructure = language === 'pt'
