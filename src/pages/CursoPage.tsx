@@ -58,7 +58,15 @@ const CursoPage = () => {
 
   const handleNavigate = (section: string) => {
     setActiveSection(section);
+    if (section !== 'videos') setHighlightTechnique(null);
     markSeen(section);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleNavigateToVideo = (techniqueName: string) => {
+    setHighlightTechnique(techniqueName);
+    setActiveSection('videos');
+    markSeen('videos');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
