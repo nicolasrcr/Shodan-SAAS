@@ -517,6 +517,11 @@ const VideosSection = ({ highlightTechnique }: VideosSectionProps) => {
                       <p className="text-xs font-medium text-white group-hover:text-primary transition-colors truncate">
                         {video.name}
                       </p>
+                      {highlightActive && highlightTechnique && video.name.toLowerCase() === highlightTechnique.toLowerCase() && (
+                        <Badge className="mt-1 text-[9px] bg-yellow-500 text-black border-0">
+                          {language === 'pt' ? '📍 Via Gokyo' : '📍 From Gokyo'}
+                        </Badge>
+                      )}
                     </div>
                   </a>
                 );

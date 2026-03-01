@@ -40,6 +40,7 @@ const CursoPage = () => {
   const { user, profile, loading, signOut } = useAuth();
   const { t, language } = useLanguage();
   const [activeSection, setActiveSection] = useState("home");
+  const [highlightTechnique, setHighlightTechnique] = useState<string | null>(null);
   const { markSeen, toggleCompleted, getLastSeenSection, progressStats, isSectionCompleted } = useCourseProgress();
   const { isBlocked, loading: secLoading } = useUserSecurity();
 
