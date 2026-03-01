@@ -145,7 +145,7 @@ const EscolarSection = () => {
         </div>
       </div>
 
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🏆</span> {t.competitions}</h3>
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🥇</span> {t.competitions}</h3>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {t.competicoesInfantis.map((comp, index) => (<div key={index} className="card-judo text-center"><h4 className="font-semibold text-white">{comp.cat}</h4><p className="text-xs text-primary mb-1">{comp.idade}</p><p className="text-xs text-muted-foreground">{comp.formato}</p></div>))}
       </div>
