@@ -79,12 +79,12 @@ const TreinosSection = () => {
 
   const physicalPreparation = language === 'pt'
     ? [
-        { icon: '🏃', title: 'Resistência', desc: 'Corrida, corda, circuitos aeróbicos' },
-        { icon: '💪', title: 'Força', desc: 'Musculação funcional, peso corporal' },
-        { icon: '🤸', title: 'Flexibilidade', desc: 'Alongamentos dinâmicos e estáticos' },
-        { icon: '⚡', title: 'Explosão', desc: 'Pliometria, sprints, movimentos rápidos' },
-        { icon: '🧠', title: 'Coordenação', desc: 'Exercícios de agilidade, timing' },
-        { icon: '🎯', title: 'Grip', desc: 'Fortalecimento de pegada com gi' },
+        { icon: '走', title: 'Resistência', desc: 'Corrida, corda, circuitos aeróbicos' },
+        { icon: '力', title: 'Força', desc: 'Musculação funcional, peso corporal' },
+        { icon: '柔', title: 'Flexibilidade', desc: 'Alongamentos dinâmicos e estáticos' },
+        { icon: '速', title: 'Explosão', desc: 'Pliometria, sprints, movimentos rápidos' },
+        { icon: '技', title: 'Coordenação', desc: 'Exercícios de agilidade, timing' },
+        { icon: '握', title: 'Grip', desc: 'Fortalecimento de pegada com gi' },
       ]
     : [
         { icon: '🏃', title: 'Endurance', desc: 'Running, rope, aerobic circuits' },
