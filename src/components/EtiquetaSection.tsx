@@ -39,12 +39,12 @@ const EtiquetaSection = () => {
         { icon: '🚶', text: 'Para ENTRAR: pé esquerdo primeiro. Para SAIR: pé direito primeiro.' },
       ],
       judogiComponents: [
-        { icon: '👘', name: 'Uwagi', desc: 'Casaco/jaqueta do judogi' },
-        { icon: '👖', name: 'Zubon/Shitabaki', desc: 'Calça do judogi' },
-        { icon: '🎀', name: 'Obi', desc: 'Faixa que indica a graduação' },
-        { icon: '👔', name: 'Eri', desc: 'Gola/lapela do casaco' },
-        { icon: '💪', name: 'Sode', desc: 'Manga do casaco' },
-        { icon: '✋', name: 'Sode-Guchi', desc: 'Boca da manga' },
+        { icon: '🥋', name: 'Uwagi', desc: 'Casaco/jaqueta do judogi' },
+        { icon: '🥋', name: 'Zubon/Shitabaki', desc: 'Calça do judogi' },
+        { icon: '🥋', name: 'Obi', desc: 'Faixa que indica a graduação' },
+        { icon: '🥋', name: 'Eri', desc: 'Gola/lapela do casaco' },
+        { icon: '🥋', name: 'Sode', desc: 'Manga do casaco' },
+        { icon: '🥋', name: 'Sode-Guchi', desc: 'Boca da manga' },
       ],
       beltSystem: {
         basicas: [
