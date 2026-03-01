@@ -17,8 +17,8 @@ const InclusivoSection = () => {
       objetivos: [
         { titulo: 'Social', desc: 'Integração, pertencimento e respeito mútuo', icone: '🤝', cor: 'bg-green-500/20 border-green-500/30' },
         { titulo: 'Cognitivo', desc: 'Concentração, estratégia e tomada de decisão', icone: '🧠', cor: 'bg-blue-500/20 border-blue-500/30' },
-        { titulo: 'Motor', desc: 'Coordenação, equilíbrio e consciência corporal', icone: '🏃', cor: 'bg-orange-500/20 border-orange-500/30' },
-        { titulo: 'Emocional', desc: 'Autoestima, autocontrole e resiliência', icone: '💚', cor: 'bg-purple-500/20 border-purple-500/30' },
+        { titulo: 'Motor', desc: 'Coordenação, equilíbrio e consciência corporal', icone: '🥋', cor: 'bg-orange-500/20 border-orange-500/30' },
+        { titulo: 'Emocional', desc: 'Autoestima, autocontrole e resiliência', icone: '🥋', cor: 'bg-purple-500/20 border-purple-500/30' },
       ],
       abordagens: [
         { tipo: 'TEA', nome: 'Transtorno do Espectro Autista', cor: 'bg-blue-500', estrategias: ['Ambiente estruturado e previsível', 'Rotinas claras e consistentes', 'Uso de pictogramas e comunicação visual', 'Redução de estímulos sensoriais excessivos', 'Instruções curtas e objetivas', 'Tempo de adaptação individual'] },
