@@ -46,10 +46,10 @@ const TreinosSection = () => {
         { icon: '🔄', title: 'Aquecimento', desc: 'Sempre inicie com aquecimento geral e específico' },
         { icon: '🎯', title: 'Foco', desc: 'Concentre-se em poucas técnicas por treino' },
         { icon: '🤝', title: 'Parceiro', desc: 'Respeite seu parceiro - ele é essencial' },
-        { icon: '📊', title: 'Progressão', desc: 'Evolua gradualmente: básico → avançado' },
-        { icon: '🧘', title: 'Ukemi', desc: 'Pratique quedas regularmente' },
-        { icon: '💪', title: 'Recuperação', desc: 'Descanse adequadamente entre treinos' },
-        { icon: '📝', title: 'Anotações', desc: 'Mantenha um diário de treinos' },
+        { icon: '📜', title: 'Progressão', desc: 'Evolua gradualmente: básico → avançado' },
+        { icon: '🥋', title: 'Ukemi', desc: 'Pratique quedas regularmente' },
+        { icon: '🥋', title: 'Recuperação', desc: 'Descanse adequadamente entre treinos' },
+        { icon: '📜', title: 'Anotações', desc: 'Mantenha um diário de treinos' },
         { icon: '🎥', title: 'Vídeos', desc: 'Grave seus treinos para análise' },
       ]
     : [
