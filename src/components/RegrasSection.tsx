@@ -32,7 +32,7 @@ const RegrasSection = () => {
         { action: "Puxar para o solo", desc: "Sem ataque válido (Shido)", icon: "⬇️" },
       ]
     : [
-        { action: "Leg Grab", desc: "Directly grabbing legs without prior attack (direct Hansoku-make)", icon: "🦵" },
+        { action: "Leg Grab", desc: "Directly grabbing legs without prior attack (direct Hansoku-make)", icon: "🥋" },
         { action: "Diving", desc: "Diving headfirst into the mat (direct Hansoku-make)", icon: "⚠️" },
         { action: "Passivity", desc: "Avoiding fight, not attacking (Shido after 45s without action)", icon: "🚫" },
         { action: "Cross grip defense", desc: "Crossed arms for more than 5 seconds (Shido)", icon: "❌" },
