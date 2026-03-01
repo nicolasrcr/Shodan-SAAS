@@ -35,12 +35,12 @@ const SocorrosSection = () => {
         { titulo: 'Suspeita de Fratura', icone: '🦴', passos: ['Imobilizar o membro sem movimentar', 'Não tentar endireitar ou alinhar', 'Aplicar gelo envolto em pano', 'Manter o atleta calmo e imóvel', 'Chamar SAMU (192) imediatamente', 'Se fratura exposta, cobrir com gaze estéril sem pressionar'] },
       ],
       prevencao: [
-        { icon: '🥋', titulo: 'Ukemi Regular', desc: 'Quedas bem treinadas previnem 90% das lesões' },
-        { icon: '🔥', titulo: 'Aquecimento', desc: 'Nunca iniciar treino sem aquecimento adequado' },
-        { icon: '💧', titulo: 'Hidratação', desc: 'Manter hidratação durante todo o treino' },
-        { icon: '😴', titulo: 'Descanso', desc: 'Respeitar tempo de recuperação entre treinos' },
-        { icon: '🥋', titulo: 'Judogi', desc: 'Manter judogi limpo e em boas condições' },
-        { icon: '💅', titulo: 'Higiene', desc: 'Unhas cortadas e cabelo preso' },
+        { icon: '受', titulo: 'Ukemi Regular', desc: 'Quedas bem treinadas previnem 90% das lesões' },
+        { icon: '準', titulo: 'Aquecimento', desc: 'Nunca iniciar treino sem aquecimento adequado' },
+        { icon: '水', titulo: 'Hidratação', desc: 'Manter hidratação durante todo o treino' },
+        { icon: '休', titulo: 'Descanso', desc: 'Respeitar tempo de recuperação entre treinos' },
+        { icon: '着', titulo: 'Judogi', desc: 'Manter judogi limpo e em boas condições' },
+        { icon: '清', titulo: 'Higiene', desc: 'Unhas cortadas e cabelo preso' },
       ],
       kit: [
         { icon: '🧊', item: 'Gelo / Bolsa térmica' }, { icon: '🩹', item: 'Curativos variados' },
