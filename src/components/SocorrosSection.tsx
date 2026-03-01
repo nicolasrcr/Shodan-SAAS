@@ -82,7 +82,7 @@ const SocorrosSection = () => {
         { titulo: 'Suspected Fracture', icone: '🦴', passos: ['Immobilize the limb without moving it', 'Don\'t try to straighten or align', 'Apply ice wrapped in cloth', 'Keep the athlete calm and still', 'Call Emergency Services (911) immediately', 'If open fracture, cover with sterile gauze without pressing'] },
       ],
       prevencao: [
-        { icon: '🧘', titulo: 'Regular Ukemi', desc: 'Well-trained falls prevent 90% of injuries' },
+        { icon: '🥋', titulo: 'Regular Ukemi', desc: 'Well-trained falls prevent 90% of injuries' },
         { icon: '🔥', titulo: 'Warm-up', desc: 'Never start training without proper warm-up' },
         { icon: '💧', titulo: 'Hydration', desc: 'Maintain hydration throughout training' },
         { icon: '😴', titulo: 'Rest', desc: 'Respect recovery time between training sessions' },
