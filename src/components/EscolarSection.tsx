@@ -25,10 +25,10 @@ const EscolarSection = () => {
         { cor: 'bg-green-500', titulo: 'Faixa Verde', emoji: '🟢', idade: '15-16 anos', conteudo: 'Preparação para graduação adulta, técnicas avançadas, katas' },
       ],
       pedagogia: [
-        { titulo: 'Ludicidade', icon: '🎮', desc: 'O ensino para crianças (4-12 anos) deve priorizar jogos e brincadeiras, desenvolvendo funções executivas e psicomotoras de forma natural e prazerosa.' },
-        { titulo: 'Progressão', icon: '📈', desc: 'Idade 7-10 anos é ideal para introdução de movimentos simples. O sistema Gokyo e técnicas de solo devem ser introduzidos gradualmente.' },
-        { titulo: 'Valores', icon: '💎', desc: 'Ênfase nos valores morais do judô: cortesia, coragem, sinceridade, honra, modéstia, respeito, autocontrole e amizade.' },
-        { titulo: 'Segurança', icon: '🛡️', desc: 'Ukemi (quedas) deve ser a base do treinamento infantil. Competições devem ser adaptadas à idade. Proteção é prioridade absoluta.' },
+        { titulo: 'Ludicidade', icon: '遊', desc: 'O ensino para crianças (4-12 anos) deve priorizar jogos e brincadeiras, desenvolvendo funções executivas e psicomotoras de forma natural e prazerosa.' },
+        { titulo: 'Progressão', icon: '進', desc: 'Idade 7-10 anos é ideal para introdução de movimentos simples. O sistema Gokyo e técnicas de solo devem ser introduzidos gradualmente.' },
+        { titulo: 'Valores', icon: '徳', desc: 'Ênfase nos valores morais do judô: cortesia, coragem, sinceridade, honra, modéstia, respeito, autocontrole e amizade.' },
+        { titulo: 'Segurança', icon: '守', desc: 'Ukemi (quedas) deve ser a base do treinamento infantil. Competições devem ser adaptadas à idade. Proteção é prioridade absoluta.' },
       ],
       fases: [
         { fase: 'Fase 1 (4-6 anos)', desc: 'Jogos motores, brincadeiras de movimento, ukemi lúdico, primeiros contatos' },
