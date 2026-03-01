@@ -108,7 +108,7 @@ const CursoPage = () => {
       case "principios": return <PrincipiosSection />;
       case "etiqueta": return <EtiquetaSection />;
       case "nomenclatura": return <NomenclaturaSection />;
-      case "gokyo": return <GokyoSection />;
+      case "gokyo": return <GokyoSection onNavigateToVideo={handleNavigateToVideo} />;
       case "katameWaza": return <KatameWazaSection />;
       case "katas": return <KatasSection />;
       case "nageNoKata": return <NageNoKataSection />;
