@@ -197,7 +197,7 @@ const NomenclaturaSection = () => {
 
       {/* Partes do Corpo */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4">
-        <span>🦵</span> {t.titles.corpo}
+        <span>🥋</span> {t.titles.corpo}
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-3 mb-10">
         {t.bodyParts.map((item, i) => (
