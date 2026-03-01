@@ -77,10 +77,10 @@ const EscolarSection = () => {
         { cor: 'bg-green-500', titulo: 'Green Belt', emoji: '🟢', idade: '15-16 years', conteudo: 'Preparation for adult grading, advanced techniques, katas' },
       ],
       pedagogia: [
-        { titulo: 'Playfulness', icon: '🎮', desc: 'Teaching for children (4-12 years) should prioritize games and play, developing executive and psychomotor functions naturally and pleasurably.' },
-        { titulo: 'Progression', icon: '📈', desc: 'Age 7-10 is ideal for introducing simple movements. The Gokyo system and ground techniques should be introduced gradually.' },
-        { titulo: 'Values', icon: '💎', desc: 'Emphasis on judo moral values: courtesy, courage, sincerity, honor, modesty, respect, self-control and friendship.' },
-        { titulo: 'Safety', icon: '🛡️', desc: 'Ukemi (falls) should be the foundation of children\'s training. Competitions must be adapted to age. Protection is absolute priority.' },
+        { titulo: 'Playfulness', icon: '遊', desc: 'Teaching for children (4-12 years) should prioritize games and play, developing executive and psychomotor functions naturally and pleasurably.' },
+        { titulo: 'Progression', icon: '進', desc: 'Age 7-10 is ideal for introducing simple movements. The Gokyo system and ground techniques should be introduced gradually.' },
+        { titulo: 'Values', icon: '徳', desc: 'Emphasis on judo moral values: courtesy, courage, sincerity, honor, modesty, respect, self-control and friendship.' },
+        { titulo: 'Safety', icon: '守', desc: 'Ukemi (falls) should be the foundation of children\'s training. Competitions must be adapted to age. Protection is absolute priority.' },
       ],
       fases: [
         { fase: 'Phase 1 (4-6 years)', desc: 'Motor games, movement play, playful ukemi, first contacts' },
