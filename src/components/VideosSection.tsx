@@ -42,10 +42,29 @@ const VideoThumbnail = ({ videoId, videoName }: { videoId: string; videoName: st
   );
 };
 
-const VideosSection = () => {
+interface VideosSectionProps {
+  highlightTechnique?: string | null;
+}
+
+const VideosSection = ({ highlightTechnique }: VideosSectionProps) => {
   const { language } = useLanguage();
   const [activeGokyoFilter, setActiveGokyoFilter] = useState<string>("all");
   const [searchQuery, setSearchQuery] = useState("");
+  const highlightedRef = useRef<HTMLAnchorElement>(null);
+  const [highlightActive, setHighlightActive] = useState(false);
+
+  useEffect(() => {
+    if (highlightTechnique) {
+      setHighlightActive(true);
+      // Small delay for DOM to render, then scroll
+      const timer = setTimeout(() => {
+        highlightedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 300);
+      // Remove highlight after 5 seconds
+      const fadeTimer = setTimeout(() => setHighlightActive(false), 5000);
+      return () => { clearTimeout(timer); clearTimeout(fadeTimer); };
+    }
+  }, [highlightTechnique]);
 
   const content = {
     pt: {
