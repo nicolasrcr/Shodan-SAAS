@@ -127,7 +127,7 @@ const EscolarSection = () => {
         ))}
       </div>
 
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>📚</span> {t.pedagogyTitle}</h3>
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>📜</span> {t.pedagogyTitle}</h3>
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
         {t.pedagogia.map((item, index) => (
           <div key={index} className="card-red p-5"><div className="flex items-center gap-3 mb-2"><span className="text-2xl">{item.icon}</span><h4 className="font-semibold text-white">{item.titulo}</h4></div><p className="text-sm text-foreground/70">{item.desc}</p></div>
