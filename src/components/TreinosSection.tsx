@@ -87,12 +87,12 @@ const TreinosSection = () => {
         { icon: '握', title: 'Grip', desc: 'Fortalecimento de pegada com gi' },
       ]
     : [
-        { icon: '🏃', title: 'Endurance', desc: 'Running, rope, aerobic circuits' },
-        { icon: '💪', title: 'Strength', desc: 'Functional weight training, bodyweight' },
-        { icon: '🤸', title: 'Flexibility', desc: 'Dynamic and static stretching' },
-        { icon: '⚡', title: 'Explosiveness', desc: 'Plyometrics, sprints, fast movements' },
-        { icon: '🧠', title: 'Coordination', desc: 'Agility exercises, timing' },
-        { icon: '🎯', title: 'Grip', desc: 'Grip strengthening with gi' },
+        { icon: '走', title: 'Endurance', desc: 'Running, rope, aerobic circuits' },
+        { icon: '力', title: 'Strength', desc: 'Functional weight training, bodyweight' },
+        { icon: '柔', title: 'Flexibility', desc: 'Dynamic and static stretching' },
+        { icon: '速', title: 'Explosiveness', desc: 'Plyometrics, sprints, fast movements' },
+        { icon: '技', title: 'Coordination', desc: 'Agility exercises, timing' },
+        { icon: '握', title: 'Grip', desc: 'Grip strengthening with gi' },
       ];
 
   const progressionLevels = language === 'pt'

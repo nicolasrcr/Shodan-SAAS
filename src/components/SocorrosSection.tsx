@@ -82,12 +82,12 @@ const SocorrosSection = () => {
         { titulo: 'Suspected Fracture', icone: '🦴', passos: ['Immobilize the limb without moving it', 'Don\'t try to straighten or align', 'Apply ice wrapped in cloth', 'Keep the athlete calm and still', 'Call Emergency Services (911) immediately', 'If open fracture, cover with sterile gauze without pressing'] },
       ],
       prevencao: [
-        { icon: '🥋', titulo: 'Regular Ukemi', desc: 'Well-trained falls prevent 90% of injuries' },
-        { icon: '🔥', titulo: 'Warm-up', desc: 'Never start training without proper warm-up' },
-        { icon: '💧', titulo: 'Hydration', desc: 'Maintain hydration throughout training' },
-        { icon: '😴', titulo: 'Rest', desc: 'Respect recovery time between training sessions' },
-        { icon: '🥋', titulo: 'Judogi', desc: 'Keep judogi clean and in good condition' },
-        { icon: '💅', titulo: 'Hygiene', desc: 'Trimmed nails and tied-up hair' },
+        { icon: '受', titulo: 'Regular Ukemi', desc: 'Well-trained falls prevent 90% of injuries' },
+        { icon: '準', titulo: 'Warm-up', desc: 'Never start training without proper warm-up' },
+        { icon: '水', titulo: 'Hydration', desc: 'Maintain hydration throughout training' },
+        { icon: '休', titulo: 'Rest', desc: 'Respect recovery time between training sessions' },
+        { icon: '着', titulo: 'Judogi', desc: 'Keep judogi clean and in good condition' },
+        { icon: '清', titulo: 'Hygiene', desc: 'Trimmed nails and tied-up hair' },
       ],
       kit: [
         { icon: '🧊', item: 'Ice / Cold pack' }, { icon: '🩹', item: 'Assorted bandages' },
