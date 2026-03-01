@@ -578,6 +578,7 @@ export const translations = {
     "auth.emailAlreadyRegistered": "This email is already registered. Try logging in.",
     "auth.rateLimitReached": "Email send limit reached. Wait a few minutes and try again.",
     "auth.weakPassword": "The password is too weak or common. Please choose a more secure password.",
+    "auth.passwordRequirements": "Password must contain at least one lowercase letter, one uppercase letter, and one number. It also cannot be a common password.",
     "auth.createAccountError": "Error creating account. Try again.",
     
     // Password Page
