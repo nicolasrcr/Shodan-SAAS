@@ -171,7 +171,7 @@ const NomenclaturaSection = () => {
 
       {/* Posições e Posturas */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4">
-        <span>🧘</span> {t.titles.posicoes}
+        <span>🥋</span> {t.titles.posicoes}
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 mb-10">
         {t.positions.map((item, i) => (
@@ -184,7 +184,7 @@ const NomenclaturaSection = () => {
 
       {/* Termos Básicos */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4">
-        <span>📚</span> {t.titles.termos}
+        <span>📜</span> {t.titles.termos}
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-3 mb-10">
         {t.terminology.map((item, i) => (
@@ -197,7 +197,7 @@ const NomenclaturaSection = () => {
 
       {/* Partes do Corpo */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4">
-        <span>🦵</span> {t.titles.corpo}
+        <span>🥋</span> {t.titles.corpo}
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-3 mb-10">
         {t.bodyParts.map((item, i) => (
@@ -265,7 +265,7 @@ const NomenclaturaSection = () => {
 
       {/* Nomenclatura Ne-Waza */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4 mt-8">
-        <span>🤼</span> {t.titles.ne}
+        <span>🥋</span> {t.titles.ne}
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
         {t.neNomenclatura.map((item, i) => (

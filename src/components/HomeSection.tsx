@@ -72,10 +72,10 @@ const HomeSection = ({ onNavigate }: HomeSectionProps) => {
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <button onClick={() => onNavigate('flashcardsMenu')} className="btn-gold">
-            <span className="mr-2">📚</span> Flashcards
+            <span className="mr-2">🥋</span> Flashcards
           </button>
           <button onClick={() => onNavigate('quizMenu')} className="btn-outline">
-            <span className="mr-2">📝</span> Quizzes
+            <span className="mr-2">🥋</span> Quizzes
           </button>
         </div>
       </div>

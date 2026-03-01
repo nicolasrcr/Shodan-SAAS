@@ -27,7 +27,7 @@ const SocorrosSection = () => {
         { numero: '190', servico: 'Polícia Militar', cor: 'bg-blue-500', desc: 'Para emergências de segurança' },
       ],
       procedimentos: [
-        { titulo: 'Contusões e Hematomas', icone: '🦵', passos: ['Afastar o atleta da área de luta', 'Aplicar gelo ou bolsa térmica por 15-20 minutos', 'Elevar a região afetada acima do coração', 'Comprimir com bandagem elástica se necessário', 'Observar evolução nas próximas 24-48 horas', 'Se piorar, encaminhar ao médico'] },
+        { titulo: 'Contusões e Hematomas', icone: '🥋', passos: ['Afastar o atleta da área de luta', 'Aplicar gelo ou bolsa térmica por 15-20 minutos', 'Elevar a região afetada acima do coração', 'Comprimir com bandagem elástica se necessário', 'Observar evolução nas próximas 24-48 horas', 'Se piorar, encaminhar ao médico'] },
         { titulo: 'Desmaio por Estrangulamento', icone: '💫', passos: ['Soltar IMEDIATAMENTE a técnica de estrangulamento', 'Deitar o atleta de lado (posição de recuperação)', 'Afrouxar o judogi e a faixa', 'Elevar as pernas levemente (15-30cm)', 'Manter vias aéreas livres', 'Se não acordar em 30 segundos, chamar emergência', 'Monitorar respiração até recuperação completa'] },
         { titulo: 'Luxação e Torção Articular', icone: '🔧', passos: ['Imobilizar a articulação afetada imediatamente', 'NÃO tentar "colocar no lugar" - isso é função médica', 'Aplicar gelo envolto em pano (nunca direto na pele)', 'Manter a região elevada e imóvel', 'Encaminhar ao pronto-socorro para avaliação', 'Não permitir que o atleta volte a treinar'] },
         { titulo: 'Cortes e Escoriações', icone: '🩹', passos: ['Calçar luvas descartáveis (proteção do socorrista)', 'Limpar o ferimento com água limpa ou soro fisiológico', 'Aplicar antisséptico (povidine ou clorexidina)', 'Cobrir com curativo ou gaze estéril', 'Se sangramento intenso, pressionar com gaze', 'Se corte profundo ou extenso, encaminhar ao médico'] },
@@ -35,7 +35,7 @@ const SocorrosSection = () => {
         { titulo: 'Suspeita de Fratura', icone: '🦴', passos: ['Imobilizar o membro sem movimentar', 'Não tentar endireitar ou alinhar', 'Aplicar gelo envolto em pano', 'Manter o atleta calmo e imóvel', 'Chamar SAMU (192) imediatamente', 'Se fratura exposta, cobrir com gaze estéril sem pressionar'] },
       ],
       prevencao: [
-        { icon: '🧘', titulo: 'Ukemi Regular', desc: 'Quedas bem treinadas previnem 90% das lesões' },
+        { icon: '🥋', titulo: 'Ukemi Regular', desc: 'Quedas bem treinadas previnem 90% das lesões' },
         { icon: '🔥', titulo: 'Aquecimento', desc: 'Nunca iniciar treino sem aquecimento adequado' },
         { icon: '💧', titulo: 'Hidratação', desc: 'Manter hidratação durante todo o treino' },
         { icon: '😴', titulo: 'Descanso', desc: 'Respeitar tempo de recuperação entre treinos' },
@@ -74,7 +74,7 @@ const SocorrosSection = () => {
         { numero: '911', servico: 'Police', cor: 'bg-blue-500', desc: 'For security emergencies' },
       ],
       procedimentos: [
-        { titulo: 'Bruises and Hematomas', icone: '🦵', passos: ['Remove athlete from the fighting area', 'Apply ice or cold pack for 15-20 minutes', 'Elevate the affected area above heart level', 'Compress with elastic bandage if necessary', 'Monitor evolution over next 24-48 hours', 'If worsening, refer to doctor'] },
+        { titulo: 'Bruises and Hematomas', icone: '🥋', passos: ['Remove athlete from the fighting area', 'Apply ice or cold pack for 15-20 minutes', 'Elevate the affected area above heart level', 'Compress with elastic bandage if necessary', 'Monitor evolution over next 24-48 hours', 'If worsening, refer to doctor'] },
         { titulo: 'Fainting from Choke', icone: '💫', passos: ['Release the choke technique IMMEDIATELY', 'Lay the athlete on their side (recovery position)', 'Loosen the judogi and belt', 'Slightly elevate legs (15-30cm)', 'Keep airways clear', 'If not awake in 30 seconds, call emergency', 'Monitor breathing until full recovery'] },
         { titulo: 'Dislocation and Joint Sprain', icone: '🔧', passos: ['Immobilize the affected joint immediately', 'DO NOT attempt to "put it back" - that\'s a medical function', 'Apply ice wrapped in cloth (never directly on skin)', 'Keep the area elevated and immobile', 'Refer to emergency room for evaluation', 'Do not allow the athlete to return to training'] },
         { titulo: 'Cuts and Abrasions', icone: '🩹', passos: ['Wear disposable gloves (rescuer protection)', 'Clean the wound with clean water or saline', 'Apply antiseptic (povidone or chlorhexidine)', 'Cover with bandage or sterile gauze', 'If intense bleeding, press with gauze', 'If deep or extensive cut, refer to doctor'] },
@@ -82,7 +82,7 @@ const SocorrosSection = () => {
         { titulo: 'Suspected Fracture', icone: '🦴', passos: ['Immobilize the limb without moving it', 'Don\'t try to straighten or align', 'Apply ice wrapped in cloth', 'Keep the athlete calm and still', 'Call Emergency Services (911) immediately', 'If open fracture, cover with sterile gauze without pressing'] },
       ],
       prevencao: [
-        { icon: '🧘', titulo: 'Regular Ukemi', desc: 'Well-trained falls prevent 90% of injuries' },
+        { icon: '🥋', titulo: 'Regular Ukemi', desc: 'Well-trained falls prevent 90% of injuries' },
         { icon: '🔥', titulo: 'Warm-up', desc: 'Never start training without proper warm-up' },
         { icon: '💧', titulo: 'Hydration', desc: 'Maintain hydration throughout training' },
         { icon: '😴', titulo: 'Rest', desc: 'Respect recovery time between training sessions' },
@@ -104,7 +104,7 @@ const SocorrosSection = () => {
 
   return (
     <div className="animate-fade-in">
-      <h2 className="section-title"><span className="section-title-icon">🚑</span>{t.title}</h2>
+      <h2 className="section-title"><span className="section-title-icon">⛑️</span>{t.title}</h2>
 
       <div className="bg-red-500/20 border-2 border-red-500/50 rounded-xl p-6 mb-8">
         <h3 className="text-lg font-semibold text-red-400 flex items-center gap-2 mb-3"><span>🚨</span> {t.emergencyAlert}</h3>

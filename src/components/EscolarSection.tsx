@@ -48,10 +48,10 @@ const EscolarSection = () => {
         { cat: 'Sub-15 (Infantil)', idade: '13-14 anos', formato: 'Próximo às regras oficiais' },
       ],
       beneficios: [
-        { icon: '🧠', text: 'Concentração e foco' }, { icon: '🤝', text: 'Socialização e trabalho em equipe' },
-        { icon: '💪', text: 'Coordenação motora' }, { icon: '😊', text: 'Autoconfiança e autoestima' },
-        { icon: '🎯', text: 'Disciplina e respeito' }, { icon: '🏃', text: 'Condicionamento físico' },
-        { icon: '🙏', text: 'Respeito aos outros e hierarquia' }, { icon: '🌟', text: 'Superação de limites pessoais' },
+        { icon: '🥋', text: 'Concentração e foco' }, { icon: '🤝', text: 'Socialização e trabalho em equipe' },
+        { icon: '🥋', text: 'Coordenação motora' }, { icon: '🥋', text: 'Autoconfiança e autoestima' },
+        { icon: '🎯', text: 'Disciplina e respeito' }, { icon: '🥋', text: 'Condicionamento físico' },
+        { icon: '🥋', text: 'Respeito aos outros e hierarquia' }, { icon: '🥇', text: 'Superação de limites pessoais' },
       ],
       responsabilidades: ['Garantir segurança física e emocional', 'Ser exemplo dos valores do judô', 'Adaptar metodologia à faixa etária', 'Manter comunicação com famílias', 'Identificar talentos e dificuldades'],
       formacao: ['Graduação mínima: Faixa Preta', 'Curso de capacitação infantil', 'Conhecimento em desenvolvimento motor', 'Formação em primeiros socorros', 'Atualização constante (seminários)'],
@@ -100,10 +100,10 @@ const EscolarSection = () => {
         { cat: 'U-15 (Infantile)', idade: '13-14 years', formato: 'Close to official rules' },
       ],
       beneficios: [
-        { icon: '🧠', text: 'Concentration and focus' }, { icon: '🤝', text: 'Socialization and teamwork' },
-        { icon: '💪', text: 'Motor coordination' }, { icon: '😊', text: 'Self-confidence and self-esteem' },
-        { icon: '🎯', text: 'Discipline and respect' }, { icon: '🏃', text: 'Physical conditioning' },
-        { icon: '🙏', text: 'Respect for others and hierarchy' }, { icon: '🌟', text: 'Overcoming personal limits' },
+        { icon: '🥋', text: 'Concentration and focus' }, { icon: '🤝', text: 'Socialization and teamwork' },
+        { icon: '🥋', text: 'Motor coordination' }, { icon: '🥋', text: 'Self-confidence and self-esteem' },
+        { icon: '🎯', text: 'Discipline and respect' }, { icon: '🥋', text: 'Physical conditioning' },
+        { icon: '🥋', text: 'Respect for others and hierarchy' }, { icon: '🥇', text: 'Overcoming personal limits' },
       ],
       responsabilidades: ['Ensure physical and emotional safety', 'Be an example of judo values', 'Adapt methodology to age group', 'Maintain communication with families', 'Identify talents and difficulties'],
       formacao: ['Minimum: Black Belt', 'Children\'s training course', 'Knowledge in motor development', 'First aid training', 'Constant updates (seminars)'],
@@ -114,7 +114,7 @@ const EscolarSection = () => {
 
   return (
     <div className="animate-fade-in">
-      <h2 className="section-title"><span className="section-title-icon">🎓</span>{t.title}</h2>
+      <h2 className="section-title"><span className="section-title-icon">🔰</span>{t.title}</h2>
       <div className="card-judo mb-8"><p className="text-sm text-foreground/70">{t.intro}</p></div>
 
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🥋</span> {t.beltSystem}</h3>
@@ -127,14 +127,14 @@ const EscolarSection = () => {
         ))}
       </div>
 
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>📚</span> {t.pedagogyTitle}</h3>
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>📜</span> {t.pedagogyTitle}</h3>
       <div className="grid sm:grid-cols-2 gap-4 mb-10">
         {t.pedagogia.map((item, index) => (
           <div key={index} className="card-red p-5"><div className="flex items-center gap-3 mb-2"><span className="text-2xl">{item.icon}</span><h4 className="font-semibold text-white">{item.titulo}</h4></div><p className="text-sm text-foreground/70">{item.desc}</p></div>
         ))}
       </div>
 
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>📊</span> {t.methodology}</h3>
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🥋</span> {t.methodology}</h3>
       <div className="card-judo mb-8">
         <div className="grid sm:grid-cols-2 gap-4 mb-6">
           {t.fases.map((item, index) => (<div key={index} className="bg-muted/20 rounded-lg p-4"><h4 className="font-semibold text-primary text-sm mb-2">{item.fase}</h4><p className="text-xs text-foreground/70">{item.desc}</p></div>))}
@@ -145,7 +145,7 @@ const EscolarSection = () => {
         </div>
       </div>
 
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🏆</span> {t.competitions}</h3>
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🥇</span> {t.competitions}</h3>
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         {t.competicoesInfantis.map((comp, index) => (<div key={index} className="card-judo text-center"><h4 className="font-semibold text-white">{comp.cat}</h4><p className="text-xs text-primary mb-1">{comp.idade}</p><p className="text-xs text-muted-foreground">{comp.formato}</p></div>))}
       </div>
@@ -155,7 +155,7 @@ const EscolarSection = () => {
         {t.beneficios.map((item, index) => (<div key={index} className="card-judo text-center p-4"><span className="text-2xl block mb-2">{item.icon}</span><p className="text-sm text-white">{item.text}</p></div>))}
       </div>
 
-      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>👨‍🏫</span> {t.teacherRole}</h3>
+      <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-4"><span>🥋</span> {t.teacherRole}</h3>
       <div className="card-red p-6">
         <div className="grid sm:grid-cols-2 gap-4">
           <div><h4 className="font-semibold text-white mb-3">{t.responsibilities}</h4><ul className="space-y-2 text-sm text-foreground/70">{t.responsabilidades.map((r, i) => <li key={i}>• {r}</li>)}</ul></div>

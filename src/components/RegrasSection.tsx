@@ -24,7 +24,7 @@ const RegrasSection = () => {
 
   const prohibitedActions = language === 'pt'
     ? [
-        { action: "Leg Grab", desc: "Pegar diretamente nas pernas sem ataque prévio (Hansoku-make direto)", icon: "🦵" },
+        { action: "Leg Grab", desc: "Pegar diretamente nas pernas sem ataque prévio (Hansoku-make direto)", icon: "🥋" },
         { action: "Diving", desc: "Mergulhar de cabeça no tatame (Hansoku-make direto)", icon: "⚠️" },
         { action: "Passividade", desc: "Evitar luta, não atacar (Shido após 45s sem ação)", icon: "🚫" },
         { action: "Defesa cruzada", desc: "Braços cruzados por mais de 5 segundos (Shido)", icon: "❌" },
@@ -32,7 +32,7 @@ const RegrasSection = () => {
         { action: "Puxar para o solo", desc: "Sem ataque válido (Shido)", icon: "⬇️" },
       ]
     : [
-        { action: "Leg Grab", desc: "Directly grabbing legs without prior attack (direct Hansoku-make)", icon: "🦵" },
+        { action: "Leg Grab", desc: "Directly grabbing legs without prior attack (direct Hansoku-make)", icon: "🥋" },
         { action: "Diving", desc: "Diving headfirst into the mat (direct Hansoku-make)", icon: "⚠️" },
         { action: "Passivity", desc: "Avoiding fight, not attacking (Shido after 45s without action)", icon: "🚫" },
         { action: "Cross grip defense", desc: "Crossed arms for more than 5 seconds (Shido)", icon: "❌" },
@@ -108,10 +108,10 @@ const RegrasSection = () => {
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               {[
-                { emoji: '💪', label: language === 'pt' ? 'Força' : 'Force' },
+                { emoji: '🥋', label: language === 'pt' ? 'Força' : 'Force' },
                 { emoji: '⚡', label: language === 'pt' ? 'Velocidade' : 'Speed' },
                 { emoji: '🎯', label: language === 'pt' ? 'Controle' : 'Control' },
-                { emoji: '✨', label: language === 'pt' ? 'Impacto Perfeito' : 'Perfect Impact' },
+                { emoji: '🥇', label: language === 'pt' ? 'Impacto Perfeito' : 'Perfect Impact' },
               ].map((item, i) => (
                 <div key={i} className="text-center p-3 bg-muted/30 rounded-xl">
                   <span className="text-2xl block mb-1">{item.emoji}</span>
@@ -204,7 +204,7 @@ const RegrasSection = () => {
 
       {/* Competition Area */}
       <h3 className="text-lg font-semibold text-primary flex items-center gap-2 mb-5">
-        🥋 {language === 'pt' ? 'Área de Competição' : 'Competition Area'}
+        🥇 {language === 'pt' ? 'Área de Competição' : 'Competition Area'}
       </h3>
       <div className="card-judo mb-8">
         <div className="grid sm:grid-cols-2 gap-6">
