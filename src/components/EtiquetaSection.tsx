@@ -128,12 +128,12 @@ const EtiquetaSection = () => {
         { icon: '🚶', text: 'To ENTER: left foot first. To EXIT: right foot first.' },
       ],
       judogiComponents: [
-        { icon: '👘', name: 'Uwagi', desc: 'Jacket' },
-        { icon: '👖', name: 'Zubon/Shitabaki', desc: 'Pants' },
-        { icon: '🎀', name: 'Obi', desc: 'Belt indicating rank' },
-        { icon: '👔', name: 'Eri', desc: 'Collar/Lapel' },
-        { icon: '💪', name: 'Sode', desc: 'Sleeve' },
-        { icon: '✋', name: 'Sode-Guchi', desc: 'Sleeve opening' },
+        { icon: '🥋', name: 'Uwagi', desc: 'Jacket' },
+        { icon: '🥋', name: 'Zubon/Shitabaki', desc: 'Pants' },
+        { icon: '🥋', name: 'Obi', desc: 'Belt indicating rank' },
+        { icon: '🥋', name: 'Eri', desc: 'Collar/Lapel' },
+        { icon: '🥋', name: 'Sode', desc: 'Sleeve' },
+        { icon: '🥋', name: 'Sode-Guchi', desc: 'Sleeve opening' },
       ],
       beltSystem: {
         basicas: [
