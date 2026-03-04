@@ -3,6 +3,7 @@ import { Search } from "lucide-react";
 import { searchIndex, sections } from "@/data/judoData";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { fuzzyFilter } from "@/lib/fuzzySearch";
 
 interface SearchBarProps {
   onNavigate: (section: string) => void;
@@ -22,13 +23,15 @@ const SearchBar = ({ onNavigate }: SearchBarProps) => {
       return;
     }
 
-    const q = query.toLowerCase();
-    const filtered = searchIndex.filter(
+    const filtered = fuzzyFilter(
+      searchIndex,
+      query,
       (item) => {
         const title = language === 'en' && item.titleEn ? item.titleEn : item.title;
         const keywords = language === 'en' && item.keywordsEn ? item.keywordsEn : item.keywords;
-        return title.toLowerCase().includes(q) || keywords.toLowerCase().includes(q);
-      }
+        return [title, keywords];
+      },
+      0.25
     );
     setResults(filtered.slice(0, 8));
     setIsOpen(true);
