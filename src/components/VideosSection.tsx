@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
+import { fuzzyMatch } from "@/lib/fuzzySearch";
 
 interface VideoItem {
   name: string;
@@ -361,10 +362,9 @@ const VideosSection = ({ highlightTechnique }: VideosSectionProps) => {
         }
       }
 
-      // Filter by search
+      // Filter by search (fuzzy)
       if (searchQuery.length >= 2) {
-        const q = searchQuery.toLowerCase();
-        filteredVideos = filteredVideos.filter(v => v.name.toLowerCase().includes(q));
+        filteredVideos = filteredVideos.filter(v => fuzzyMatch(searchQuery, v.name, 0.25) > 0);
       }
 
       return { ...cat, videos: filteredVideos };
