@@ -77,6 +77,10 @@ export const techniqueVideoMap: Record<string, string> = {
   "Ko-Uchi-Makikomi": "_1eygIXLD_w",
   "Kani-Basami": "OR-HGHnarYc",
   "Kawazu-Gake": "w6G57bWACi0",
+
+  // Katame-waza (Shinmeisho)
+  "Uki-Gatame": "e_lAjik1SUM",
+  "Ura-Gatame": "e_lAjik1SUM",
 };
 
 // Helper: get YouTube thumbnail URL
