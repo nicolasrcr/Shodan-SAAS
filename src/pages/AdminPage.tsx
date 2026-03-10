@@ -51,7 +51,15 @@ const AdminPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [paymentSearch, setPaymentSearch] = useState('');
   const [updating, setUpdating] = useState<string | null>(null);
+  const [adminUsers, setAdminUsers] = useState<Set<string>>(new Set());
 
+  const fetchAdminRoles = async () => {
+    const { data } = await supabase
+      .from('user_roles')
+      .select('user_id')
+      .eq('role', 'admin');
+    if (data) setAdminUsers(new Set(data.map(r => r.user_id)));
+  };
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString(language === 'pt' ? 'pt-BR' : 'en-US');
   };
