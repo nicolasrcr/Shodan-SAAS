@@ -95,6 +95,7 @@ const AdminPage = () => {
     if (isAdmin) {
       fetchUsers();
       fetchPayments();
+      fetchAdminRoles();
     }
   }, [isAdmin]);
 
