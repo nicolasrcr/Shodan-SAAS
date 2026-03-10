@@ -11,7 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
-import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert } from 'lucide-react';
+import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert, Crown } from 'lucide-react';
 import StatCard from '@/components/admin/StatCard';
 import AdminSecurityTab from '@/components/admin/AdminSecurityTab';
 import LanguageToggle from '@/components/LanguageToggle';
@@ -51,7 +51,15 @@ const AdminPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [paymentSearch, setPaymentSearch] = useState('');
   const [updating, setUpdating] = useState<string | null>(null);
+  const [adminUsers, setAdminUsers] = useState<Set<string>>(new Set());
 
+  const fetchAdminRoles = async () => {
+    const { data } = await supabase
+      .from('user_roles')
+      .select('user_id')
+      .eq('role', 'admin');
+    if (data) setAdminUsers(new Set(data.map(r => r.user_id)));
+  };
   const formatDate = (dateStr: string) => {
     return new Date(dateStr).toLocaleDateString(language === 'pt' ? 'pt-BR' : 'en-US');
   };
@@ -87,6 +95,7 @@ const AdminPage = () => {
     if (isAdmin) {
       fetchUsers();
       fetchPayments();
+      fetchAdminRoles();
     }
   }, [isAdmin]);
 
@@ -113,6 +122,36 @@ const AdminPage = () => {
     } else {
       toast({ title: t('common.success'), description: t('admin.renewedSuccess') });
       fetchUsers();
+    }
+    setUpdating(null);
+  };
+
+  const toggleAdminRole = async (userId: string) => {
+    setUpdating(userId);
+    const isCurrentlyAdmin = adminUsers.has(userId);
+    
+    if (isCurrentlyAdmin) {
+      const { error } = await supabase
+        .from('user_roles')
+        .delete()
+        .eq('user_id', userId)
+        .eq('role', 'admin');
+      if (error) {
+        toast({ title: t('common.error'), description: language === 'pt' ? 'Erro ao remover admin' : 'Error removing admin', variant: 'destructive' });
+      } else {
+        toast({ title: t('common.success'), description: language === 'pt' ? 'Papel admin removido' : 'Admin role removed' });
+        setAdminUsers(prev => { const n = new Set(prev); n.delete(userId); return n; });
+      }
+    } else {
+      const { error } = await supabase
+        .from('user_roles')
+        .upsert({ user_id: userId, role: 'admin' as const }, { onConflict: 'user_id,role' });
+      if (error) {
+        toast({ title: t('common.error'), description: language === 'pt' ? 'Erro ao promover admin' : 'Error promoting admin', variant: 'destructive' });
+      } else {
+        toast({ title: t('common.success'), description: language === 'pt' ? 'Usuário promovido a admin' : 'User promoted to admin' });
+        setAdminUsers(prev => new Set(prev).add(userId));
+      }
     }
     setUpdating(null);
   };
@@ -267,6 +306,16 @@ const AdminPage = () => {
                               </TableCell>
                               <TableCell className="text-right">
                                 <div className="flex items-center justify-end gap-2">
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className={adminUsers.has(user.id) ? "border-primary text-primary hover:bg-primary hover:text-primary-foreground" : "border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary"}
+                                    onClick={() => toggleAdminRole(user.id)}
+                                    disabled={updating === user.id}
+                                    title={adminUsers.has(user.id) ? (language === 'pt' ? 'Remover admin' : 'Remove admin') : (language === 'pt' ? 'Promover a admin' : 'Promote to admin')}
+                                  >
+                                    <Crown className="h-4 w-4" />
+                                  </Button>
                                   {isExpired && user.has_paid && (
                                     <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white" onClick={() => renewAccess(user.id)} disabled={updating === user.id}>
                                       {updating === user.id ? <RefreshCw className="h-4 w-4 animate-spin" /> : <><RotateCcw className="h-4 w-4 mr-1" />{t('admin.renew')}</>}
