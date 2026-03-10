@@ -126,6 +126,36 @@ const AdminPage = () => {
     setUpdating(null);
   };
 
+  const toggleAdminRole = async (userId: string) => {
+    setUpdating(userId);
+    const isCurrentlyAdmin = adminUsers.has(userId);
+    
+    if (isCurrentlyAdmin) {
+      const { error } = await supabase
+        .from('user_roles')
+        .delete()
+        .eq('user_id', userId)
+        .eq('role', 'admin');
+      if (error) {
+        toast({ title: t('common.error'), description: language === 'pt' ? 'Erro ao remover admin' : 'Error removing admin', variant: 'destructive' });
+      } else {
+        toast({ title: t('common.success'), description: language === 'pt' ? 'Papel admin removido' : 'Admin role removed' });
+        setAdminUsers(prev => { const n = new Set(prev); n.delete(userId); return n; });
+      }
+    } else {
+      const { error } = await supabase
+        .from('user_roles')
+        .upsert({ user_id: userId, role: 'admin' as const }, { onConflict: 'user_id,role' });
+      if (error) {
+        toast({ title: t('common.error'), description: language === 'pt' ? 'Erro ao promover admin' : 'Error promoting admin', variant: 'destructive' });
+      } else {
+        toast({ title: t('common.success'), description: language === 'pt' ? 'Usuário promovido a admin' : 'User promoted to admin' });
+        setAdminUsers(prev => new Set(prev).add(userId));
+      }
+    }
+    setUpdating(null);
+  };
+
   const filteredUsers = users.filter(user =>
     user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
     user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
