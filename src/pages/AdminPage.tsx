@@ -306,6 +306,16 @@ const AdminPage = () => {
                               </TableCell>
                               <TableCell className="text-right">
                                 <div className="flex items-center justify-end gap-2">
+                                  <Button
+                                    size="sm"
+                                    variant="outline"
+                                    className={adminUsers.has(user.id) ? "border-primary text-primary hover:bg-primary hover:text-primary-foreground" : "border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary"}
+                                    onClick={() => toggleAdminRole(user.id)}
+                                    disabled={updating === user.id}
+                                    title={adminUsers.has(user.id) ? (language === 'pt' ? 'Remover admin' : 'Remove admin') : (language === 'pt' ? 'Promover a admin' : 'Promote to admin')}
+                                  >
+                                    <Crown className="h-4 w-4" />
+                                  </Button>
                                   {isExpired && user.has_paid && (
                                     <Button size="sm" variant="outline" className="border-green-500 text-green-500 hover:bg-green-500 hover:text-white" onClick={() => renewAccess(user.id)} disabled={updating === user.id}>
                                       {updating === user.id ? <RefreshCw className="h-4 w-4 animate-spin" /> : <><RotateCcw className="h-4 w-4 mr-1" />{t('admin.renew')}</>}
