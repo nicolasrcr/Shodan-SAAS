@@ -11,7 +11,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { toast } from '@/hooks/use-toast';
-import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert } from 'lucide-react';
+import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert, Crown } from 'lucide-react';
 import StatCard from '@/components/admin/StatCard';
 import AdminSecurityTab from '@/components/admin/AdminSecurityTab';
 import LanguageToggle from '@/components/LanguageToggle';
