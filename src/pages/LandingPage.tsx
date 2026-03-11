@@ -281,9 +281,9 @@ const LandingPage = () => {
                   
                   <div className="text-center">
                     <div className="mb-2">
-                      <span className="text-muted-foreground line-through text-lg">R$ 397</span>
+                      <span className="text-muted-foreground line-through text-lg">R$ 100</span>
                     </div>
-                    <div className="text-5xl md:text-6xl font-bold text-primary mb-2">R$ 100
+                    <div className="text-5xl md:text-6xl font-bold text-primary mb-2">R$ 50
 
                     </div>
                     <p className="text-sm text-muted-foreground mb-6">
@@ -452,7 +452,7 @@ const LandingPage = () => {
               </div>
               <div className="bg-secondary/50 rounded-lg p-4 mb-4">
                 <p className="text-sm text-muted-foreground mb-2">{t("pix.value")}</p>
-                <p className="text-2xl font-bold text-primary">R$ 197,00</p>
+                <p className="text-2xl font-bold text-primary">R$ 50,00</p>
               </div>
               <div className="bg-primary/20 border border-primary/50 rounded-lg p-4 mb-4">
                 <p className="text-sm text-muted-foreground mb-2">{t("pix.whatsapp")}</p>
