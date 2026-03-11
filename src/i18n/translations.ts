@@ -309,7 +309,7 @@ export const translations = {
     "plans.faqMobile": "Posso acessar pelo celular?",
     "plans.faqMobileAnswer": "Sim! O curso é 100% responsivo e funciona em qualquer dispositivo com internet.",
     "plans.faqExpire": "E se meu acesso expirar?",
-    "plans.faqExpireAnswer": "Você pode renovar por apenas R$ 99,90/ano e continuar estudando com as atualizações.",
+    "plans.faqExpireAnswer": "Você pode renovar por apenas R$ 50/ano e continuar estudando com as atualizações.",
     "plans.faqSupport": "Tem suporte?",
     "plans.faqSupportAnswer": "Sim! Suporte via WhatsApp (61) 99663-4944 para dúvidas sobre conteúdo ou acesso.",
     "plans.questions": "Dúvidas? Fale conosco pelo",
