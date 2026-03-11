@@ -59,7 +59,7 @@ serve(async (req) => {
     const userName = profile.name;
 
     const isRenewal = type === 'renewal';
-    const price = isRenewal ? 99.90 : 197.00;
+    const price = isRenewal ? 50.00 : 50.00;
     const title = isRenewal 
       ? 'Renovação Anual - Guia Exame Shodan' 
       : 'Guia Completo Exame Shodan - Acesso 1 Ano';

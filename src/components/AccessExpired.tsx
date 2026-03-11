@@ -130,7 +130,7 @@ const AccessExpired = ({ expirationDate }: AccessExpiredProps) => {
               <div className="mb-8">
                 <div className="text-muted-foreground line-through text-lg mb-1">R$ 197</div>
                 <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
-                  R$ 99,90
+                  R$ 50
                 </div>
                 <p className="text-sm text-muted-foreground">{t("expired.annualRenewal")}</p>
               </div>

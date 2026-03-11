@@ -114,9 +114,9 @@ const PaymentRequired = () => {
               </ul>
 
               <div className="mb-8">
-                <div className="text-muted-foreground line-through text-lg mb-1">R$ 397</div>
+                <div className="text-muted-foreground line-through text-lg mb-1">R$ 197</div>
                 <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
-                  R$ 197
+                  R$ 50
                 </div>
                 <p className="text-sm text-muted-foreground">{t("pricing.singlePayment")}</p>
               </div>
