@@ -756,7 +756,7 @@ export const translations = {
     "plans.faqMobile": "Can I access from my phone?",
     "plans.faqMobileAnswer": "Yes! The course is 100% responsive and works on any device with internet.",
     "plans.faqExpire": "What if my access expires?",
-    "plans.faqExpireAnswer": "You can renew for just R$ 99.90/year and continue studying with updates.",
+    "plans.faqExpireAnswer": "You can renew for just R$ 50/year and continue studying with updates.",
     "plans.faqSupport": "Is there support?",
     "plans.faqSupportAnswer": "Yes! WhatsApp support (61) 99663-4944 for content or access questions.",
     "plans.questions": "Questions? Contact us via",

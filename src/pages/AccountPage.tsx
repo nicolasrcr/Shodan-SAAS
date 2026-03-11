@@ -161,7 +161,7 @@ const AccountPage = () => {
                 {language === 'pt' ? 'Renovar Acesso' : 'Renew Access'}
               </h2>
               <p className="text-muted-foreground mb-4">
-                {language === 'pt' ? 'Renove por mais 1 ano por apenas R$ 99,90' : 'Renew for 1 more year for only R$ 99.90'}
+                {language === 'pt' ? 'Renove por mais 1 ano por apenas R$ 50' : 'Renew for 1 more year for only R$ 50'}
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <Button onClick={() => handleRenewal('cartao')} disabled={isProcessing} className="btn-gold">
