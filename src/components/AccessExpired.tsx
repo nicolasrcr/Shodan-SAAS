@@ -128,7 +128,7 @@ const AccessExpired = ({ expirationDate }: AccessExpiredProps) => {
               </ul>
 
               <div className="mb-8">
-                <div className="text-muted-foreground line-through text-lg mb-1">R$ 197</div>
+                <div className="text-muted-foreground line-through text-lg mb-1">R$ 100</div>
                 <div className="text-5xl md:text-6xl font-bold text-primary mb-2">
                   R$ 50
                 </div>
