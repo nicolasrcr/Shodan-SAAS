@@ -279,7 +279,7 @@ export const translations = {
     "plans.investHighlight": "futuro no Judô",
     "plans.description": "Escolha o plano ideal para sua jornada rumo à faixa preta. Todo o conhecimento que você precisa para o exame de Shodan.",
     "plans.renewal": "Renovação",
-    "plans.renewalPrice": "99,90",
+    "plans.renewalPrice": "50,00",
     "plans.renewalPeriod": "por ano",
     "plans.renewalDescription": "Para quem já é aluno e quer continuar estudando",
     "plans.renewalFeature1": "Renovação por mais 1 ano",
