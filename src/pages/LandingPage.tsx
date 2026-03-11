@@ -283,7 +283,7 @@ const LandingPage = () => {
                     <div className="mb-2">
                       <span className="text-muted-foreground line-through text-lg">R$ 100</span>
                     </div>
-                    <div className="text-5xl md:text-6xl font-bold text-primary mb-2">R$ 100
+                    <div className="text-5xl md:text-6xl font-bold text-primary mb-2">R$ 50
 
                     </div>
                     <p className="text-sm text-muted-foreground mb-6">
