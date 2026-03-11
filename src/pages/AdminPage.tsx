@@ -312,7 +312,12 @@ const AdminPage = () => {
                                     size="sm"
                                     variant="outline"
                                     className={adminUsers.has(user.id) ? "border-primary text-primary hover:bg-primary hover:text-primary-foreground" : "border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary"}
-                                    onClick={() => toggleAdminRole(user.id)}
+                                    onClick={() => setConfirmDialog({
+                                      open: true,
+                                      userId: user.id,
+                                      userName: user.name,
+                                      isPromoting: !adminUsers.has(user.id)
+                                    })}
                                     disabled={updating === user.id}
                                     title={adminUsers.has(user.id) ? (language === 'pt' ? 'Remover admin' : 'Remove admin') : (language === 'pt' ? 'Promover a admin' : 'Promote to admin')}
                                   >
