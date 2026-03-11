@@ -53,6 +53,7 @@ const AdminPage = () => {
   const [paymentSearch, setPaymentSearch] = useState('');
   const [updating, setUpdating] = useState<string | null>(null);
   const [adminUsers, setAdminUsers] = useState<Set<string>>(new Set());
+  const [confirmDialog, setConfirmDialog] = useState<{ open: boolean; userId: string; userName: string; isPromoting: boolean }>({ open: false, userId: '', userName: '', isPromoting: false });
 
   const fetchAdminRoles = async () => {
     const { data } = await supabase
