@@ -430,6 +430,43 @@ const AdminPage = () => {
           </CardContent>
         </Card>
       </main>
+
+      <AlertDialog open={confirmDialog.open} onOpenChange={(open) => setConfirmDialog(prev => ({ ...prev, open }))}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {confirmDialog.isPromoting
+                ? (language === 'pt' ? 'Promover a admin?' : 'Promote to admin?')
+                : (language === 'pt' ? 'Remover privilégios de admin?' : 'Remove admin privileges?')}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {confirmDialog.isPromoting
+                ? (language === 'pt'
+                    ? `Tem certeza que deseja promover "${confirmDialog.userName}" a administrador? Ele terá acesso total ao painel admin.`
+                    : `Are you sure you want to promote "${confirmDialog.userName}" to admin? They will have full access to the admin panel.`)
+                : (language === 'pt'
+                    ? `Tem certeza que deseja remover os privilégios de administrador de "${confirmDialog.userName}"?`
+                    : `Are you sure you want to remove admin privileges from "${confirmDialog.userName}"?`)}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setConfirmDialog(prev => ({ ...prev, open: false }))}>
+              {language === 'pt' ? 'Cancelar' : 'Cancel'}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                toggleAdminRole(confirmDialog.userId);
+                setConfirmDialog(prev => ({ ...prev, open: false }));
+              }}
+              className={confirmDialog.isPromoting ? '' : 'bg-destructive hover:bg-destructive/90'}
+            >
+              {confirmDialog.isPromoting
+                ? (language === 'pt' ? 'Promover' : 'Promote')
+                : (language === 'pt' ? 'Remover' : 'Remove')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
