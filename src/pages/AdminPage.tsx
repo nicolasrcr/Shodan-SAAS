@@ -10,6 +10,7 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { toast } from '@/hooks/use-toast';
 import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert, Crown } from 'lucide-react';
 import StatCard from '@/components/admin/StatCard';
@@ -52,6 +53,7 @@ const AdminPage = () => {
   const [paymentSearch, setPaymentSearch] = useState('');
   const [updating, setUpdating] = useState<string | null>(null);
   const [adminUsers, setAdminUsers] = useState<Set<string>>(new Set());
+  const [confirmDialog, setConfirmDialog] = useState<{ open: boolean; userId: string; userName: string; isPromoting: boolean }>({ open: false, userId: '', userName: '', isPromoting: false });
 
   const fetchAdminRoles = async () => {
     const { data } = await supabase
@@ -310,7 +312,12 @@ const AdminPage = () => {
                                     size="sm"
                                     variant="outline"
                                     className={adminUsers.has(user.id) ? "border-primary text-primary hover:bg-primary hover:text-primary-foreground" : "border-muted-foreground/30 text-muted-foreground hover:border-primary hover:text-primary"}
-                                    onClick={() => toggleAdminRole(user.id)}
+                                    onClick={() => setConfirmDialog({
+                                      open: true,
+                                      userId: user.id,
+                                      userName: user.name,
+                                      isPromoting: !adminUsers.has(user.id)
+                                    })}
                                     disabled={updating === user.id}
                                     title={adminUsers.has(user.id) ? (language === 'pt' ? 'Remover admin' : 'Remove admin') : (language === 'pt' ? 'Promover a admin' : 'Promote to admin')}
                                   >
@@ -423,6 +430,43 @@ const AdminPage = () => {
           </CardContent>
         </Card>
       </main>
+
+      <AlertDialog open={confirmDialog.open} onOpenChange={(open) => setConfirmDialog(prev => ({ ...prev, open }))}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>
+              {confirmDialog.isPromoting
+                ? (language === 'pt' ? 'Promover a admin?' : 'Promote to admin?')
+                : (language === 'pt' ? 'Remover privilégios de admin?' : 'Remove admin privileges?')}
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              {confirmDialog.isPromoting
+                ? (language === 'pt'
+                    ? `Tem certeza que deseja promover "${confirmDialog.userName}" a administrador? Ele terá acesso total ao painel admin.`
+                    : `Are you sure you want to promote "${confirmDialog.userName}" to admin? They will have full access to the admin panel.`)
+                : (language === 'pt'
+                    ? `Tem certeza que deseja remover os privilégios de administrador de "${confirmDialog.userName}"?`
+                    : `Are you sure you want to remove admin privileges from "${confirmDialog.userName}"?`)}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setConfirmDialog(prev => ({ ...prev, open: false }))}>
+              {language === 'pt' ? 'Cancelar' : 'Cancel'}
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => {
+                toggleAdminRole(confirmDialog.userId);
+                setConfirmDialog(prev => ({ ...prev, open: false }));
+              }}
+              className={confirmDialog.isPromoting ? '' : 'bg-destructive hover:bg-destructive/90'}
+            >
+              {confirmDialog.isPromoting
+                ? (language === 'pt' ? 'Promover' : 'Promote')
+                : (language === 'pt' ? 'Remover' : 'Remove')}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
