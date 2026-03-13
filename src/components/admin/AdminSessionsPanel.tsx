@@ -25,7 +25,11 @@ interface Props {
   language: string;
 }
 
-export default function AdminSessionsPanel({ userId, language }: Props) {
+export default function AdminSessionsPanel({ userId, language, t }: Props & { t?: (key: string) => string }) {
+  const translate = (key: string, fallbackPt: string, fallbackEn: string) => {
+    if (t) return t(key);
+    return language === 'pt' ? fallbackPt : fallbackEn;
+  };
   const [sessions, setSessions] = useState<UserSession[]>([]);
   const [loading, setLoading] = useState(true);
   const [revokingId, setRevokingId] = useState<string | null>(null);
@@ -66,9 +70,9 @@ export default function AdminSessionsPanel({ userId, language }: Props) {
       .eq('id', dbId);
 
     if (error) {
-      toast({ title: 'Erro', description: language === 'pt' ? 'Falha ao revogar sessão' : 'Failed to revoke session', variant: 'destructive' });
+      toast({ title: translate('common.error', 'Erro', 'Error'), description: translate('admin.errorRevokingSession', 'Falha ao revogar sessão', 'Failed to revoke session'), variant: 'destructive' });
     } else {
-      toast({ title: language === 'pt' ? 'Sessão revogada' : 'Session revoked' });
+      toast({ title: translate('common.success', 'Sucesso', 'Success'), description: translate('admin.sessionRevoked', 'Sessão revogada', 'Session revoked') });
       sendRevocationNotification(userId, false, 'Revogado pelo admin');
       fetchSessions();
     }
@@ -87,9 +91,9 @@ export default function AdminSessionsPanel({ userId, language }: Props) {
       .is('revoked_at', null);
 
     if (error) {
-      toast({ title: 'Erro', description: language === 'pt' ? 'Falha ao revogar sessões' : 'Failed to revoke sessions', variant: 'destructive' });
+      toast({ title: translate('common.error', 'Erro', 'Error'), description: translate('admin.errorRevokingSessions', 'Falha ao revogar sessões', 'Failed to revoke sessions'), variant: 'destructive' });
     } else {
-      toast({ title: language === 'pt' ? 'Todas as sessões revogadas' : 'All sessions revoked' });
+      toast({ title: translate('common.success', 'Sucesso', 'Success'), description: translate('admin.allSessionsRevoked', 'Todas as sessões revogadas', 'All sessions revoked') });
       sendRevocationNotification(userId, true, 'Todas revogadas pelo admin');
       fetchSessions();
     }

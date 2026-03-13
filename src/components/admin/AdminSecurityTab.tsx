@@ -45,7 +45,11 @@ interface UserProfile {
   email: string;
 }
 
-export default function AdminSecurityTab({ language, users }: { language: string; users: { id: string; name: string; email: string }[] }) {
+export default function AdminSecurityTab({ language, users, t }: { language: string; users: { id: string; name: string; email: string }[]; t?: (key: string) => string }) {
+  const translate = (key: string, fallbackPt: string, fallbackEn: string) => {
+    if (t) return t(key);
+    return language === 'pt' ? fallbackPt : fallbackEn;
+  };
   const { user: adminUser } = useAuth();
   const [suspicious, setSuspicious] = useState<SuspiciousEntry[]>([]);
   const [loading, setLoading] = useState(true);
@@ -110,9 +114,9 @@ export default function AdminSecurityTab({ language, users }: { language: string
     });
 
     if (error) {
-      toast({ title: 'Erro', description: 'Falha ao bloquear usuário', variant: 'destructive' });
+      toast({ title: translate('common.error', 'Erro', 'Error'), description: translate('admin.errorBlockingUser', 'Falha ao bloquear usuário', 'Failed to block user'), variant: 'destructive' });
     } else {
-      toast({ title: 'Sucesso', description: 'Usuário bloqueado' });
+      toast({ title: translate('common.success', 'Sucesso', 'Success'), description: translate('admin.userBlocked', 'Usuário bloqueado', 'User blocked') });
       if (detailUserId === blockTargetId) openDetails(blockTargetId);
     }
 
@@ -136,9 +140,9 @@ export default function AdminSecurityTab({ language, users }: { language: string
     });
 
     if (error) {
-      toast({ title: 'Erro', description: 'Falha ao desbloquear', variant: 'destructive' });
+      toast({ title: translate('common.error', 'Erro', 'Error'), description: translate('admin.errorUnblockingUser', 'Falha ao desbloquear', 'Failed to unblock'), variant: 'destructive' });
     } else {
-      toast({ title: 'Sucesso', description: 'Usuário desbloqueado' });
+      toast({ title: translate('common.success', 'Sucesso', 'Success'), description: translate('admin.userUnblocked', 'Usuário desbloqueado', 'User unblocked') });
       if (detailUserId === userId) openDetails(userId);
     }
 
@@ -291,7 +295,7 @@ export default function AdminSecurityTab({ language, users }: { language: string
           </CardContent>
         </Card>
 
-        <AdminSessionsPanel userId={detailUserId} language={language} />
+        <AdminSessionsPanel userId={detailUserId} language={language} t={t} />
         </>
       )}
 

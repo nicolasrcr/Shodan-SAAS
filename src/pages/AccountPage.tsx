@@ -50,7 +50,7 @@ const AccountPage = () => {
         window.location.href = data.initPoint;
       }
     } catch (error: any) {
-      toast.error(error.message || 'Erro ao processar');
+      toast.error(language === 'pt' ? 'Erro ao processar. Tente novamente.' : 'Processing error. Try again.');
     } finally {
       setIsProcessing(false);
     }
