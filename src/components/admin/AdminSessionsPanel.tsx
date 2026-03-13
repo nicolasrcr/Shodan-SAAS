@@ -70,9 +70,9 @@ export default function AdminSessionsPanel({ userId, language, t }: Props & { t?
       .eq('id', dbId);
 
     if (error) {
-      toast({ title: 'Erro', description: language === 'pt' ? 'Falha ao revogar sessão' : 'Failed to revoke session', variant: 'destructive' });
+      toast({ title: translate('common.error', 'Erro', 'Error'), description: translate('admin.errorRevokingSession', 'Falha ao revogar sessão', 'Failed to revoke session'), variant: 'destructive' });
     } else {
-      toast({ title: language === 'pt' ? 'Sessão revogada' : 'Session revoked' });
+      toast({ title: translate('common.success', 'Sucesso', 'Success'), description: translate('admin.sessionRevoked', 'Sessão revogada', 'Session revoked') });
       sendRevocationNotification(userId, false, 'Revogado pelo admin');
       fetchSessions();
     }
