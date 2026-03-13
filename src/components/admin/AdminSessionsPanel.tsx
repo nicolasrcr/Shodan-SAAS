@@ -25,7 +25,11 @@ interface Props {
   language: string;
 }
 
-export default function AdminSessionsPanel({ userId, language }: Props) {
+export default function AdminSessionsPanel({ userId, language, t }: Props & { t?: (key: string) => string }) {
+  const translate = (key: string, fallbackPt: string, fallbackEn: string) => {
+    if (t) return t(key);
+    return language === 'pt' ? fallbackPt : fallbackEn;
+  };
   const [sessions, setSessions] = useState<UserSession[]>([]);
   const [loading, setLoading] = useState(true);
   const [revokingId, setRevokingId] = useState<string | null>(null);
