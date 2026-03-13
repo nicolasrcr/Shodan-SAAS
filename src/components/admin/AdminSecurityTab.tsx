@@ -295,7 +295,7 @@ export default function AdminSecurityTab({ language, users, t }: { language: str
           </CardContent>
         </Card>
 
-        <AdminSessionsPanel userId={detailUserId} language={language} />
+        <AdminSessionsPanel userId={detailUserId} language={language} t={t} />
         </>
       )}
 
