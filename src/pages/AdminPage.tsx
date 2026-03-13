@@ -139,9 +139,10 @@ const AdminPage = () => {
         .eq('user_id', userId)
         .eq('role', 'admin');
       if (error) {
-        toast({ title: t('common.error'), description: language === 'pt' ? 'Erro ao remover admin' : 'Error removing admin', variant: 'destructive' });
+        const desc = error.message?.includes('invalid input value') ? t('admin.invalidRoleError') : t('admin.errorRemovingAdmin');
+        toast({ title: t('common.error'), description: desc, variant: 'destructive' });
       } else {
-        toast({ title: t('common.success'), description: language === 'pt' ? 'Papel admin removido' : 'Admin role removed' });
+        toast({ title: t('common.success'), description: t('admin.adminRemoved') });
         setAdminUsers(prev => { const n = new Set(prev); n.delete(userId); return n; });
       }
     } else {
@@ -149,9 +150,10 @@ const AdminPage = () => {
         .from('user_roles')
         .upsert({ user_id: userId, role: 'admin' as const }, { onConflict: 'user_id,role' });
       if (error) {
-        toast({ title: t('common.error'), description: language === 'pt' ? 'Erro ao promover admin' : 'Error promoting admin', variant: 'destructive' });
+        const desc = error.message?.includes('invalid input value') ? t('admin.invalidRoleError') : t('admin.errorPromotingAdmin');
+        toast({ title: t('common.error'), description: desc, variant: 'destructive' });
       } else {
-        toast({ title: t('common.success'), description: language === 'pt' ? 'Usuário promovido a admin' : 'User promoted to admin' });
+        toast({ title: t('common.success'), description: t('admin.adminPromoted') });
         setAdminUsers(prev => new Set(prev).add(userId));
       }
     }

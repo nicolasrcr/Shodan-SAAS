@@ -140,9 +140,9 @@ export default function AdminSecurityTab({ language, users, t }: { language: str
     });
 
     if (error) {
-      toast({ title: 'Erro', description: 'Falha ao desbloquear', variant: 'destructive' });
+      toast({ title: translate('common.error', 'Erro', 'Error'), description: translate('admin.errorUnblockingUser', 'Falha ao desbloquear', 'Failed to unblock'), variant: 'destructive' });
     } else {
-      toast({ title: 'Sucesso', description: 'Usuário desbloqueado' });
+      toast({ title: translate('common.success', 'Sucesso', 'Success'), description: translate('admin.userUnblocked', 'Usuário desbloqueado', 'User unblocked') });
       if (detailUserId === userId) openDetails(userId);
     }
 
