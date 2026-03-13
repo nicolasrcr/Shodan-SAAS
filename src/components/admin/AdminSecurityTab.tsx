@@ -45,7 +45,11 @@ interface UserProfile {
   email: string;
 }
 
-export default function AdminSecurityTab({ language, users }: { language: string; users: { id: string; name: string; email: string }[] }) {
+export default function AdminSecurityTab({ language, users, t }: { language: string; users: { id: string; name: string; email: string }[]; t?: (key: string) => string }) {
+  const translate = (key: string, fallbackPt: string, fallbackEn: string) => {
+    if (t) return t(key);
+    return language === 'pt' ? fallbackPt : fallbackEn;
+  };
   const { user: adminUser } = useAuth();
   const [suspicious, setSuspicious] = useState<SuspiciousEntry[]>([]);
   const [loading, setLoading] = useState(true);
