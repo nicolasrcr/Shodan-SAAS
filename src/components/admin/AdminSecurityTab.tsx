@@ -114,9 +114,9 @@ export default function AdminSecurityTab({ language, users, t }: { language: str
     });
 
     if (error) {
-      toast({ title: 'Erro', description: 'Falha ao bloquear usuário', variant: 'destructive' });
+      toast({ title: translate('common.error', 'Erro', 'Error'), description: translate('admin.errorBlockingUser', 'Falha ao bloquear usuário', 'Failed to block user'), variant: 'destructive' });
     } else {
-      toast({ title: 'Sucesso', description: 'Usuário bloqueado' });
+      toast({ title: translate('common.success', 'Sucesso', 'Success'), description: translate('admin.userBlocked', 'Usuário bloqueado', 'User blocked') });
       if (detailUserId === blockTargetId) openDetails(blockTargetId);
     }
 
