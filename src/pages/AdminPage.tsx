@@ -413,7 +413,7 @@ const AdminPage = () => {
 
           {/* Security Tab */}
           <TabsContent value="security">
-            <AdminSecurityTab language={language} users={users.map(u => ({ id: u.id, name: u.name, email: u.email }))} />
+            <AdminSecurityTab language={language} users={users.map(u => ({ id: u.id, name: u.name, email: u.email }))} t={t} />
           </TabsContent>
         </Tabs>
 
