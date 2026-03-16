@@ -21,6 +21,7 @@ import PerformancePage from "./pages/PerformancePage";
 import BlockedPage from "./pages/BlockedPage";
 import NotFound from "./pages/NotFound";
 import OfflineBanner from "@/components/OfflineBanner";
+import BackToTop from "@/components/BackToTop";
 
 const queryClient = new QueryClient();
 
@@ -54,10 +55,11 @@ const App = () => {
                 <Route path="/payment-success" element={<PaymentSuccess />} />
                 <Route path="/payment-failure" element={<PaymentFailure />} />
                 <Route path="/blocked" element={<BlockedPage />} />
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </BrowserRouter>
+        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <BackToTop />
+    </BrowserRouter>
           </AuthProvider>
         </LanguageProvider>
       </TooltipProvider>
