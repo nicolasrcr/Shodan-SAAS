@@ -21,6 +21,7 @@ import PerformancePage from "./pages/PerformancePage";
 import BlockedPage from "./pages/BlockedPage";
 import NotFound from "./pages/NotFound";
 import OfflineBanner from "@/components/OfflineBanner";
+import BackToTop from "@/components/BackToTop";
 
 const queryClient = new QueryClient();
 
