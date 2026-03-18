@@ -165,6 +165,20 @@ serve(async (req) => {
 
     console.log(`Processing ${type} payment for user: ${userId}, method: ${method}`);
 
+    // Idempotency check: skip if this payment was already processed
+    const { data: existingPayment } = await supabase
+      .from('payments')
+      .select('id')
+      .eq('mp_payment_id', String(paymentId))
+      .maybeSingle();
+
+    if (existingPayment) {
+      console.log(`Payment ${paymentId} already processed, skipping`);
+      return new Response(JSON.stringify({ received: true, already_processed: true }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
     // Get current profile
     const { data: profile, error: fetchError } = await supabase
       .from('profiles')
