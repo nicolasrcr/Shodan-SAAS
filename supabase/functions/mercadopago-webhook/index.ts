@@ -17,6 +17,11 @@ serve(async (req) => {
       throw new Error('MERCADO_PAGO_ACCESS_TOKEN is not configured');
     }
 
+    const WEBHOOK_SECRET = Deno.env.get('MERCADO_PAGO_WEBHOOK_SECRET');
+    if (!WEBHOOK_SECRET) {
+      throw new Error('MERCADO_PAGO_WEBHOOK_SECRET is not configured');
+    }
+
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL');
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY');
     
@@ -24,10 +29,52 @@ serve(async (req) => {
       throw new Error('Supabase configuration is missing');
     }
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
+    // Verify Mercado Pago webhook signature
+    const signature = req.headers.get('x-signature');
+    const requestId = req.headers.get('x-request-id');
+
+    if (!signature || !requestId) {
+      console.error('Missing x-signature or x-request-id headers');
+      return new Response(JSON.stringify({ error: 'Unauthorized' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
     const body = await req.json();
     console.log('Webhook received:', JSON.stringify(body, null, 2));
+
+    // Extract ts and v1 from x-signature header
+    const tsMatch = signature.match(/ts=(\d+)/);
+    const v1Match = signature.match(/v1=([a-f0-9]+)/);
+    const ts = tsMatch ? tsMatch[1] : '';
+    const v1 = v1Match ? v1Match[1] : '';
+
+    if (!ts || !v1) {
+      console.error('Invalid x-signature format');
+      return new Response(JSON.stringify({ error: 'Invalid signature format' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // Build manifest and verify HMAC
+    const dataId = body.data?.id ? String(body.data.id) : '';
+    const manifest = `id:${dataId};request-id:${requestId};ts:${ts};`;
+    const { createHmac } = await import('node:crypto');
+    const expected = createHmac('sha256', WEBHOOK_SECRET).update(manifest).digest('hex');
+
+    if (expected !== v1) {
+      console.error('Webhook signature verification failed');
+      return new Response(JSON.stringify({ error: 'Invalid signature' }), {
+        status: 401,
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    console.log('Webhook signature verified successfully');
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
     if (body.type !== 'payment' && body.action !== 'payment.created' && body.action !== 'payment.updated') {
       console.log('Ignoring non-payment notification:', body.type || body.action);
@@ -117,6 +164,20 @@ serve(async (req) => {
     }
 
     console.log(`Processing ${type} payment for user: ${userId}, method: ${method}`);
+
+    // Idempotency check: skip if this payment was already processed
+    const { data: existingPayment } = await supabase
+      .from('payments')
+      .select('id')
+      .eq('mp_payment_id', String(paymentId))
+      .maybeSingle();
+
+    if (existingPayment) {
+      console.log(`Payment ${paymentId} already processed, skipping`);
+      return new Response(JSON.stringify({ received: true, already_processed: true }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
 
     // Get current profile
     const { data: profile, error: fetchError } = await supabase
