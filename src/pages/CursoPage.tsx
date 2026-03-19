@@ -185,19 +185,28 @@ const CursoPage = () => {
           {renderSection()}
         </PageTransition>
 
-        {/* Mark complete button for content sections */}
-        {activeSection !== 'home' && activeSection !== 'quizzes' && activeSection !== 'flashcardsMenu' && (
-          <div className="mt-8 text-center">
-            <Button
-              onClick={() => toggleCompleted(activeSection)}
-              variant="outline"
-              className={`gap-2 ${isSectionCompleted(activeSection) ? 'border-green-500/50 text-green-500' : 'border-primary/50 text-primary'}`}
+        {/* Mark complete button + Back to top for content sections */}
+        {activeSection !== 'home' && (
+          <div className="mt-8 flex flex-col items-center gap-4">
+            {activeSection !== 'quizzes' && activeSection !== 'flashcardsMenu' && (
+              <Button
+                onClick={() => toggleCompleted(activeSection)}
+                variant="outline"
+                className={`gap-2 ${isSectionCompleted(activeSection) ? 'border-green-500/50 text-green-500' : 'border-primary/50 text-primary'}`}
+              >
+                {isSectionCompleted(activeSection) ? <CheckCircle className="w-4 h-4" /> : <Circle className="w-4 h-4" />}
+                {isSectionCompleted(activeSection)
+                  ? (language === 'pt' ? 'Concluído ✓' : 'Completed ✓')
+                  : (language === 'pt' ? 'Marcar como concluído' : 'Mark as completed')}
+              </Button>
+            )}
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
             >
-              {isSectionCompleted(activeSection) ? <CheckCircle className="w-4 h-4" /> : <Circle className="w-4 h-4" />}
-              {isSectionCompleted(activeSection)
-                ? (language === 'pt' ? 'Concluído ✓' : 'Completed ✓')
-                : (language === 'pt' ? 'Marcar como concluído' : 'Mark as completed')}
-            </Button>
+              <ArrowUp className="w-4 h-4" />
+              {language === 'pt' ? 'Voltar ao topo' : 'Back to top'}
+            </button>
           </div>
         )}
       </main>
