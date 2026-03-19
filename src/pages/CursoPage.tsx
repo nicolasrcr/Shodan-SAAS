@@ -33,7 +33,7 @@ import AccessExpired from "@/components/AccessExpired";
 import PageTransition from "@/components/PageTransition";
 import LanguageToggle from "@/components/LanguageToggle";
 import { Button } from "@/components/ui/button";
-import { LogOut, User, CheckCircle, Circle, Play } from "lucide-react";
+import { LogOut, User, CheckCircle, Circle, Play, ArrowUp } from "lucide-react";
 
 const CursoPage = () => {
   const navigate = useNavigate();
