@@ -24,7 +24,7 @@ const RegrasSection = () => {
 
   const prohibitedActions = language === 'pt'
     ? [
-        { action: "Leg Grab", desc: "Pegar diretamente nas pernas sem ataque prévio (Hansoku-make direto)", icon: "🥋" },
+        { action: "Pegar nas Pernas", desc: "Pegar diretamente nas pernas sem ataque prévio (Shido)", icon: "🥋" },
         { action: "Diving", desc: "Mergulhar de cabeça no tatame (Hansoku-make direto)", icon: "⚠️" },
         { action: "Passividade", desc: "Evitar luta, não atacar (Shido após 45s sem ação)", icon: "🚫" },
         { action: "Defesa cruzada", desc: "Braços cruzados por mais de 5 segundos (Shido)", icon: "❌" },
@@ -32,7 +32,7 @@ const RegrasSection = () => {
         { action: "Puxar para o solo", desc: "Sem ataque válido (Shido)", icon: "⬇️" },
       ]
     : [
-        { action: "Leg Grab", desc: "Directly grabbing legs without prior attack (direct Hansoku-make)", icon: "🥋" },
+        { action: "Leg Grab", desc: "Directly grabbing legs without prior attack (Shido)", icon: "🥋" },
         { action: "Diving", desc: "Diving headfirst into the mat (direct Hansoku-make)", icon: "⚠️" },
         { action: "Passivity", desc: "Avoiding fight, not attacking (Shido after 45s without action)", icon: "🚫" },
         { action: "Cross grip defense", desc: "Crossed arms for more than 5 seconds (Shido)", icon: "❌" },
@@ -56,7 +56,7 @@ const RegrasSection = () => {
 
   const fightDurations = language === 'pt'
     ? [
-        { category: "Sênior Masculino", time: "5 minutos" },
+        { category: "Sênior Masculino", time: "4 minutos" },
         { category: "Sênior Feminino", time: "4 minutos" },
         { category: "Júnior (Sub-21)", time: "4 minutos" },
         { category: "Cadete (Sub-18)", time: "4 minutos" },
@@ -64,7 +64,7 @@ const RegrasSection = () => {
         { category: "Golden Score", time: "Sem limite (primeiro a pontuar)" },
       ]
     : [
-        { category: "Senior Men", time: "5 minutes" },
+        { category: "Senior Men", time: "4 minutes" },
         { category: "Senior Women", time: "4 minutes" },
         { category: "Junior (U21)", time: "4 minutes" },
         { category: "Cadet (U18)", time: "4 minutes" },
