@@ -24,7 +24,7 @@ const RegrasSection = () => {
 
   const prohibitedActions = language === 'pt'
     ? [
-        { action: "Leg Grab", desc: "Pegar diretamente nas pernas sem ataque prévio (Hansoku-make direto)", icon: "🥋" },
+        { action: "Pegar nas Pernas", desc: "Pegar diretamente nas pernas sem ataque prévio (Shido)", icon: "🥋" },
         { action: "Diving", desc: "Mergulhar de cabeça no tatame (Hansoku-make direto)", icon: "⚠️" },
         { action: "Passividade", desc: "Evitar luta, não atacar (Shido após 45s sem ação)", icon: "🚫" },
         { action: "Defesa cruzada", desc: "Braços cruzados por mais de 5 segundos (Shido)", icon: "❌" },
