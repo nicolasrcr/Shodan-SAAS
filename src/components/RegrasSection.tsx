@@ -56,7 +56,7 @@ const RegrasSection = () => {
 
   const fightDurations = language === 'pt'
     ? [
-        { category: "Sênior Masculino", time: "5 minutos" },
+        { category: "Sênior Masculino", time: "4 minutos" },
         { category: "Sênior Feminino", time: "4 minutos" },
         { category: "Júnior (Sub-21)", time: "4 minutos" },
         { category: "Cadete (Sub-18)", time: "4 minutos" },
