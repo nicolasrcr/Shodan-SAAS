@@ -64,7 +64,7 @@ const RegrasSection = () => {
         { category: "Golden Score", time: "Sem limite (primeiro a pontuar)" },
       ]
     : [
-        { category: "Senior Men", time: "5 minutes" },
+        { category: "Senior Men", time: "4 minutes" },
         { category: "Senior Women", time: "4 minutes" },
         { category: "Junior (U21)", time: "4 minutes" },
         { category: "Cadet (U18)", time: "4 minutes" },
