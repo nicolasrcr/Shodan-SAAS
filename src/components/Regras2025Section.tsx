@@ -111,7 +111,7 @@ const Regras2025Section = () => {
       'Internal pants grips (tachi-waza) = Shido',
       'False attacks / volume fighting = Shido',
       'Waki-gatame standing = Hansoku-make',
-      'Direct leg grab = Hansoku-make',
+      'Direct leg grab = Shido',
     ],
   };
 
