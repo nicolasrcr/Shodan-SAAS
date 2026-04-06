@@ -126,6 +126,32 @@ export const quizData: Record<string, QuizCategory> = {
       { q: 'Kuchiki-Taoshi significa:', o: ['Derrubar bambu', 'Derrubar árvore seca', 'Derrubar pilar', 'Derrubar muro'], c: 1 },
     ],
   },
+  regras2025: {
+    title: 'Regras IJF 2025',
+    icon: '新',
+    questions: [
+      { q: 'Qual pontuação foi reintroduzida nas regras IJF 2025?', o: ['Koka', 'Yuko', 'Kinsa', 'Hantei'], c: 1 },
+      { q: 'Quanto tempo de imobilização vale Yuko nas regras 2025?', o: ['3-4 segundos', '5-9 segundos', '10-14 segundos', '15-19 segundos'], c: 1 },
+      { q: 'Yukos podem somar para Waza-ari?', o: ['Sim, 2 Yukos = Waza-ari', 'Sim, 3 Yukos = Waza-ari', 'Não, nunca somam', 'Só no Golden Score'], c: 2 },
+      { q: 'O que acontece com 5 segundos de osaekomi no Golden Score (2025)?', o: ['Nada, precisa de 10s', 'Yuko + Soremadê (fim)', 'Waza-ari', 'Shido para o adversário'], c: 1 },
+      { q: 'Abraço de urso (Bear Hug) é permitido nas regras 2025?', o: ['Sim, sempre', 'Não, é Hansoku-make', 'Sim, exceto com braços entrelaçados', 'Só no ne-waza'], c: 2 },
+      { q: 'Seoi-nage invertido (Drop Seoi) é permitido para Cadetes (Sub-18)?', o: ['Sim', 'Não, resulta em Shido', 'Só em competições nacionais', 'Só com autorização'], c: 1 },
+      { q: 'Cadetes podem usar a cabeça como apoio para projetar?', o: ['Sim', 'Não, resulta em Shido', 'Sim, com restrições', 'Só em treinos'], c: 1 },
+      { q: 'O que acontece se um cadete fizer ponte para defender?', o: ['Shido para o cadete', 'Ippon direto para Tori', 'Matte', 'Nada, é permitido'], c: 1 },
+      { q: 'Diving (mergulho de cabeça) nas regras 2025 resulta em:', o: ['Shido', 'Waza-ari para o oponente', 'Hansoku-make direto', 'Advertência verbal'], c: 2 },
+      { q: 'Pegada na parte INTERNA da perna em tachi-waza resulta em:', o: ['Ippon para o oponente', 'Shido', 'Hansoku-make', 'É permitido'], c: 1 },
+      { q: 'Pegar diretamente nas pernas (Leg Grab) sem ataque prévio resulta em:', o: ['Hansoku-make', 'Shido', 'Waza-ari para o oponente', 'Advertência verbal'], c: 1 },
+      { q: 'Waki-gatame aplicado em pé resulta em:', o: ['Shido', 'Matte', 'Hansoku-make direto', 'Waza-ari'], c: 2 },
+      { q: 'Ataques falsos ou "volume fighting" resultam em:', o: ['Advertência verbal', 'Shido', 'Hansoku-make', 'Nada'], c: 1 },
+      { q: 'Pegada DENTRO da manga é permitida em tachi-waza?', o: ['Não, é Shido', 'Sim, é permitida', 'Só para faixas pretas', 'Só no ne-waza'], c: 1 },
+      { q: 'Pegada dentro da calça é permitida em ne-waza?', o: ['Não, nunca', 'Sim, é permitida', 'Só com ataque simultâneo', 'Só para adultos'], c: 1 },
+      { q: 'Qual a duração da luta para a categoria Sênior?', o: ['3 minutos', '4 minutos', '5 minutos', '6 minutos'], c: 1 },
+      { q: 'Onde foi realizado o Seminário Técnico que definiu as regras 2025?', o: ['Tóquio, Japão', 'Paris, França', 'Istambul, Turquia', 'Budapeste, Hungria'], c: 2 },
+      { q: 'Aplicar chave articular em pé com queda perigosa resulta em:', o: ['Shido', 'Matte', 'Hansoku-make', 'Waza-ari'], c: 2 },
+      { q: 'Quantos Yukos são necessários para vencer por acumulação?', o: ['3 Yukos', '5 Yukos', 'Não existe acumulação de Yukos', '2 Yukos'], c: 2 },
+      { q: 'O árbitro pode dar Matte no ne-waza quando:', o: ['Sempre que quiser', 'Não houver progressão clara', 'Após 30 segundos', 'Nunca, só em tachi-waza'], c: 1 },
+    ],
+  },
 };
 
 // Flatten all questions for simulado
