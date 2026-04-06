@@ -94,7 +94,7 @@ const Regras2025Section = () => {
       'Pegadas internas na calça (tachi-waza) = Shido',
       'Ataques falsos / volume fighting = Shido',
       'Waki-gatame em pé = Hansoku-make',
-      'Leg grab direto = Hansoku-make',
+      'Leg grab direto = Shido',
     ],
   } : {
     permitido: [
