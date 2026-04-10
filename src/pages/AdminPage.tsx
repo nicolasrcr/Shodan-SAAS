@@ -12,10 +12,11 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { toast } from '@/hooks/use-toast';
-import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert, Crown } from 'lucide-react';
+import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert, Crown, BarChart3 } from 'lucide-react';
 import StatCard from '@/components/admin/StatCard';
 import AdminSecurityTab from '@/components/admin/AdminSecurityTab';
 import LanguageToggle from '@/components/LanguageToggle';
+import AdminDashboardTab from '@/components/admin/AdminDashboardTab';
 
 type PaymentMethod = 'pix' | 'cartao' | 'outro' | null;
 
