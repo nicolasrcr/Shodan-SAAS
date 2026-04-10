@@ -12,10 +12,11 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { toast } from '@/hooks/use-toast';
-import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert, Crown } from 'lucide-react';
+import { Users, Shield, Search, CheckCircle, XCircle, LogOut, RefreshCw, RotateCcw, CreditCard, QrCode, TrendingUp, Receipt, ShieldAlert, Crown, BarChart3 } from 'lucide-react';
 import StatCard from '@/components/admin/StatCard';
 import AdminSecurityTab from '@/components/admin/AdminSecurityTab';
 import LanguageToggle from '@/components/LanguageToggle';
+import AdminDashboardTab from '@/components/admin/AdminDashboardTab';
 
 type PaymentMethod = 'pix' | 'cartao' | 'outro' | null;
 
@@ -232,12 +233,18 @@ const AdminPage = () => {
           <StatCard icon={<TrendingUp className="h-5 w-5" />} title={t('admin.conversionRate')} value={`${stats.conversionRate}%`} variant="green" />
         </div>
 
-        <Tabs defaultValue="users" className="space-y-4">
+        <Tabs defaultValue="dashboard" className="space-y-4">
           <TabsList>
+            <TabsTrigger value="dashboard" className="gap-2"><BarChart3 className="h-4 w-4" />{language === 'pt' ? 'Dashboard' : 'Dashboard'}</TabsTrigger>
             <TabsTrigger value="users" className="gap-2"><Users className="h-4 w-4" />{language === 'pt' ? 'Usuários' : 'Users'}</TabsTrigger>
             <TabsTrigger value="payments" className="gap-2"><Receipt className="h-4 w-4" />{language === 'pt' ? 'Pagamentos' : 'Payments'}</TabsTrigger>
             <TabsTrigger value="security" className="gap-2"><ShieldAlert className="h-4 w-4" />{language === 'pt' ? 'Segurança' : 'Security'}</TabsTrigger>
           </TabsList>
+
+          {/* Dashboard Tab */}
+          <TabsContent value="dashboard">
+            <AdminDashboardTab users={users} language={language} />
+          </TabsContent>
 
           {/* Users Tab */}
           <TabsContent value="users">
