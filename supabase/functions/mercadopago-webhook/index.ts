@@ -240,6 +240,92 @@ serve(async (req) => {
 
     console.log(`Successfully updated user ${userId} with expiration: ${newExpirationDate.toISOString()}`);
 
+    // Notify admin about approved payment
+    try {
+      const { data: userProfile } = await supabase
+        .from('profiles')
+        .select('name, email, phone')
+        .eq('id', userId)
+        .single();
+
+      const userName = userProfile?.name || 'Desconhecido';
+      const userEmail = userProfile?.email || '';
+      const userPhone = userProfile?.phone || '';
+      const timestamp = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+      const amount = payment.transaction_amount || 0;
+      const methodLabel = method === 'pix' ? 'PIX' : method === 'cartao' ? 'Cartão' : 'Outro';
+      const typeLabel = type === 'renewal' ? 'Renovação' : 'Novo acesso';
+
+      // Email via Resend
+      const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY');
+      if (RESEND_API_KEY) {
+        try {
+          await fetch('https://api.resend.com/emails', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${RESEND_API_KEY}`,
+            },
+            body: JSON.stringify({
+              from: 'Shodan Exame <onboarding@resend.dev>',
+              to: ['nicolasrcr@gmail.com'],
+              subject: `💰 Pagamento aprovado: ${userName} (R$ ${amount})`,
+              html: `
+                <h2>Pagamento aprovado!</h2>
+                <p><strong>Aluno:</strong> ${userName}</p>
+                <p><strong>Email:</strong> ${userEmail}</p>
+                <p><strong>Telefone:</strong> ${userPhone}</p>
+                <p><strong>Valor:</strong> R$ ${amount}</p>
+                <p><strong>Método:</strong> ${methodLabel}</p>
+                <p><strong>Tipo:</strong> ${typeLabel}</p>
+                <p><strong>Validade até:</strong> ${newExpirationDate.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })}</p>
+                <p><strong>Data:</strong> ${timestamp}</p>
+              `,
+            }),
+          });
+        } catch (e) {
+          console.error('Resend notification error:', e);
+        }
+      }
+
+      // WhatsApp via Twilio Gateway
+      const LOVABLE_API_KEY = Deno.env.get('LOVABLE_API_KEY');
+      const TWILIO_API_KEY = Deno.env.get('TWILIO_API_KEY');
+      const TWILIO_FROM = Deno.env.get('TWILIO_WHATSAPP_FROM');
+
+      if (LOVABLE_API_KEY && TWILIO_API_KEY && TWILIO_FROM) {
+        try {
+          const whatsappBody = `💰 *Pagamento aprovado no Shodan Exame*\n\n` +
+            `*Aluno:* ${userName}\n` +
+            `*Email:* ${userEmail}\n` +
+            `*Valor:* R$ ${amount}\n` +
+            `*Método:* ${methodLabel}\n` +
+            `*Tipo:* ${typeLabel}\n` +
+            `*Validade:* ${newExpirationDate.toLocaleDateString('pt-BR', { timeZone: 'America/Sao_Paulo' })}\n` +
+            `*Data:* ${timestamp}`;
+
+          await fetch('https://connector-gateway.lovable.dev/twilio/Messages.json', {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${LOVABLE_API_KEY}`,
+              'X-Connection-Api-Key': TWILIO_API_KEY,
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+              To: 'whatsapp:+5561996634944',
+              From: `whatsapp:${TWILIO_FROM}`,
+              Body: whatsappBody,
+            }),
+          });
+        } catch (e) {
+          console.error('Twilio notification error:', e);
+        }
+      }
+    } catch (notifyError) {
+      console.error('Payment notification error:', notifyError);
+      // Don't throw - payment was already processed successfully
+    }
+
     return new Response(
       JSON.stringify({ 
         success: true, 
