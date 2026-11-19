@@ -1,0 +1,95 @@
+# =====================================================================
+# SPA Rewrite Rules for ShodanExame
+# =====================================================================
+# Lets React Router handle all routes: redirect everything to index.html
+# except real files/folders.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Don't rewrite if it's a real file
+  RewriteCond %{REQUEST_FILENAME} !-f
+
+  # Don't rewrite if it's a real directory
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  # Rewrite all other requests to index.html
+  RewriteRule ^ index.html [QSA,L]
+</IfModule>
+
+# =====================================================================
+# Security Headers
+# =====================================================================
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set X-XSS-Protection "1; mode=block"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+  # Content Security Policy
+  # Google Fonts: CSS comes from fonts.googleapis.com, font files from fonts.gstatic.com
+  Header set Content-Security-Policy "default-src 'self' https://*.supabase.co; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.supabase.co https://*.supabase.in"
+</IfModule>
+
+# =====================================================================
+# Compression & Performance
+# =====================================================================
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html
+  AddOutputFilterByType DEFLATE text/plain
+  AddOutputFilterByType DEFLATE text/xml
+  AddOutputFilterByType DEFLATE text/css
+  AddOutputFilterByType DEFLATE text/javascript
+  AddOutputFilterByType DEFLATE application/xml
+  AddOutputFilterByType DEFLATE application/xhtml+xml
+  AddOutputFilterByType DEFLATE application/rss+xml
+  AddOutputFilterByType DEFLATE application/javascript
+  AddOutputFilterByType DEFLATE application/x-javascript
+  AddOutputFilterByType DEFLATE application/x-font-ttf
+  AddOutputFilterByType DEFLATE application/x-font-opentype
+  AddOutputFilterByType DEFLATE application/vnd.ms-fontobject
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# =====================================================================
+# Cache Control
+# =====================================================================
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # Default cache time
+  ExpiresDefault "access plus 1 month"
+
+  # Cache HTML files for 1 day (updates app)
+  ExpiresByType text/html "access plus 1 day"
+
+  # Cache CSS for 1 year (versioned by build)
+  ExpiresByType text/css "access plus 1 year"
+
+  # Cache JavaScript for 1 year (versioned by build)
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+
+  # Cache images for 30 days
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/gif "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # Cache fonts for 1 year
+  ExpiresByType font/truetype "access plus 1 year"
+  ExpiresByType font/opentype "access plus 1 year"
+  ExpiresByType font/x-woff "access plus 1 year"
+  ExpiresByType font/x-woff2 "access plus 1 year"
+  ExpiresByType application/vnd.ms-fontobject "access plus 1 year"
+</IfModule>
+
+# =====================================================================
+# Remove unnecessary HTTP headers
+# =====================================================================
+<IfModule mod_headers.c>
+  Header unset X-Powered-By
+  Header unset Server
+</IfModule>
